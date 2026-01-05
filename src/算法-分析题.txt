@@ -14,7 +14,7 @@
 
 
 计算下述算法所进行的加法次数。 
-输入：n=2t，t为正整数 
+输入：n=2^t，t为正整数 
 输出：k
 1.	k¬0 
 2.	while n≥1 do
@@ -65,7 +65,7 @@
 7.         then SecondMin¬min，min¬S[i]
 8.         else SecondMin¬S[i]
 
-△2n-3
+△W(n)=2n-3
 
 
 
