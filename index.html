@@ -170,7 +170,15 @@
         <div id="q-content" class="question-content"></div>
 
         <div id="input-area">
-            <input type="text" id="user-answer" placeholder="请输入答案 (如 A, B, T, F)..." autocomplete="off">
+            <input
+                    type="text"
+                    id="user-answer"
+                    placeholder="请输入答案 (如 A, B, T, F)..."
+                    autocomplete="off"
+                    inputmode="none"  <!-- 核心：告知浏览器无需唤起输入法 -->
+                    autocorrect="off" <!-- 关闭自动修正，辅助优化移动端表现 -->
+                    readonly <!-- 初始只读，防止聚焦唤起输入法，后续手动解除只读用于输入 -->
+            >
             <!-- 快速输入按钮容器 -->
             <div id="quick-answer-btns" style="display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap;">
                 <button class="quick-btn" data-value="A">A</button>
@@ -228,7 +236,7 @@
                 }
             });
         });
-        
+
     };
 
     // 1. 从服务器获取题目列表 JSON
