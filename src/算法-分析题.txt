@@ -1,0 +1,73 @@
+考虑下述选择排序算法： 
+算法：ModSelectSort 
+输入：n个不等的整数的数组A[1..n]
+输出：按递增次序排序的A
+1.	for i¬1 to n-1 do 	
+2.	   for j¬i+1 to n do
+3.	      if A[j]<A[i] then A[j]↔A[i]
+请回答： 
+(1)最坏情况下，该算法做多少次比较运算？ 
+(2)最坏情况下，该算法做多少次交换运算？这种情况在什么输入条件下发生？ 
+
+△n(n-1)/2、n(n-1)/2、递减序列
+
+
+
+计算下述算法所进行的加法次数。 
+输入：n=2t，t为正整数 
+输出：k
+1.	k¬0 
+2.	while n≥1 do
+3.	   for j¬1 to n do
+4.	      k¬k+1
+5.	   n¬n/2
+6.	return k 
+
+△2n-1
+
+
+计算下述算法所进行的加法次数及算法复杂度。
+输入：n为正整数
+输出：k
+1. k¬0 
+2. for i¬1 to n do
+3.    m¬⌊n/i⌋ 
+4.    for j¬1 to m do
+5.       k¬k+1
+6. return k
+
+△nlogn、O(nlogn)
+
+
+阅读下述算法A的伪码，说明该算法求解的是什么问题，并计算该算法所进行的乘法运算(*)和加法运算次数。
+算法 A
+输入：数组P[1..n]，实数x
+输出：y
+1. y¬P[0]，power¬1
+2. for i¬1 to n do
+3.    power ¬ power * x
+4.    y ¬ y + P[i] * power
+5. return y
+
+△P(x)=p0+p1x+p2x2+……+pnxn、2n、n
+
+
+
+下述Find_Second_Min算法是找第二小算法。输入n个不等的数构成的数组S，输出是第二小的数SecondMin。
+最坏情况下算法做多少次比较？
+算法 Find_Second_Min(S,n)
+1. if S[1]<S[2]
+2. then min¬S[1]; SecondMin¬S[2]
+3. else min¬S[2]; SecondMin¬S[1]
+4. for i¬3 to n do
+5.     if S[i]< SecondMin then
+6.         if S[i]<min
+7.         then SecondMin¬min，min¬S[i]
+8.         else SecondMin¬S[i]
+
+△2n-3
+
+
+
+
+

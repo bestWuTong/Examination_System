@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线考试系统</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        /* 标题区 */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        .header h1 { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 10px; }
+        .header p { color: #7f8c8d; font-size: 0.9rem; }
+
+        /* 页面切换 */
+        .page { display: none; animation: fadeIn 0.5s; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 输入控件 */
+        .selection-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        select, input[type="file"], input[type="text"] {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; margin-bottom: 15px; outline: none; background: #fff;
+        }
+        select:focus, input:focus { border-color: var(--primary-color); }
+
+        /* 按钮 */
+        .btn {
+            width: 100%; padding: 14px; background-color: var(--primary-color); color: white; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: background 0.2s; font-weight: bold;
+        }
+        .btn:hover { background-color: #357abd; }
+        .btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+        .btn-outline { background-color: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); margin-top: 10px; }
+
+        /* 考试区 */
+        .progress-bar { height: 6px; background: #eee; border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary-color); width: 0%; transition: width 0.3s ease; }
+        .question-meta { font-size: 0.9rem; color: #7f8c8d; margin-bottom: 15px; display: flex; justify-content: space-between; }
+        .question-content {
+            font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px; white-space: pre-wrap;
+            background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary-color);
+        }
+
+        /* 反馈区 */
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; font-weight: bold; }
+        .feedback.correct { background-color: #d4edda; color: #155724; display: block; }
+        .feedback.wrong { background-color: #f8d7da; color: #721c24; display: block; }
+
+        /* 结果页 */
+        .score-card { text-align: center; padding: 40px 0; }
+        .final-score { font-size: 4rem; font-weight: bold; color: var(--primary-color); }
+
+        /* 加载遮罩 */
+        #loading-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.9); display: flex; justify-content: center; align-items: center;
+            z-index: 10; display: none; flex-direction: column;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3; border-top: 4px solid var(--primary-color); border-radius: 50%;
+            width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 10px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 480px) { .container { padding: 20px; height: 100vh; border-radius: 0; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-text">正在加载...</div>
+    </div>
+
+    <div class="header">
+        <h1>综合考试系统</h1>
+        <p id="subtitle">Java / C++ / 算法 / UML 在线测试</p>
+    </div>
+
+    <div id="setup-panel" class="page active">
+        <div class="selection-group">
+            <label>方式 A: 选择在线题库</label>
+            <select id="preset-select">
+                <option value="">正在从服务器加载列表...</option>
+            </select>
+        </div>
+
+        <div style="text-align: center; margin: 15px 0; color: #aaa;">- 或 -</div>
+
+        <div class="selection-group">
+            <label>方式 B: 导入本地文件 (.txt)</label>
+            <input type="file" id="file-upload" accept=".txt">
+        </div>
+
+        <button class="btn" onclick="startExam()">开始考试</button>
+    </div>
+
+    <div id="quiz-panel" class="page">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="question-meta">
+            <span id="q-counter">题目 1/10</span>
+            <span id="current-score-display">得分: 0</span>
+        </div>
+
+        <div id="q-content" class="question-content"></div>
+
+        <div id="input-area">
+            <input type="text" id="user-answer" placeholder="请输入答案 (如 A, B, T, F)..." autocomplete="off">
+            <button class="btn" id="submit-btn" onclick="checkAnswer()">提交答案</button>
+        </div>
+
+        <div id="feedback-area" class="feedback"></div>
+        <button class="btn btn-outline" id="next-btn" style="display:none;" onclick="nextQuestion()">下一题</button>
+    </div>
+
+    <div id="result-panel" class="page">
+        <div class="score-card">
+            <h2>考试结束</h2>
+            <div class="final-score" id="final-score">0</div>
+            <div class="score-total" id="total-questions">/ 10</div>
+        </div>
+        <button class="btn" onclick="location.reload()">退出 / 返回首页</button>
+    </div>
+</div>
+
+<script>
+    // ================= 配置区 =================
+    // 题库根目录
+    const BASE_URL = "https://exam.bestwutong.top/src/";
+    // 题库列表的JSON文件名 (必须在上述目录下)
+    const LIST_JSON_NAME = "subjects.json";
+    // =========================================
+
+    let questions = [];
+    let currentIdx = 0;
+    let score = 0;
+    let isAnswered = false;
+
+    // === 页面加载时：自动拉取题目列表 ===
+    window.onload = async function() {
+        await loadSubjectList();
+    };
+
+    // 1. 从服务器获取题目列表 JSON
+    async function loadSubjectList() {
+        const select = document.getElementById('preset-select');
+        try {
+            const response = await fetch(BASE_URL + LIST_JSON_NAME);
+            if (!response.ok) throw new Error("无法连接到列表文件");
+
+            const listData = await response.json();
+
+            // 清空并填充下拉框
+            select.innerHTML = '<option value="">-- 请选择科目 --</option>';
+
+            // 兼容两种JSON格式：
+            // 1. Array: [{"name":"xx", "file":"xx.txt"}] (推荐)
+            // 2. Object: {"xx": "xx.txt"}
+            if (Array.isArray(listData)) {
+                listData.forEach(item => {
+                    const opt = document.createElement('option');
+                    opt.value = item.file; // 比如 "Java-选择题.txt"
+                    opt.textContent = item.name;
+                    select.appendChild(opt);
+                });
+            } else {
+                for (let key in listData) {
+                    const opt = document.createElement('option');
+                    opt.value = listData[key];
+                    opt.textContent = key;
+                    select.appendChild(opt);
+                }
+            }
+        } catch (e) {
+            console.error(e);
+            select.innerHTML = '<option value="">加载失败，请检查网络或跨域设置</option>';
+            alert("无法加载题库列表，请确认服务器配置。\n错误信息: " + e.message);
+        }
+    }
+
+    // 2. 开始考试主入口
+    async function startExam() {
+        const fileInput = document.getElementById('file-upload');
+        const presetSelect = document.getElementById('preset-select');
+
+        // A. 优先使用本地文件
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                initGame(e.target.result);
+            };
+            reader.readAsText(file); // 默认UTF-8
+            return;
+        }
+
+        // B. 使用服务器文件
+        const selectedFile = presetSelect.value;
+        if (selectedFile) {
+            showLoading(true, "正在下载题库...");
+            try {
+                // 拼接完整URL: https://.../src/Java-选择题.txt
+                const targetUrl = BASE_URL + selectedFile;
+                const response = await fetch(targetUrl);
+
+                if (!response.ok) throw new Error("文件下载失败: " + response.status);
+
+                const textData = await response.text();
+                initGame(textData);
+            } catch (e) {
+                alert("获取题目失败：" + e.message);
+            } finally {
+                showLoading(false);
+            }
+        } else {
+            alert("请选择一个科目，或上传本地TXT文件！");
+        }
+    }
+
+    // 解析题目逻辑 (保持与Java逻辑一致)
+    function parseContent(text) {
+        const lines = text.split(/\r?\n/);
+        const parsedQuestions = [];
+        let currentQ = { content: [], answer: "" };
+
+        lines.forEach(line => {
+            line = line.trim();
+            if (!line) return;
+
+            if (line.startsWith("△")) {
+                currentQ.answer = line.replace(/△/g, "").trim();
+                parsedQuestions.push(currentQ);
+                currentQ = { content: [], answer: "" };
+            } else {
+                currentQ.content.push(line);
+            }
+        });
+        return parsedQuestions;
+    }
+
+    // 初始化考试
+    function initGame(rawText) {
+        questions = parseContent(rawText);
+
+        if (questions.length === 0) {
+            alert("格式错误：未读取到题目。\n请确保TXT文件中答案行以 '△' 开头。");
+            return;
+        }
+
+        // 洗牌算法
+        for (let i = questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
+
+        currentIdx = 0;
+        score = 0;
+
+        document.getElementById('setup-panel').classList.remove('active');
+        document.getElementById('quiz-panel').classList.add('active');
+
+        renderQuestion();
+    }
+
+    // 渲染题目
+    function renderQuestion() {
+        isAnswered = false;
+        const q = questions[currentIdx];
+
+        document.getElementById('q-counter').innerText = `题目 ${currentIdx + 1} / ${questions.length}`;
+        document.getElementById('current-score-display').innerText = `得分: ${score}`;
+        document.getElementById('progress-fill').style.width = `${((currentIdx) / questions.length) * 100}%`;
+
+        document.getElementById('q-content').innerHTML = q.content.join('<br>');
+
+        const input = document.getElementById('user-answer');
+        input.value = '';
+        input.disabled = false;
+        input.focus();
+
+        document.getElementById('submit-btn').style.display = 'block';
+        document.getElementById('next-btn').style.display = 'none';
+
+        const feedback = document.getElementById('feedback-area');
+        feedback.className = 'feedback';
+        feedback.innerHTML = '';
+    }
+
+    // 检查答案
+    function checkAnswer() {
+        if (isAnswered) return;
+        const userVal = document.getElementById('user-answer').value.trim();
+        if (!userVal) { alert("请输入答案"); return; }
+
+        isAnswered = true;
+        const currentQ = questions[currentIdx];
+        const feedback = document.getElementById('feedback-area');
+
+        if (userVal.toUpperCase() === currentQ.answer.toUpperCase()) {
+            score++;
+            feedback.innerHTML = `✓ 正确！`;
+            feedback.classList.add('correct');
+        } else {
+            feedback.innerHTML = `✕ 错误！<br>正确答案：<strong>${currentQ.answer}</strong>`;
+            feedback.classList.add('wrong');
+        }
+
+        document.getElementById('user-answer').disabled = true;
+        document.getElementById('submit-btn').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'block';
+        document.getElementById('next-btn').focus();
+    }
+
+    function nextQuestion() {
+        currentIdx++;
+        if (currentIdx < questions.length) {
+            renderQuestion();
+        } else {
+            document.getElementById('quiz-panel').classList.remove('active');
+            document.getElementById('result-panel').classList.add('active');
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('total-questions').innerText = `/ ${questions.length}`;
+        }
+    }
+
+    function showLoading(show, text) {
+        const overlay = document.getElementById('loading-overlay');
+        const txt = document.getElementById('loading-text');
+        if (show) {
+            txt.innerText = text || "加载中...";
+            overlay.style.display = 'flex';
+        } else {
+            overlay.style.display = 'none';
+        }
+    }
+
+    document.getElementById('user-answer').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter' && !isAnswered) checkAnswer();
+    });
+</script>
+
+</body>
+</html>

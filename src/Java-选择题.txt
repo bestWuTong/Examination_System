@@ -1,0 +1,312 @@
+编译Java Application 源程序文件将产生相应的字节码文件，这些字节码文件的扩展名为（）。
+A. Java       B. .class     C. html     D. .exe
+△B△
+设 x = 1 , y = 2 , z = 3，则表达式 y＋＝z－－/＋＋x 的值是（）。
+A. 3         B. 3.5        C. 4        D. 5
+△A△
+不允许作为类及类成员的访问控制符的是（）。
+A. public       B. private    C. static    D. protected
+△C△
+为AB类的一个无形式参数无返回值的方法method书写方法头，使得使用类名AB作为前缀就可以调用它，该方法头的形式为（）。
+A. static void method( )  B. public void method( )  C. final void method( ) D. abstract void method( )
+△A△
+给定java 代码如下，编译运行后，输出结果是（）。
+public class test { 
+static int i; 
+public int aMethod() { 
+  i++; 
+  return i; 
+} 
+public static void main (String args[]) {    
+        Test test=new Test() ;  
+        test.aMethod () ; 
+System.out.println (test.aMethod()) ; 
+} }   
+A .0    B.1     C.2     D.3
+△C△
+如下哪个是合法的Java中的标识符（）。
+A、fieldname   B、super   C、3number   D、#number
+△A△
+下面的代码段执行之后count的值是什么（）。
+int count = 1;
+for (int i = 1; i <= 5; i++) {//第一次i出去是1
+	count += i;}
+System.out.println(count);
+A、5   B、1   C、15   D、16
+△D△
+下列哪一个import命令可以使我们在程序中创建输入/输出流对象（）。
+A、import java.sql.;   B、import java.util.;  C、import java.io.;   D、import java.net.;
+△C△
+下列程序段执行后的结果是（）。
+str.charAt(i)的意思是第i个字符在字符串str中所占的位置
+length()
+返回字符串的长度
+String s = new String("abcdefg");
+for (int i=0; i<s.length(); i+=2){//i第一次输出的值是0
+    System.out.print(s.charAt(i));}  
+A) aceg     B) ACEG    C) abcdefg    D) abcd
+△A△
+Java“一次编译，随处运行”的特点在于其（）
+A.跨平台性      B.面向对象型     C.多线程性      D.安全性
+△A△
+下列有关类、对象和实例的叙述，正确的是（）
+A.类就是对象，对象就是类，实例是对象的另一个名称，三者没有差别
+B.类是对象的抽象，对象是类的具体化，实例是对象的另一个名称
+C.对象是类的抽象，类是对象的具体化，实例是对象的另一个名称
+D.类是对象的抽象，对象是类的具体化，实例是类的另一个名称
+△B△
+下列（）不是面向对象程序设计方法的特点。 
+A.封装    B.继承    C.多态     D.结构化
+△D△
+下列哪个属于容器的构件（）?
+A  .JFrame    B.JButton    C.JPanel    D.JApplet
+△B△
+下列有关父类属性和方法继承规则的描述错误的是（）
+A.父类中private修饰的属性和方法在子类中不被继承
+B.父类中public修饰的属性和方法在子类中被继承且可访问
+C.父类中protected修饰的属性和方法在子类中被继承且可访问
+D.父类中default修饰的属性和方法在之类中被继承，若父类和子类在同一个包中，则也可访问
+△D△
+下列有关 Java 中接口的说法哪个是正确的？（）
+A. 接口中含有具体方法的实现代码
+B. 若一个类要实现一个接口，则用到 “implements” 关键字
+C. 若一个类要实现一个接口，则用到“ extends ”关键字
+D. 接口不允许继承
+△B△
+下列哪项字符序列可以做为标识符？（）
+A． true
+B． default
+C． _char
+D．good-student
+△C△
+下列叙述正确的是（）。
+A．成员变量的名字不可以与局部变量的名字相同
+B．方法参数的名字可以和方法中声明的局部变量的名字相同
+C．成员变量没有默认值
+D．局部变量没有默认值
+△D△
+下列哪个叙述是正确的？（）。
+A．final 类可以有子类。
+B．abstract类中只能有abstract方法。
+C．abstract类中可以有非abstract方法，但该方法不可以用final修饰。
+D．不可以同时用final和abstract修饰一个方法。
+△D△
+假设C是B的子类，B是A的子类，cat是C类的一个对象，bird是B类的一个对象，下列叙述错误的是（）。
+A．cat instanceof B的值是true
+B．bird instanceof A的值是true
+C．cat instanceof A的值是true
+D．bird instanceof C的值是true
+△D△
+下列叙述正确的是（）。
+A．一个类最多可以实现两个接口
+B．如果一个抽象类实现某个接口，那么它必须重写接口中的全部方法
+C．如果一个非抽象类实现某个接口，它可以只重写接口中的部分方法
+D．允许接口中只有一个抽象方法
+△D△
+在编写异常处理的Java程序中，每个catch语句块都应该与（）语句块对应，使得用该语句块来启动Java的异常处理机制。
+A．if – else      B．switch      C．try       D．throw
+△C△
+实现一个继承接口Runnable的类需要实现（）方法。	
+A．start       B．run     C．wait    D．paint
+△B△
+可以改变容器布局的语句是（）。
+A．addLayout(myLayout)　　　 B．layout(myLayout)
+C．setLayout(myLayout)　　　 D．setLayoutManager(myLayout) 
+△C△
+创建一个标识有“关闭”按钮的语句是（）。
+A．JTextField  b = new  JTextField(“关闭”)
+B．JLabel    b  = new  JLabel(“关闭”)
+C．JCheckbox  b = new  JCheckbox(“关闭”)
+D．JButton    b = new  JButton(“关闭”)
+△D△
+下面各类对象不能接受用户输入的是（）。
+A．JTextField   B.JPasswordField   C. JTextArea   D. JLable
+△D△
+下列叙述正确的是（）。
+A．String类是final类，不可以有子类
+B．String类在java.util包中
+C．“abc”==“abc”的值是false
+D．“abc”.equals（“Abc”）的值是true
+△A△
+Java中（）类提供了随机访问文件的功能。
+A．RandomAccessFile 	B．RandomFile   C．File 	D．AccessFile 
+△A△
+以下关于数组的描述有误的是（）。
+A. 整型数组中的各元素的值必须是整型
+B. 数组是有序数据的集合
+C. 如数组名为ab,即ab.length可以取得该数组的长度
+D. 数组的下标从1开始
+△D△
+下列（）不是面向对象程序设计方法的特点。 
+A.封装    B.继承    C.多态     D.结构化
+△D△
+int 型 public 成员变量 MAX_LENGTH，该值保持为常数100，则定义这个变量的语句是（）
+A．public int MAX_LENGTH=100
+B．final int MAX_LENGTH=100
+C．public const int MAX_LENGTH=100
+D．public final int MAX_LENGTH=100
+△D△
+下列哪个叙述是错误（）
+A．try-catch语句可以由几个catch组成，分别处理发生的相应异常。
+B．一个方法在声明时可以使用 throws关键字声明要产生的若干个异常。
+C．一个方法在声明时可以使用 throw关键字声明要产生的若干个异常。
+D．throw的作用就是抛出异常. throw和throws是两个不同的关键字。
+△C△
+Java application中的主类需包含main方法，以下哪项是main方法的正确形参？（）
+A、 String args    B、String args[]    C、Char arg    D、StringBuffer args[]
+△B△
+以下关于继承的叙述正确的是（）。
+A、在Java中类只允许单一继承
+B、在Java中一个类只能实现一个接口
+C、在Java中一个类不能同时继承一个类和实现一个接口
+D、在Java中接口只允许单一继承
+△A△
+将GUI窗口中的组件按照从左到右如打字式排列的布局管理器是（）
+A.FlowLayout    B.BorderLayout    C.GirdLayout    D.CardLayout
+△A△
+以下哪个不是Java的原始数据类型（）
+A、int    B、Boolean    C、float    D、char
+△B△
+若需要定义一个类域或类方法，应使用哪种修饰符？（）
+A、static   B、package   C、private   D、public
+△A△
+在浏览器中执行applet 程序，以下选项中的哪个方法将被最先执行（）。
+A、init()   B、start()   C、destroy()   D、stop()
+△A△
+有以下程序片段，下列哪个选项不能插入到行1。（）
+1.
+2 .public class Interesting{
+3. //do sth
+4.}
+A、import java.awt.;     B、package mypackage;
+C、class OtherClass{ }    D、public class MyClass{ }
+△D△
+设有下面两个赋值语句：
+a = Integer.parseInt(“12”);
+b = Integer.valueOf(“12”).intValue();
+下述说法正确的是（）。
+A、a是整数类型变量，b是整数类对象。
+B、a是整数类对象，b是整数类型变量。
+C、a和b都是整数类对象并且值相等。
+D、a和b都是整数类型变量并且值相等。
+△D△
+FilterOutputStream是BufferedOutputStream、DataOutputStream及PrintStream的父类，以下哪个类可能是FilterOutputStream构造函数的参数类型？()
+A、OutputStream   B、File  C、InputStream   D、BufferedOutputStream
+△A△
+在编写Java Applet程序时，需在程序的开头写上()语句。
+A、import java.awt. ;   B、import java.applet.Applet ;
+C、import java.io.* ;    D、import java.awt.Graphics ;
+△B△
+在使用interface声明一个接口时，只可以使用（）修饰符修饰该接口。
+A、private B、protected C、private protected D、public
+△D△
+Java源文件和编译后的文件扩展名分别为（）
+A.class 和java   B.java 和class   C.class和class   D.java和java
+△B△
+下列说法中，不正确的一项是（）
+A.Java程序只有两类：Application和Applet
+B.类的方法只能由public修饰
+C.面向对象的程序设计的优点有可重用性、可扩展性、可管理性
+D.Java语言通过接口支持多重继承
+△B△
+main方法是Java Application程序执行的入口点，关于main方法的方法头，下面（）是合法的。
+A.public static void main()
+B.public static void main(String args[ ])
+C.public static int main(String [ ] args)
+D.public void main (String args[ ])
+△B△
+在类中若要处理ItemEvent事件，则该类需要实现的接口是（）
+A.ItemListener   B.ActionListener   C. itemStateChanged   D. Event
+△A△
+如下哪个是Java中的标识符（）
+A、public   B、super   C、3number   D、width
+△D△
+下列哪项是不能改变线程状态的方法?（）
+A.start( )    B.sleep( )    C.main( )       D.stop( )
+△C△
+已知如下定义：String s = “story”; 下面哪个语句不是合法的()
+A、s += “books”;     B、s = s + 100;
+C、int len = s.length;    D、String t = s + “abc”;
+△C△
+如下哪个是Java中有效的关键字( )
+A、name   B、hello   C、false   D、good
+△C△
+下面的代码段执行之后count的值是什么()
+int count = 1;
+	for (int i = 1; i <= 5; i++) {
+		count += i;
+	}
+	System.out.println(count);
+A、5 B、1 C、15 D、16
+△D△
+定义一个类，必须使用的关键字是( )
+A、public   B、class   C、interface   D、static
+△B△
+定义一个接口必须使用的关键字是（）
+A、public   B、class   C、interface   D、static
+△C△
+如果容器组件p的布局是BorderLayout，则在p的下边中添加一个按钮b，应该使用的语句是（）
+A、p.add(b);          B、p.add(b,“North”);
+C、p.add(b,“South”);   D、b.add(p,“North”);
+△C△
+声明并创建一个按钮对象b，应该使用的语句是（）
+A、Button b=new Button();       B、button b=new button();
+C、Button b=new b();            D、b.setLabel(“确定”);
+△A△
+Frame对象默认的布局管理器是（）
+A、FlowLayout                 B、BorderLayout
+C、CardLayout                 D、null
+△B△
+下列哪一个import命令可以使我们在程序中创建输入/输出流对象（）
+A、import java.sql.;              B、import java.util.;
+C、import java.io.;               D、import java.net.;
+△C△
+下列说法中，错误的一项是（）
+A.在Java中，若要处理某类事件，必须定义相关的事件处理类
+B.在对事件源实例化之后，要注册相应事件的监听器
+C.事件处理类必须实现与该类事件相对应的监听器接口
+D.事件源通常是一个构件，也称做监听器
+△D△
+如果需要从文件中读取数据，则可以在程序中创建哪一个类的对象（）
+A、FileInputStream            B、FileOutputStream
+C、DataOutputStream         D、FileWriter
+△A△
+在编写Java Applet程序时，需在程序的开头写上（）语句。
+A、import java.awt.* ;           B、import java.applet.Applet ;
+C、import java.io.* ;             D、import java.awt.Graphics ;
+△B△
+如何在框架（Frame）中显示标题？（）
+A、调用根窗格的set Title 函数显示
+B、调用内容窗格的setTitle函数显示
+C、调用框架对象的setTitle函数显示
+D、调用框架对象的Border对象的setTitle函数显示
+△C△
+下列各种java中的构造函数定义，那种形式是错误的构造函数定义（）。
+A 、 class MyClass
+{ public MyClass()  {  }
+}
+B、 class MyClass 
+{   public MyClass(int X)   {   } 
+}
+C、 class MyClass
+{   public int  MyClass()   {   } 
+}
+D、 class MyClass
+{  public  MyClass(int x, int y)  {  }
+}
+△C△
+Java属于（）型语言。
+A.解释     B.编译     C.多线程性     D.安全性
+△A△
+下列哪项不是Java语言中所规定的注释样式?（）
+A.//单行注释        B.–单行注释
+C./*                D./**
+△B△
+以下关于抽象类和接口的说法正确的是（）。
+A.抽象类可以用来定义接口          B.定义抽象类时需要abstract
+C.抽象类中的所有方法都是具体的    D.抽象类可以是对接口的实现
+△B△
+Applet可以做下列哪些操作（）?
+A.读取客户端文件　       B.在客户端主机上创建新文件
+C.在客户端装载程序库　　 D.读取客户端部分系统变量
+△D△
