@@ -27,7 +27,7 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 900px;
             background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -69,6 +69,31 @@
         .btn:hover { background-color: #357abd; }
         .btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
         .btn-outline { background-color: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); margin-top: 10px; }
+
+        /* 快速输入按钮样式 */
+        .quick-btn {
+            flex: 1;
+            min-width: calc(16.666% - 8px); /* 6个按钮均分，扣除间距 */
+            padding: 10px 0;
+            background-color: #f8f9fa;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .quick-btn:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+        .quick-btn:disabled {
+            background-color: #e9ecef;
+            border-color: #ced4da;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
 
         /* 考试区 */
         .progress-bar { height: 6px; background: #eee; border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
@@ -146,6 +171,15 @@
 
         <div id="input-area">
             <input type="text" id="user-answer" placeholder="请输入答案 (如 A, B, T, F)..." autocomplete="off">
+            <!-- 快速输入按钮容器 -->
+            <div id="quick-answer-btns" style="display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap;">
+                <button class="quick-btn" data-value="A">A</button>
+                <button class="quick-btn" data-value="B">B</button>
+                <button class="quick-btn" data-value="C">C</button>
+                <button class="quick-btn" data-value="D">D</button>
+                <button class="quick-btn" data-value="T">T</button>
+                <button class="quick-btn" data-value="F">F</button>
+            </div>
             <button class="btn" id="submit-btn" onclick="checkAnswer()">提交答案</button>
         </div>
 
@@ -179,6 +213,22 @@
     // === 页面加载时：自动拉取题目列表 ===
     window.onload = async function() {
         await loadSubjectList();
+
+        // 初始化快速输入按钮点击事件
+        document.querySelectorAll('.quick-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 仅当未答题（输入框未禁用）时允许填充
+                if (!isAnswered) {
+                    const userAnswerInput = document.getElementById('user-answer');
+                    const value = this.getAttribute('data-value');
+                    // 填充对应值到输入框
+                    userAnswerInput.value = value;
+                    // 聚焦输入框（可选，提升用户体验）
+                    userAnswerInput.focus();
+                }
+            });
+        });
+        
     };
 
     // 1. 从服务器获取题目列表 JSON
