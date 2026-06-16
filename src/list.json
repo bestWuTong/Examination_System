@@ -1,5 +1,18 @@
 [
-    "demo.txt",
-    "demo - 副本.txt",
-    "demo - 副本 (2).txt"
+    {
+        "file": "demo.txt",
+        "type": "选择"
+    },
+    {
+        "file": "demo - 副本.txt",
+        "type": "选择"
+    },
+    {
+        "file": "demo - 副本 (2).txt",
+        "type": "选择"
+    },
+    {
+        "file": "填空 demo.txt",
+        "type": "填空"
+    }
 ]

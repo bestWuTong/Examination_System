@@ -31,5 +31,35 @@
       "print(str[1].upper()+str[2:])"
     ],
     "correct_answer": "print(str[0].upper()+str[1:])"
+  },
+  {
+    "id": 4,
+    "content": "下面代码的输出结果是\n```python\na = [[1,2,3], [4,5,6], [7,8,9]]\ns = 0\nfor c in a:\n    for j in range(3):\n        s += c[j]\nprint(s)\n```",
+    "options": [
+      "0",
+      "45",
+      "都不对",
+      "24"
+    ],
+    "correct_answer": "45"
+  },
+  {
+    "id": 5,
+    "content": "下面代码的输出结果是:
+```python
+a = [[1,2,3], [4,5,6], [7,8,9]]
+s = 0
+for c in a:
+    for j in range(3):
+        s += c[j]
+print(s)
+```",
+    "options": [
+      "0",
+      "45",
+      "都不对",
+      "24"
+    ],
+    "correct_answer": "45"
   }
 ]

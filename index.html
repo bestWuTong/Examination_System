@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>选择题考试系统</title>
+  <title>考试系统</title>
   <style>
     :root {
       color-scheme: light;
@@ -248,6 +248,29 @@
       overflow-wrap: anywhere;
     }
 
+    .formatted-text {
+      display: block;
+      white-space: pre-wrap;
+    }
+
+    .formatted-code {
+      margin: 12px 0;
+      padding: 14px;
+      overflow-x: auto;
+      border-radius: 8px;
+      background: #111827;
+      color: #f8fafc;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.55;
+      white-space: pre;
+    }
+
+    .formatted-code code {
+      font: inherit;
+    }
+
     .options {
       display: grid;
       gap: 12px;
@@ -313,6 +336,39 @@
       display: flex;
       justify-content: flex-end;
       margin-top: 18px;
+    }
+
+    .fill-answer {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .fill-input {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .fill-input:focus {
+      border-color: rgba(37, 99, 235, 0.65);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .fill-input:disabled {
+      background: #f8fafc;
+      color: var(--muted);
+    }
+
+    .fill-actions {
+      display: flex;
+      justify-content: flex-end;
     }
 
     .feedback {
@@ -439,8 +495,8 @@
     <section id="homeView" class="shell">
       <div class="top-title">
         <div>
-          <h1>选择题考试系统</h1>
-          <p>选择题库后开始答题，系统会随机排列题目和选项。</p>
+          <h1>考试系统</h1>
+          <p>选择题库后开始答题，系统会根据题库类型进入对应考试。</p>
         </div>
         <span id="bankCount" class="badge">读取题库中</span>
       </div>
@@ -467,8 +523,14 @@
       <div class="panel question-panel">
         <p id="examName" class="exam-name"></p>
         <span id="questionType" class="question-type">单选题</span>
-        <h2 id="questionTitle" class="question-title"></h2>
+        <div id="questionTitle" class="question-title" role="heading" aria-level="2"></div>
         <div id="options" class="options"></div>
+        <div id="fillAnswer" class="fill-answer hidden">
+          <input id="fillInput" class="fill-input" type="text" autocomplete="off" placeholder="请输入答案">
+          <div class="fill-actions">
+            <button id="submitFillBtn" class="primary-btn" type="button">提交答案</button>
+          </div>
+        </div>
         <div id="multiActions" class="multi-actions hidden">
           <button id="submitMultiBtn" class="primary-btn" type="button">提交答案</button>
         </div>
@@ -504,6 +566,9 @@
       questionType: document.querySelector("#questionType"),
       questionTitle: document.querySelector("#questionTitle"),
       options: document.querySelector("#options"),
+      fillAnswer: document.querySelector("#fillAnswer"),
+      fillInput: document.querySelector("#fillInput"),
+      submitFillBtn: document.querySelector("#submitFillBtn"),
       multiActions: document.querySelector("#multiActions"),
       submitMultiBtn: document.querySelector("#submitMultiBtn"),
       feedback: document.querySelector("#feedback"),
@@ -515,7 +580,7 @@
 
     const state = {
       banks: [],
-      currentBank: "",
+      currentBank: null,
       questions: [],
       currentIndex: 0,
       selectedAnswers: new Map(),
@@ -545,6 +610,24 @@
         return answer.map(String);
       }
       return [String(answer)];
+    }
+
+    function normalizeBank(item) {
+      if (typeof item === "string") {
+        return {
+          file: item,
+          type: "选择"
+        };
+      }
+
+      return {
+        file: String(item.file || ""),
+        type: String(item.type || "选择")
+      };
+    }
+
+    function isFillExam() {
+      return state.currentBank && state.currentBank.type === "填空";
     }
 
     function isMultiQuestion(question) {
@@ -585,7 +668,9 @@
 
       try {
         const list = await fetchJson("src/list.json");
-        state.banks = Array.isArray(list) ? list : [];
+        state.banks = Array.isArray(list)
+          ? list.map(normalizeBank).filter((bank) => bank.file)
+          : [];
         renderBankList();
       } catch (error) {
         setBankCount("读取失败");
@@ -602,31 +687,33 @@
       }
 
       dom.bankList.innerHTML = "";
-      state.banks.forEach((fileName) => {
+      state.banks.forEach((bank) => {
         const button = document.createElement("button");
         button.className = "bank-card";
         button.type = "button";
-        button.innerHTML = `<span class="bank-name">${escapeHtml(getBankDisplayName(fileName))}</span>`;
-        button.addEventListener("click", () => startExam(fileName));
+        button.innerHTML = `<span class="bank-name">${escapeHtml(getBankDisplayName(bank.file))}</span>`;
+        button.addEventListener("click", () => startExam(bank));
         dom.bankList.appendChild(button);
       });
     }
 
-    async function startExam(fileName) {
+    async function startExam(bank) {
       clearAutoTimer();
       dom.bankList.innerHTML = '<div class="loading">正在载入题目</div>';
 
       try {
-        const rawQuestions = await fetchJson(`src/${encodeURIComponent(fileName)}`);
+        const rawQuestions = await fetchJson(`src/${encodeURIComponent(bank.file)}`);
         if (!Array.isArray(rawQuestions) || rawQuestions.length === 0) {
           throw new Error("题库中没有题目");
         }
 
-        state.currentBank = fileName;
+        state.currentBank = bank;
         state.questions = shuffle(rawQuestions).map((question, index) => ({
           ...question,
           uid: `${Date.now()}-${index}-${Math.random().toString(16).slice(2)}`,
-          options: shuffle(Array.isArray(question.options) ? question.options.map(String) : []),
+          options: bank.type === "选择"
+            ? shuffle(Array.isArray(question.options) ? question.options.map(String) : [])
+            : [],
           correctAnswers: normalizeAnswers(question.correct_answer)
         }));
         state.currentIndex = 0;
@@ -655,18 +742,33 @@
 
       const selected = state.selectedAnswers.get(question.uid) || [];
       const result = state.results.get(question.uid);
-      const multi = isMultiQuestion(question);
+      const fill = isFillExam();
+      const multi = !fill && isMultiQuestion(question);
 
-      dom.examName.textContent = state.currentBank;
+      dom.examName.textContent = getBankDisplayName(state.currentBank.file);
       dom.progressText.textContent = `第 ${state.currentIndex + 1} 题 / 共 ${state.questions.length} 题`;
       dom.prevBtn.disabled = state.currentIndex === 0;
       dom.nextBtn.textContent = state.currentIndex === state.questions.length - 1 ? "交卷" : "下一题";
-      dom.questionType.textContent = multi ? "多选题" : "单选题";
-      dom.questionTitle.textContent = question.content || "未命名题目";
-      dom.multiActions.classList.toggle("hidden", !multi || Boolean(result));
+      dom.questionType.textContent = fill ? "填空题" : (multi ? "多选题" : "单选题");
+      renderFormattedText(dom.questionTitle, question.content || "未命名题目");
+      dom.options.classList.toggle("hidden", fill);
+      dom.fillAnswer.classList.toggle("hidden", !fill);
+      dom.multiActions.classList.toggle("hidden", fill || !multi || Boolean(result));
       dom.submitMultiBtn.disabled = selected.length === 0;
       setFeedback("", "idle");
       dom.options.innerHTML = "";
+      dom.fillInput.value = selected[0] || "";
+      dom.fillInput.disabled = Boolean(result);
+      dom.submitFillBtn.disabled = Boolean(result);
+
+      if (fill) {
+        if (result) {
+          showStoredResult(result);
+        } else {
+          dom.fillInput.focus();
+        }
+        return;
+      }
 
       question.options.forEach((option, optionIndex) => {
         const optionButton = document.createElement("button");
@@ -675,8 +777,9 @@
         optionButton.disabled = Boolean(result);
         optionButton.innerHTML = `
           <span class="option-key">${letters[optionIndex] || optionIndex + 1}</span>
-          <span class="option-text">${escapeHtml(option)}</span>
+          <span class="option-text"></span>
         `;
+        renderFormattedText(optionButton.querySelector(".option-text"), option);
         optionButton.addEventListener("click", () => {
           if (multi) {
             toggleMultiAnswer(question.uid, option);
@@ -725,7 +828,9 @@
       }
 
       const selected = answer.map(String);
-      const correct = sameAnswerSet(selected, question.correctAnswers);
+      const correct = isFillExam()
+        ? selected[0] === question.correctAnswers[0]
+        : sameAnswerSet(selected, question.correctAnswers);
       const result = {
         selected,
         correct,
@@ -736,7 +841,7 @@
       state.results.set(question.uid, result);
       renderQuestion();
 
-      if (correct) {
+      if (correct && !isFillExam()) {
         state.autoTimer = window.setTimeout(() => {
           goNext();
         }, 700);
@@ -751,6 +856,15 @@
         return;
       }
       submitAnswer(selected);
+    }
+
+    function submitFillAnswer() {
+      const value = dom.fillInput.value;
+      if (value === "") {
+        setFeedback("请输入答案后再提交。", "warn");
+        return;
+      }
+      submitAnswer([value]);
     }
 
     function showStoredResult(result) {
@@ -821,6 +935,39 @@
         .replaceAll("'", "&#039;");
     }
 
+    function renderFormattedText(target, value) {
+      const source = String(value);
+      const fragment = document.createDocumentFragment();
+      const codeBlockPattern = /```[^\n]*\n?([\s\S]*?)```/g;
+      let lastIndex = 0;
+      let match;
+
+      while ((match = codeBlockPattern.exec(source)) !== null) {
+        appendTextBlock(fragment, source.slice(lastIndex, match.index));
+        const pre = document.createElement("pre");
+        const code = document.createElement("code");
+        pre.className = "formatted-code";
+        code.textContent = match[1].replace(/\n$/, "");
+        pre.appendChild(code);
+        fragment.appendChild(pre);
+        lastIndex = codeBlockPattern.lastIndex;
+      }
+
+      appendTextBlock(fragment, source.slice(lastIndex));
+      target.replaceChildren(fragment);
+    }
+
+    function appendTextBlock(fragment, text) {
+      if (!text) {
+        return;
+      }
+
+      const span = document.createElement("span");
+      span.className = "formatted-text";
+      span.textContent = text;
+      fragment.appendChild(span);
+    }
+
     function getBankDisplayName(fileName) {
       return String(fileName).replace(/\.txt$/i, "");
     }
@@ -830,6 +977,12 @@
     dom.prevBtn.addEventListener("click", goPrev);
     dom.nextBtn.addEventListener("click", goNext);
     dom.submitMultiBtn.addEventListener("click", submitMultiAnswer);
+    dom.submitFillBtn.addEventListener("click", submitFillAnswer);
+    dom.fillInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        submitFillAnswer();
+      }
+    });
     dom.restartBtn.addEventListener("click", restartExam);
     dom.resultHomeBtn.addEventListener("click", goHome);
 
