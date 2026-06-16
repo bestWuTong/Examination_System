@@ -1,0 +1,981 @@
+[
+    {
+        "id": 1,
+        "content": "表达式 500/10的结果是：",
+        "options": [
+            "'500/10'",
+            "500/10",
+            "50",
+            "50.0"
+        ],
+        "correct_answer": "50.0"
+    },
+    {
+        "id": 2,
+        "content": "以下关于字符串类型的操作的描述，错误的是：",
+        "options": [
+            "str.replace(x,y)方法把字符串str中所有的x子串都替换成y",
+            "想把一个字符串str所有的字符都大写，用str.upper()",
+            "想获取字符串str的长度，用字符串处理函数 str.len()",
+            "设 x = ’aa’ ，则执行x*3的结果是‘aaaaaa’"
+        ],
+        "correct_answer": "想获取字符串str的长度，用字符串处理函数 str.len()"
+    },
+    {
+        "id": 3,
+        "content": "设 str = 'python'，想把字符串的第一个字母大写，其他字母还是小写，正确的选项是：",
+        "options": [
+            "print(str[0].upper()+str[1:])",
+            "print(str[1].upper()+str[-1:1])",
+            "print(str[0].upper()+str[1:-1])",
+            "print(str[1].upper()+str[2:])"
+        ],
+        "correct_answer": "print(str[0].upper()+str[1:])"
+    },
+    {
+        "id": 4,
+        "content": "执行以下程序，输入qp，输出结果是：\n```python\nk = 0\nwhile True:\n    s = input('请输入q退出：')\n    if s == 'q':\n        k += 1\n        continue\n    else:\n        k += 2\n        break\nprint(k)\n```",
+        "options": [
+            "2",
+            "请输入q退出：",
+            "3",
+            "1"
+        ],
+        "correct_answer": "2"
+    },
+    {
+        "id": 5,
+        "content": "以下表达式，正确定义了一个集合数据对象的是：",
+        "options": [
+            "x = { 200, ’flg’, 20.3}",
+            "x = ( 200, ’flg’, 20.3)",
+            "x = [ 200, ’flg’, 20.3 ]",
+            "x = {‘flg’ : 20.3}"
+        ],
+        "correct_answer": "x = { 200, ’flg’, 20.3}"
+    },
+    {
+        "id": 6,
+        "content": "以下程序的输出结果是：\n```python\nss = list(set(\"jzzszyj\"))\nss.sort()\nprint(ss)\n```",
+        "options": [
+            "['z', 'j', 's', 'y']",
+            "['j', 's', 'y', 'z']",
+            "['j', 'z', 'z', 's', 'z', 'y', 'j']",
+            "['j', 'j', 's', 'y', 'z', 'z', 'z']"
+        ],
+        "correct_answer": "['j', 's', 'y', 'z']"
+    },
+    {
+        "id": 7,
+        "content": "以下程序的输出结果是：\n```python\nls =list({'shandong':200, 'hebei':300, 'beijing':400})\nprint(ls)\n```",
+        "options": [
+            "['300','200','400']",
+            "['shandong', 'hebei', 'beijing']",
+            "[300,200,400]",
+            "'shandong', 'hebei', 'beijing'"
+        ],
+        "correct_answer": "['shandong', 'hebei', 'beijing']"
+    },
+    {
+        "id": 8,
+        "content": "以下选项中不可用作Python标识符的是",
+        "options": [
+            "3.14",
+            "姓名",
+            "__Name__",
+            "Pi"
+        ],
+        "correct_answer": "3.14"
+    },
+    {
+        "id": 9,
+        "content": "Python可以将一条长语句分成多行显示的续行符号是：",
+        "options": [
+            "\\",
+            "#",
+            ";",
+            "‘"
+        ],
+        "correct_answer": "\\"
+    },
+    {
+        "id": 10,
+        "content": "运行以下程序，输出结果的是：\n```python\nprint(5/2)\n```",
+        "options": [
+            "3",
+            "2",
+            "2.5",
+            "2.50"
+        ],
+        "correct_answer": "2.5"
+    },
+    {
+        "id": 11,
+        "content": "下面代码的输出结果是：\n```python\nTempStr = \"Pi=3.141593\"\nprint(TempStr[3:-1])\n```",
+        "options": [
+            "3.14159",
+            "3.141593",
+            "Pi=3.14",
+            "3.1416"
+        ],
+        "correct_answer": "3.14159"
+    },
+    {
+        "id": 12,
+        "content": "for或者while与else搭配使用时，关于执行else语句块描述正确的是",
+        "options": [
+            "仅循环非正常结束后执行（以break结束）",
+            "仅循环正常结束后执行",
+            "总会执行",
+            "永不执行"
+        ],
+        "correct_answer": "仅循环正常结束后执行"
+    },
+    {
+        "id": 13,
+        "content": "下面代码的输出结果是\n```python\nfor n in range(400,500):\n    i = n // 100\n    j = n // 10 % 10\n    k = n % 10\n    if n == i ** 3 + j ** 3 + k ** 3:\n        print(n)\n```",
+        "options": [
+            "407",
+            "408",
+            "153",
+            "159"
+        ],
+        "correct_answer": "407"
+    },
+    {
+        "id": 14,
+        "content": "字典 d={'Name': 'Kate', 'No': '1001', 'Age': '20'}，表达式len(d)的值为",
+        "options": [
+            "12",
+            "9",
+            "6",
+            "3"
+        ],
+        "correct_answer": "3"
+    },
+    {
+        "id": 15,
+        "content": "元组变量t=(\"cat\", \"dog\", \"tiger\", \"human\")， t[::-1]的结果是",
+        "options": [
+            "{'human', 'tiger', 'dog', 'cat'}",
+            "['human', 'tiger', 'dog', 'cat']",
+            "运行出错",
+            "('human', 'tiger', 'dog', 'cat')"
+        ],
+        "correct_answer": "('human', 'tiger', 'dog', 'cat')"
+    },
+    {
+        "id": 16,
+        "content": "关于Python的列表，描述错误的选项是",
+        "options": [
+            "Python列表是包含0个或者多个对象引用的有序序列",
+            "Python列表用中括号[]表示",
+            "Python列表是一个可以修改数据项的序列类型",
+            "Python列表的长度不可变的"
+        ],
+        "correct_answer": "Python列表的长度不可变的"
+    },
+    {
+        "id": 17,
+        "content": "s = \" Python\", 能够显示输出 Python 的选项是：",
+        "options": [
+            "print(s[0:-1])",
+            "print(s[-1:0])",
+            "print(s[:6])",
+            "print(s[:])"
+        ],
+        "correct_answer": "print(s[:])"
+    },
+    {
+        "id": 18,
+        "content": "字符串 s = \"I love Python\"，以下程序的输出结果是：\n```python\ns = \"I love Python\"\nls = s.split()\nls.reverse()\nprint(ls)\n```",
+        "options": [
+            "'Python', 'love', 'I'",
+            "Python love I",
+            "None",
+            "['Python', 'love', 'I']"
+        ],
+        "correct_answer": "['Python', 'love', 'I']"
+    },
+    {
+        "id": 19,
+        "content": "以下程序的输出结果是：\n```python\ns=''\nls = [1,2,3,4]\nfor l in ls:   \n    s += str(l)\nprint(s)\n```",
+        "options": [
+            "1,2,3,4",
+            "4321",
+            "4,3,2,1",
+            "1234"
+        ],
+        "correct_answer": "1234"
+    },
+    {
+        "id": 20,
+        "content": "以下关于程序控制结构描述错误的是：",
+        "options": [
+            "单分支结构是用if保留字判断满足一个条件，就执行相应的处理代码",
+            "二分支结构是用if-else根据条件的真假，执行两种处理代码",
+            "多分支结构是用if-elif-else处理多种可能的情况",
+            "在Python的程序流程图中可以用处理框表示计算的输出结果"
+        ],
+        "correct_answer": "在Python的程序流程图中可以用处理框表示计算的输出结果"
+    },
+    {
+        "id": 21,
+        "content": "ls = [1,2,3,4,5,6], 以下关于循环结构的描述，错误的是：",
+        "options": [
+            "表达式 for i in range(len(ls))  的循环次数跟 for i in ls 的循环次数是一样的",
+            "表达式 for i in range(len(ls)) 的循环次数跟 for i in range(0,len(ls)) 的循环次数是一样的",
+            "表达式 for i in range(len(ls)) 的循环次数跟 for i in range(1,len(ls)+1) 的循环次数是一样的",
+            "表达式 for i in range(len(ls))  跟  for i in ls 的循环中，i 的值是一样的"
+        ],
+        "correct_answer": "表达式 for i in range(len(ls))  跟  for i in ls 的循环中，i 的值是一样的"
+    },
+    {
+        "id": 22,
+        "content": "以下程序的输出结果是：\n```python\nj = ''\nfor i in \"12345\":\n    j += i + ','\nprint(j)\n```",
+        "options": [
+            "1,2,3,4,5",
+            "12345",
+            "‘1,2,3,4,5,’",
+            "1,2,3,4,5,"
+        ],
+        "correct_answer": "1,2,3,4,5,"
+    },
+    {
+        "id": 23,
+        "content": "以下程序的输出结果是：\n```python\na = 30\nb = 1\nif a >=10:\n    a = 20\nelif a>=20:\n    a = 30\nelif a>=30:\n    b = a\nelse:\n    b = 0\nprint('a={}, b={}'.format(a,b))\n```",
+        "options": [
+            "a=30, b=1",
+            "a=30, b=30",
+            "a=20, b=20",
+            "a=20, b=1"
+        ],
+        "correct_answer": "a=20, b=1"
+    },
+    {
+        "id": 24,
+        "content": "以下关于组合数据类型的描述，错误的是：",
+        "options": [
+            "集合类型是一种具体的数据类型",
+            "序列类似和映射类型都是一类数据类型的总称",
+            "python 的集合类型跟数学中的集合概念一致，都是多个数据项的无序组合",
+            "字典类型的键可以用的数据类型包括字符串，元组，以及列表"
+        ],
+        "correct_answer": "字典类型的键可以用的数据类型包括字符串，元组，以及列表"
+    },
+    {
+        "id": 25,
+        "content": "以下程序的输出结果是：\n```python\nls1 = [1,2,3,4,5]\nls2 = [3,4,5,6,7,8]\ncha1 = []\nfor i in ls2:\n    if i not in ls1:\n        cha1.append(i)\nprint(cha1)\n```",
+        "options": [
+            "(6, 7, 8)",
+            "(1,2,6, 7, 8)",
+            "[1,2,6,7,8]",
+            "[6, 7, 8]"
+        ],
+        "correct_answer": "[6, 7, 8]"
+    },
+    {
+        "id": 26,
+        "content": "以下程序的输出结果是：\n```python\nframe = [[1,2,3],[4,5,6],[7,8,9]]\nrgb = frame[::-1]\nprint(rgb)\n```",
+        "options": [
+            "[[1, 2, 3], [4, 5, 6]]",
+            "[[7, 8, 9]]",
+            "[[1,2,3],[4,5,6],[7,8,9]]",
+            "[[7, 8, 9], [4, 5, 6], [1, 2, 3]]"
+        ],
+        "correct_answer": "[[7, 8, 9], [4, 5, 6], [1, 2, 3]]"
+    },
+    {
+        "id": 27,
+        "content": "以下程序的输出结果是：\n```python\nfor i in \"CHINA\":\n    for k in range(2):\n        print(i, end=\"\")\n        if i == 'N':\n            break\n```",
+        "options": [
+            "CCHHIINNAA",
+            "CCHHIIAA",
+            "CCHHIAA",
+            "CCHHIINAA"
+        ],
+        "correct_answer": "CCHHIINAA"
+    },
+    {
+        "id": 28,
+        "content": "以下程序的输出结果是：\n```python\nx= 10\nwhile x:\n    x -= 1\n    if not x%2:\n        print(x,end = '')\nelse:\n    print(x)\n```",
+        "options": [
+            "86420",
+            "975311",
+            "97531",
+            "864200"
+        ],
+        "correct_answer": "864200"
+    },
+    {
+        "id": 29,
+        "content": "以下关于组合类型的描述，错误的是：",
+        "options": [
+            "可以用大括号创建字典，用中括号增加新元素",
+            "嵌套的字典数据类型可以用来表达高维数据",
+            "字典的 pop 函数可以返回一个键对应的值，并删除该键值对",
+            "空字典和空集合都可以用大括号来创建"
+        ],
+        "correct_answer": "空字典和空集合都可以用大括号来创建"
+    },
+    {
+        "id": 30,
+        "content": "以下程序的输出结果是：\n```python\nx = ['90','87','90']\nn = 90\nprint(x.count(n))\n```",
+        "options": [
+            "1",
+            "2",
+            "None",
+            "0"
+        ],
+        "correct_answer": "0"
+    },
+    {
+        "id": 31,
+        "content": "s = \"the sky is blue\"，表达式 print(s[-4:], s[:-4]) 的结果是：",
+        "options": [
+            "the sky is blue",
+            "blue is sky the",
+            "sky is blue the",
+            "blue the sky is"
+        ],
+        "correct_answer": "blue the sky is"
+    },
+    {
+        "id": 32,
+        "content": "以下对 Python 程序缩进格式描述错误的选项是：",
+        "options": [
+            "不需要缩进的代码顶行写，前面不能留空白",
+            "缩进可以用 tab 键实现，也可以用多个空格实现",
+            "严格的缩进可以约束程序结构，可以多层缩进",
+            "缩进是用来格式美化 Python 程序的"
+        ],
+        "correct_answer": "缩进是用来格式美化 Python 程序的"
+    },
+    {
+        "id": 33,
+        "content": "定义 x=2.6，表达式 int(x) 的结果是：",
+        "options": [
+            "3",
+            "2.6",
+            "2.0",
+            "2"
+        ],
+        "correct_answer": "2"
+    },
+    {
+        "id": 34,
+        "content": "以下程序的输出结果是：\n```python\nfor i in reversed(range(10, 0, -2)): \n   print(i,end=\" \")\n```",
+        "options": [
+            "0 2 4 6 8 10",
+            "12345678910",
+            "9 8 7 6 5 4 3 2 1 0",
+            "2 4 6 8 10"
+        ],
+        "correct_answer": "2 4 6 8 10"
+    },
+    {
+        "id": 35,
+        "content": "以下程序的输出结果是：\n```python\nfor i in \"the number changes\":\n    if i == 'n':\n        break\n    else:\n        print( i, end= \"\")\n```",
+        "options": [
+            "the umber chages",
+            "thenumberchanges",
+            "theumberchages",
+            "the"
+        ],
+        "correct_answer": "the"
+    },
+    {
+        "id": 36,
+        "content": "以下程序的输出结果是：\n```python\nfor i in range(3):\n    for s in \"abcd\":\n        if s==\"c\":\n             break\n        print (s,end=\"\")\n```",
+        "options": [
+            "abcabcabc",
+            "aaabbbccc",
+            "aaabbb",
+            "ababab"
+        ],
+        "correct_answer": "ababab"
+    },
+    {
+        "id": 37,
+        "content": "以下关于字典类型的描述，错误的是：",
+        "options": [
+            "字典类型是一种无序的对象集合，通过键来存取",
+            "字典类型可以在原来的变量上增加或缩短",
+            "字典类型可以包含列表和其他数据类型，支持嵌套的字典",
+            "字典类型中的数据可以进行分片和合并操作"
+        ],
+        "correct_answer": "字典类型中的数据可以进行分片和合并操作"
+    },
+    {
+        "id": 38,
+        "content": "以下程序的输出结果是：\n```python\nls =list(\"the sky is blue\")\na = ls.index('s',5,10)\nprint(a)\n```",
+        "options": [
+            "4",
+            "5",
+            "10",
+            "9"
+        ],
+        "correct_answer": "9"
+    },
+    {
+        "id": 39,
+        "content": "以下程序的输出结果是：\n```python\nd = {\"zhang\":\"China\", \"Jone\":\"America\", \"Natan\":\"Japan\"}\nfor k in d:\n    print(k, end=\"\")\n```",
+        "options": [
+            "ChinaAmericaJapan",
+            "zhang:China Jone:America Natan:Japan",
+            "“zhang””Jone””Natan”",
+            "zhangJoneNatan"
+        ],
+        "correct_answer": "zhangJoneNatan"
+    },
+    {
+        "id": 40,
+        "content": "Python 中对变量描述错误的选项是：",
+        "options": [
+            "Python 不需要显式声明变量类型，在第一次变量赋值时由值决定变量的类型",
+            "变量通过变量名访问",
+            "变量必须在创建和赋值后使用",
+            "变量 PI 与变量 Pi 被看作相同的变量"
+        ],
+        "correct_answer": "变量 PI 与变量 Pi 被看作相同的变量"
+    },
+    {
+        "id": 41,
+        "content": "运行以下程序，输出结果的是：\n```python\nstr1 = \"Nanjing University\"\nstr2 = str1[:7] + \" Normal \" + str1[-10:]\nprint(str2)\n```",
+        "options": [
+            "Normal U",
+            "Nanjing Normal",
+            "Normal University",
+            "Nanjing Normal University"
+        ],
+        "correct_answer": "Nanjing Normal University"
+    },
+    {
+        "id": 42,
+        "content": "以下语句执行后a、b、c的值是：\n```python\na = \"watermelon\"\nb = \"strawberry\"\nc = \"cherry\"\nif a > b:\n    c = a\n    a = b\n    b = c\n```",
+        "options": [
+            "watermelon strawberry cherry",
+            "watermelon cherry strawberry",
+            "strawberry cherry watermelon",
+            "strawberry watermelon watermelon"
+        ],
+        "correct_answer": "strawberry watermelon watermelon"
+    },
+    {
+        "id": 43,
+        "content": "以下关于 Python 的控制结构，错误的是：",
+        "options": [
+            "每个 if 条件后要使用冒号（：）",
+            "在 Python 中，没有 switch-case 语句",
+            "Python 中的 pass 是空语句，一般用作占位语句",
+            "elif 可以单独使用"
+        ],
+        "correct_answer": "elif 可以单独使用"
+    },
+    {
+        "id": 44,
+        "content": "以下程序的输出结果是：\n```python\nDa = {\"北美洲\":\"北极兔\",\"南美洲\":\"托哥巨嘴鸟\",\"亚洲\":\"大熊猫\",\"非洲\":\"单峰驼\",\"南极洲\":\"帝企鹅\"}\nDa[\"非洲\"] = \"大猩猩\"\nprint(Da)\n```",
+        "options": [
+            "('北美洲': '北极兔', '南美洲': '托哥巨嘴鸟', '亚洲': '大熊猫', '非洲': '大猩猩', '南极洲': '帝企鹅')",
+            "['北美洲': '北极兔', '南美洲': '托哥巨嘴鸟', '亚洲': '大熊猫', '非洲': '大猩猩', '南极洲': '帝企鹅']",
+            "{\"北美洲\":\"北极兔\",\"南美洲\":\"托哥巨嘴鸟\",\"亚洲\":\"大熊猫\",\"非洲\":\"单峰驼\",\"南极洲\":\"帝企鹅\"}",
+            "{'北美洲': '北极兔', '南美洲': '托哥巨嘴鸟', '亚洲': '大熊猫', '非洲': '大猩猩', '南极洲': '帝企鹅'}"
+        ],
+        "correct_answer": "{'北美洲': '北极兔', '南美洲': '托哥巨嘴鸟', '亚洲': '大熊猫', '非洲': '大猩猩', '南极洲': '帝企鹅'}"
+    },
+    {
+        "id": 45,
+        "content": "以下关于列表操作的描述，错误的是：",
+        "options": [
+            "通过 append 方法可以向列表添加元素",
+            "通过 extend 方法可以将另一个列表中的元素逐一添加到列表中",
+            "通过 insert(index,object) 方法在指定位置 index 前插入元素 object",
+            "通过 add 方法可以向列表添加元素"
+        ],
+        "correct_answer": "通过 add 方法可以向列表添加元素"
+    },
+    {
+        "id": 46,
+        "content": "以下关于字典操作的描述，错误的是：",
+        "options": [
+            "del 用于删除字典或者元素",
+            "clear 用于清空字典中的数据",
+            "len 方法可以计算字典中键值对的个数",
+            "keys 方法可以获取字典的值视图"
+        ],
+        "correct_answer": "keys 方法可以获取字典的值视图"
+    },
+    {
+        "id": 47,
+        "content": "下程序的输出结果是：\n```python\na = [\"a\",\"b\",\"c\"]\nb = a[::-1]\nprint(b)\n```",
+        "options": [
+            "['a', 'b', 'c']",
+            "'c', 'b', 'a'",
+            "'a', 'b', 'c'",
+            "['c', 'b', 'a']"
+        ],
+        "correct_answer": "['c', 'b', 'a']"
+    },
+    {
+        "id": 48,
+        "content": "以下关于列表和字符串的描述，错误的是：",
+        "options": [
+            "列表使用正向递增序号和反向递减序号的索引体系",
+            "列表是一个可以修改数据项的序列类型",
+            "字符和列表均支持成员关系操作符（in）和长度计算函数（len()）",
+            "字符串是单一字符的无序组合"
+        ],
+        "correct_answer": "字符串是单一字符的无序组合"
+    },
+    {
+        "id": 49,
+        "content": "假设将单词保存在变量 word 中，使用一个字典类型 counts={}，统计单词出现的次数可采用以下代码：",
+        "options": [
+            "counts[word] = count[word] + 1",
+            "counts[word] = 1",
+            "counts[word] = count.get(word,1) + 1",
+            "counts[word] = count.get(word,0) + 1"
+        ],
+        "correct_answer": "counts[word] = count.get(word,0) + 1"
+    },
+    {
+        "id": 50,
+        "content": "以下程序的输出结果是：\n```python\nlcat =[\"狮子\",\"猎豹\",\"虎猫\",\"花豹\",\"孟加拉虎\",\"美洲豹\",\"雪豹\"]\nfor s in lcat:\n    if \"豹\" in s:\n        print(s,end=\"\")\n        continue\n```",
+        "options": [
+            "猎豹\n花豹\n美洲豹\n雪豹",
+            "猎豹",
+            "雪豹",
+            "猎豹花豹美洲豹雪豹"
+        ],
+        "correct_answer": "猎豹花豹美洲豹雪豹"
+    },
+    {
+        "id": 51,
+        "content": "以下程序的输出结果是：\n```python\nls = [\"石山羊\",\"一角鲸\",\"南极雪海燕\",\"竖琴海豹\",\"山蝰\"]\nls.remove(\"山蝰\")\nstr = \"\"\nprint(\"极地动物有\",end=\"\")\nfor s in ls:\n    str = str + s + \",\"\nprint(str[:-1],end=\".\")\n```",
+        "options": [
+            "极地动物有石山羊,一角鲸,南极雪海燕,竖琴海豹,山蝰",
+            "极地动物有石山羊,一角鲸,南极雪海燕,竖琴海豹,山蝰。",
+            "极地动物有石山羊,一角鲸,南极雪海燕,竖琴海豹",
+            "极地动物有石山羊,一角鲸,南极雪海燕,竖琴海豹。"
+        ],
+        "correct_answer": "极地动物有石山羊,一角鲸,南极雪海燕,竖琴海豹。"
+    },
+    {
+        "id": 52,
+        "content": "以下关于字典的描述，错误的是：",
+        "options": [
+            "字典中元素以键信息为索引访问",
+            "字典长度是可变的",
+            "字典是键值对的集合",
+            "字典中的键可以对应多个值信息"
+        ],
+        "correct_answer": "字典中的键可以对应多个值信息"
+    },
+    {
+        "id": 53,
+        "content": "```python\nls = [3.5, \"Python\", [10, \"LIST\"], 3.6]\nls[2][-1][1]\n```的运行结果是",
+        "options": [
+            "I",
+            "P",
+            "Y",
+            "L"
+        ],
+        "correct_answer": "I"
+    },
+    {
+        "id": 54,
+        "content": "下面代码的输出结果是\n```python\nsum = 1.0\nfor num in range(1,4):\nsum+=num\nprint(sum)\n```",
+        "options": [
+            "6",
+            "7.0",
+            "1.0",
+            "7"
+        ],
+        "correct_answer": "7.0"
+    },
+    {
+        "id": 55,
+        "content": "下面代码的输出结果是\n```python\nname = \"Python语言程序设计\"\nprint(name[2:-2])\n```",
+        "options": [
+            "thon语言程序",
+            "thon语言程序设",
+            "ython语言程序",
+            "ython语言程序设"
+        ],
+        "correct_answer": "thon语言程序"
+    },
+    {
+        "id": 56,
+        "content": "下面代码的输出结果是\n```python\na = [5,1,3,4]\nprint(sorted(a,reverse = True))\n```",
+        "options": [
+            "[5, 1, 3, 4]",
+            "[5, 4, 3, 1]",
+            "[4, 3, 1, 5]",
+            "[1, 3, 4, 5]"
+        ],
+        "correct_answer": "[5, 4, 3, 1]"
+    },
+    {
+        "id": 57,
+        "content": "下面代码的输出结果是\n```python\nfor s in \"abc\":\n   for i in range(3):\n      print (s,end=\"\")\n      if s==\"c\":\n          break\n```",
+        "options": [
+            "aaabccc",
+            "aaabbbc",
+            "abbbccc",
+            "aaabbbccc"
+        ],
+        "correct_answer": "aaabbbc"
+    },
+    {
+        "id": 58,
+        "content": "下面代码的输出结果是\n```python\nfor i in range(10):\nif i%2==0:\ncontinue\nelse:\nprint(i, end=\",\")\n```",
+        "options": [
+            "2,4,6,8,",
+            "0,2,4,6,8,",
+            "0,2,4,6,8,10,",
+            "1,3,5,7,9,"
+        ],
+        "correct_answer": "1,3,5,7,9,"
+    },
+    {
+        "id": 59,
+        "content": "下面代码的输出结果是\n```python\nls = list(range(1,4))\nprint(ls)\n```",
+        "options": [
+            "{0,1,2,3}",
+            "[1,2,3]",
+            "{1,2,3}",
+            "[0,1,2,3]"
+        ],
+        "correct_answer": "[1,2,3]"
+    },
+    {
+        "id": 60,
+        "content": "下面代码的执行结果\n```python\na = 10.99\nprint(complex(a))\n```",
+        "options": [
+            "10.99+j",
+            "10.99",
+            "0.99",
+            "(10.99+0j)"
+        ],
+        "correct_answer": "(10.99+0j)"
+    },
+    {
+        "id": 61,
+        "content": "关于Python循环结构，以下选项中描述错误的是",
+        "options": [
+            "遍历循环中的遍历结构可以是字符串、文件、组合数据类型和range()函数等",
+            "break用来结束当前当次语句，但不跳出当前的循环体",
+            "continue只结束本次循环",
+            "Python通过for、while等保留字构建循环结构"
+        ],
+        "correct_answer": "break用来结束当前当次语句，但不跳出当前的循环体"
+    },
+    {
+        "id": 62,
+        "content": "对于列表ls的操作，以下选项中描述错误的是",
+        "options": [
+            "ls.clear()：删除ls的最后一个元素",
+            "ls.copy()：生成一个新列表，复制ls的所有元素",
+            "ls.reverse()：列表ls的所有元素反转",
+            "ls.append(x)：在ls最后增加一个元素"
+        ],
+        "correct_answer": "ls.clear()：删除ls的最后一个元素"
+    },
+    {
+        "id": 63,
+        "content": "下面代码的输出结果是\n```python\nlistV = list(range(5))\nprint(2 in listV)\n```",
+        "options": [
+            "False",
+            "0",
+            "-1",
+            "True"
+        ],
+        "correct_answer": "True"
+    },
+    {
+        "id": 64,
+        "content": "给出如下代码\n```python\nMonthandFlower={\"1月\":\"梅花\",\"2月\":\"杏花\",\"3月\":\"桃花\",\"4月\":\"牡丹花\",\\\n\"5月\":\"石榴花\",\"6月\":\"莲花\",\"7月\":\"玉簪花\",\"8月\":\"桂花\",\\\n\"9月\":\"菊花\",\"10月\":\"芙蓉花\",\"11月\":\"山茶花\",\"12月\":\"水仙花\"}\nn = input(\"请输入1—12的月份:\")\nprint(n + \"月份之代表花：\" + MonthandFlower.get(str(n)+\"月\"))\n```\n以下选项中描述正确的是",
+        "options": [
+            "代码实现了获取一个整数（1—12）来表示月份，输出该月份对应的代表花名",
+            "MonthandFlower是列表类型变量",
+            "MonthandFlower是一个元组",
+            "MonthandFlower是集合类型变量"
+        ],
+        "correct_answer": "代码实现了获取一个整数（1—12）来表示月份，输出该月份对应的代表花名"
+    },
+    {
+        "id": 65,
+        "content": "给出如下代码：\n```python\nTempStr = \"Hello World\"\n```\n以下选项中可以输出“World”子串的是",
+        "options": [
+            "print(TempStr[–5: –1])",
+            "print(TempStr[–5:0])",
+            "print(TempStr[–4: –1])print(TempStr[–4: –1])",
+            "print(TempStr[–5:])"
+        ],
+        "correct_answer": "print(TempStr[–5:])"
+    },
+    {
+        "id": 66,
+        "content": "下面代码的输出结果是\n```python\nx = 12.34\nprint(type(x))\n```",
+        "options": [
+            "<class 'int'>",
+            "<class 'float'>",
+            "<class 'bool'>",
+            "<class 'complex'>"
+        ],
+        "correct_answer": "<class 'float'>"
+    },
+    {
+        "id": 67,
+        "content": "下面代码的输出结果是\n```python\nvlist = list(range(5))\nprint(vlist)\n```",
+        "options": [
+            "0 1 2 3 4",
+            "0,1,2,3,4,",
+            "0;1;2;3;4;",
+            "[0, 1, 2, 3, 4]"
+        ],
+        "correct_answer": "[0, 1, 2, 3, 4]"
+    },
+    {
+        "id": 68,
+        "content": "以下选项中，不是建立字典的方式是",
+        "options": [
+            "d = {[1,2]:1, [3,4]:3}",
+            "d = {(1,2):1, (3,4):3}",
+            "d = {'张三':1, '李四':2}",
+            "d = {1:[1,2], 3:[3,4]}"
+        ],
+        "correct_answer": "d = {[1,2]:1, [3,4]:3}"
+    },
+    {
+        "id": 69,
+        "content": "如果name = \"全国计算机等级考试二级Python\"，以下选项中输出错误的是",
+        "options": [
+            "print(name[:]) 全国计算机等级考试二级Python",
+            "print(name[11:]) Python",
+            "print(name[:11]) 全国计算机等级考试二级",
+            "print(name[0], name[8], name[–1]) 全 试"
+        ],
+        "correct_answer": "print(name[0], name[8], name[–1]) 全 试"
+    },
+    {
+        "id": 70,
+        "content": "以下选项中，不符合Python语言变量命名规则的是",
+        "options": [
+            "keyword33_",
+            "33_keyword",
+            "_33keyword",
+            "keyword_33"
+        ],
+        "correct_answer": "33_keyword"
+    },
+    {
+        "id": 71,
+        "content": "以下选项中，不是Python语言保留字的是",
+        "options": [
+            "while",
+            "continue",
+            "goto",
+            "for"
+        ],
+        "correct_answer": "goto"
+    },
+    {
+        "id": 72,
+        "content": "以下选项中，Python语言中代码注释使用的符号是",
+        "options": [
+            "/*… …*/",
+            "！",
+            "#",
+            "//"
+        ],
+        "correct_answer": "#"
+    },
+    {
+        "id": 73,
+        "content": "Python语言提供的3个基本数字类型是",
+        "options": [
+            "整数类型、浮点数类型、复数类型",
+            "整数类型、二进制类型、浮点数类型",
+            "整数类型、二进制类型、复数类型",
+            "整数类型、二进制类型、浮点数类型"
+        ],
+        "correct_answer": "整数类型、浮点数类型、复数类型"
+    },
+    {
+        "id": 74,
+        "content": "关于分支结构，以下选项中描述不正确的是",
+        "options": [
+            "if 语句中条件部分可以使用任何能够产生True和False的语句和函数",
+            "二分支结构有一种紧凑形式，使用保留字if和elif实现",
+            "多分支结构用于设置多个判断条件以及对应的多条执行路径",
+            "if 语句中语句块执行与否依赖于条件判断"
+        ],
+        "correct_answer": "二分支结构有一种紧凑形式，使用保留字if和elif实现"
+    },
+    {
+        "id": 75,
+        "content": "下面代码的执行结果是\n```python\nls=[[1,2,3],[[4,5],6],[7,8]]\nprint(len(ls))\n```",
+        "options": [
+            "3",
+            "4",
+            "8",
+            "1"
+        ],
+        "correct_answer": "3"
+    },
+    {
+        "id": 76,
+        "content": "下面代码的执行结果是：\n```python\nls = [\"2020\", \"20.20\", \"Python\"]\nls.append(2020)\nls.append([2020, \"2020\"])\nprint(ls)\n```",
+        "options": [
+            "['2020', '20.20', 'Python', 2020]",
+            "['2020', '20.20', 'Python', 2020, [2020, '2020']]",
+            "['2020', '20.20', 'Python', 2020, ['2020']]",
+            "['2020', '20.20', 'Python', 2020, 2020, '2020']"
+        ],
+        "correct_answer": "['2020', '20.20', 'Python', 2020, [2020, '2020']]"
+    },
+    {
+        "id": 77,
+        "content": "以下选项中符合Python语言变量命名规则的是",
+        "options": [
+            "*i",
+            "3_1",
+            "AI!",
+            "Templist"
+        ],
+        "correct_answer": "Templist"
+    },
+    {
+        "id": 78,
+        "content": "下面代码的输出结果是\n```python\nfor s in \"HelloWorld\":\n    if s==\"W\":\n        break\n    print(s, end=\"\")\n```",
+        "options": [
+            "Hello",
+            "World",
+            "HelloWorld",
+            "Helloorld"
+        ],
+        "correct_answer": "Hello"
+    },
+    {
+        "id": 79,
+        "content": "下面代码的输出结果是\n```python\ns =[\"seashell\",\"gold\",\"pink\",\"brown\",\"purple\",\"tomato\"]\nprint(s[4:])\n```",
+        "options": [
+            "['purple']",
+            "['seashell', 'gold', 'pink', 'brown']",
+            "['gold', 'pink', 'brown', 'purple', 'tomato']",
+            "['purple', 'tomato']"
+        ],
+        "correct_answer": "['purple', 'tomato']"
+    },
+    {
+        "id": 80,
+        "content": "以下关于 Python 字符串的描述中，错误的是",
+        "options": [
+            "字符串是字符的序列，可以按照单个字符或者字符片段进行索引",
+            "字符串包括两种序号体系：正向递增和反向递减",
+            "Python 字符串提供区间访问方式，采用 [N:M] 格式，表示字符串中从 N 到 M 的索引子字符串（包含 N 和 M）",
+            "字符串是用一对双引号\" \"或者单引号' '括起来的零个或者多个字符"
+        ],
+        "correct_answer": "Python 字符串提供区间访问方式，采用 [N:M] 格式，表示字符串中从 N 到 M 的索引子字符串（包含 N 和 M）"
+    },
+    {
+        "id": 81,
+        "content": "关于 Python 语言的注释，以下选项中描述错误的是",
+        "options": [
+            "Python 语言的单行注释以#开头",
+            "Python 语言的单行注释以单引号 ' 开头",
+            "Python 语言的多行注释以 ' ' '（三个单引号）开头和结尾",
+            "Python 语言有两种注释方式：单行注释和多行注释"
+        ],
+        "correct_answer": "Python 语言的单行注释以单引号 ' 开头"
+    },
+    {
+        "id": 82,
+        "content": "关于 Python 序列类型的通用操作符和函数，以下选项中描述错误的是",
+        "options": [
+            "如果 x 不是 s 的元素，x not in s 返回 True",
+            "如果 s 是一个序列，s = [1,\"kate\",True]，s[3] 返回 True",
+            "如果 s 是一个序列，s = [1,\"kate\",True]，s[–1] 返回 True",
+            "如果 x 是 s 的元素，x in s 返回 True"
+        ],
+        "correct_answer": "如果 s 是一个序列，s = [1,\"kate\",True]，s[3] 返回 True"
+    },
+    {
+        "id": 83,
+        "content": "下面代码的输出结果是\n```python\nfor s in \"HelloWorld\":\n    if s==\"W\":\n        continue\n    print(s,end=\"\")\n```",
+        "options": [
+            "Hello",
+            "World",
+            "HelloWorld",
+            "Helloorld"
+        ],
+        "correct_answer": "Helloorld"
+    },
+    {
+        "id": 84,
+        "content": "给出如下代码：\n```python\nDictColor = {\"seashell\":\"海贝色\",\"gold\":\"金色\",\"pink\":\"粉红色\",\"brown\":\"棕色\", \"purple\":\"紫色\",\"tomato\":\"西红柿色\"} \n```\n以下选项中能输出“海贝色”的是",
+        "options": [
+            "print(DictColor.keys())",
+            "print(DictColor[\"海贝色\"])",
+            "print(DictColor.values())",
+            "print(DictColor[\"seashell\"])"
+        ],
+        "correct_answer": "print(DictColor[\"seashell\"])"
+    },
+    {
+        "id": 85,
+        "content": "下面代码的输出结果是\n```python\ns =[\"seashell\",\"gold\",\"pink\",\"brown\",\"purple\",\"tomato\"]\nprint(s[1:4:2])\n```",
+        "options": [
+            "['gold', 'pink', 'brown']",
+            "['gold', 'pink']",
+            "['gold', 'pink', 'brown', 'purple', 'tomato']",
+            "['gold', 'brown']"
+        ],
+        "correct_answer": "['gold', 'brown']"
+    },
+    {
+        "id": 86,
+        "content": "下面代码的输出结果是\n```python\nd ={\"大海\":\"蓝色\", \"天空\":\"灰色\", \"大地\":\"黑色\"}\nprint(d[\"大地\"], d.get(\"大地\", \"黄色\"))\n```",
+        "options": [
+            "黑的 灰色",
+            "黑色 黑色",
+            "黑色 蓝色",
+            "黑色 黄色"
+        ],
+        "correct_answer": "黑色 黑色"
+    },
+    {
+        "id": 87,
+        "content": "下面代码的输出结果是\n```python\na = [[1,2,3], [4,5,6], [7,8,9]]\ns = 0\nfor c in a:\n    for j in range(3):\n        s += c[j]\nprint(s)\n```",
+        "options": [
+            "0",
+            "45",
+            "以上答案都不对",
+            "24"
+        ],
+        "correct_answer": "45"
+    },
+    {
+        "id": 88,
+        "content": "关于Python函数，以下选项中描述错误的是",
+        "options": [
+            "函数是一段可重用的语句组",
+            "函数通过函数名进行调用",
+            "每次使用函数需要提供相同的参数作为输入",
+            "函数是一段具有特定功能的语句组"
+        ],
+        "correct_answer": "每次使用函数需要提供相同的参数作为输入"
+    },
+    {
+        "id": 89,
+        "content": "关于函数，以下选项中描述错误的是",
+        "options": [
+            "函数能完成特定的功能，对函数的使用不需要了解函数内部实现原理，只要了解函数的输入输出方式即可。",
+            "使用函数的主要目的是减低编程难度和代码重用",
+            "Python 使用 del 保留字定义一个函数",
+            "函数是一段具有特定功能的、可重用的语句组"
+        ],
+        "correct_answer": "Python 使用 del 保留字定义一个函数"
+    }
+]

@@ -1,18 +1,10 @@
 [
     {
-        "file": "demo.txt",
+        "file": "Python选择题.txt",
         "type": "选择"
     },
     {
-        "file": "demo - 副本.txt",
-        "type": "选择"
-    },
-    {
-        "file": "demo - 副本 (2).txt",
-        "type": "选择"
-    },
-    {
-        "file": "填空 demo.txt",
+        "file": "Python读程序题.txt",
         "type": "填空"
     }
 ]
