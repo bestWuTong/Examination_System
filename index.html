@@ -122,17 +122,15 @@
 
     .bank-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      padding: 18px;
+      gap: 10px;
+      padding: 14px;
     }
 
     .bank-card {
-      display: grid;
-      align-content: space-between;
-      min-height: 132px;
-      gap: 16px;
-      padding: 16px;
+      display: block;
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 16px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: var(--surface);
@@ -155,21 +153,6 @@
       font-size: 17px;
       font-weight: 700;
       line-height: 1.45;
-    }
-
-    .bank-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .start-mark {
-      color: var(--primary);
-      font-weight: 700;
-      white-space: nowrap;
     }
 
     .exam-bar {
@@ -417,7 +400,6 @@
       }
 
       .bank-list {
-        grid-template-columns: 1fr;
         padding: 12px;
       }
 
@@ -624,13 +606,7 @@
         const button = document.createElement("button");
         button.className = "bank-card";
         button.type = "button";
-        button.innerHTML = `
-          <span class="bank-name">${escapeHtml(fileName)}</span>
-          <span class="bank-meta">
-            <span>文件名题库</span>
-            <span class="start-mark">开始答题</span>
-          </span>
-        `;
+        button.innerHTML = `<span class="bank-name">${escapeHtml(getBankDisplayName(fileName))}</span>`;
         button.addEventListener("click", () => startExam(fileName));
         dom.bankList.appendChild(button);
       });
@@ -843,6 +819,10 @@
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+    }
+
+    function getBankDisplayName(fileName) {
+      return String(fileName).replace(/\.txt$/i, "");
     }
 
     dom.reloadBtn.addEventListener("click", loadBanks);
