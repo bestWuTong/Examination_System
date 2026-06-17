@@ -436,6 +436,47 @@
       display: none !important;
     }
 
+    .import-btn {
+      min-height: 42px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: var(--success);
+      color: #ffffff;
+    }
+
+    .import-btn:hover:not(:disabled) {
+      background: var(--success-soft);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+
+    .export-btn {
+      min-height: 42px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: #7c3aed;
+      color: #ffffff;
+    }
+
+    .export-btn:hover:not(:disabled) {
+      background: #6d28d9;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #importFileInput {
+      display: none;
+    }
+
     @media (max-width: 720px) {
       .app {
         width: min(100% - 20px, 1080px);
@@ -504,11 +545,15 @@
       <div class="panel">
         <div class="home-head">
           <h2>题库列表</h2>
-          <button id="reloadBtn" class="ghost-btn" type="button">刷新列表</button>
+          <div style="display: flex; gap: 8px;">
+            <button id="importBtn" class="import-btn" type="button">导入错题集</button>
+            <button id="reloadBtn" class="ghost-btn" type="button">刷新列表</button>
+          </div>
         </div>
         <div id="bankList" class="bank-list">
           <div class="loading">正在读取 src/list.json</div>
         </div>
+        <input id="importFileInput" type="file" accept=".txt">
       </div>
     </section>
 
@@ -542,7 +587,8 @@
       <div class="panel result-panel">
         <p id="scoreText" class="score">0 / 0</p>
         <p id="scoreSubText" class="score-sub"></p>
-        <div>
+        <div class="result-actions">
+          <button id="exportErrorBtn" class="export-btn" type="button">导出错题集</button>
           <button id="restartBtn" class="primary-btn" type="button">再做一次</button>
           <button id="resultHomeBtn" class="ghost-btn" type="button">回到首页</button>
         </div>
@@ -558,6 +604,8 @@
       bankCount: document.querySelector("#bankCount"),
       bankList: document.querySelector("#bankList"),
       reloadBtn: document.querySelector("#reloadBtn"),
+      importBtn: document.querySelector("#importBtn"),
+      importFileInput: document.querySelector("#importFileInput"),
       homeBtn: document.querySelector("#homeBtn"),
       prevBtn: document.querySelector("#prevBtn"),
       nextBtn: document.querySelector("#nextBtn"),
@@ -574,6 +622,7 @@
       feedback: document.querySelector("#feedback"),
       scoreText: document.querySelector("#scoreText"),
       scoreSubText: document.querySelector("#scoreSubText"),
+      exportErrorBtn: document.querySelector("#exportErrorBtn"),
       restartBtn: document.querySelector("#restartBtn"),
       resultHomeBtn: document.querySelector("#resultHomeBtn")
     };
@@ -585,7 +634,9 @@
       currentIndex: 0,
       selectedAnswers: new Map(),
       results: new Map(),
-      autoTimer: null
+      autoTimer: null,
+      isImportedExam: false,
+      importedQuestions: []
     };
 
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -753,6 +804,8 @@
 
     async function startExam(bank) {
       clearAutoTimer();
+      state.isImportedExam = false;
+      state.importedQuestions = [];
       dom.bankList.innerHTML = '<div class="loading">正在载入题目</div>';
 
       try {
@@ -967,7 +1020,9 @@
     }
 
     function restartExam() {
-      if (state.currentBank) {
+      if (state.isImportedExam && state.importedQuestions.length > 0) {
+        startImportedExam(state.importedQuestions);
+      } else if (state.currentBank) {
         startExam(state.currentBank);
       } else {
         loadBanks();
@@ -976,6 +1031,8 @@
 
     function goHome() {
       clearAutoTimer();
+      state.isImportedExam = false;
+      state.importedQuestions = [];
       showView("home");
       renderBankList();
     }
@@ -1026,7 +1083,114 @@
       return String(fileName).replace(/\.txt$/i, "");
     }
 
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const seconds = String(date.getSeconds()).padStart(2, '0');
+      return `${year}年${month}月${day}日${hours}时${minutes}分${seconds}秒`;
+    }
+
+    function exportErrorQuestions() {
+      const errorQuestions = [];
+      state.questions.forEach((question) => {
+        const result = state.results.get(question.uid);
+        if (result && !result.correct) {
+          const questionData = {
+            id: question.id,
+            content: question.content,
+            correct_answer: question.correctAnswers.length === 1 ? question.correctAnswers[0] : question.correctAnswers
+          };
+          if (question.options && question.options.length > 0) {
+            const originalQuestion = state.isImportedExam
+              ? state.importedQuestions.find(q => q.id === question.id)
+              : question;
+            if (originalQuestion && originalQuestion.options) {
+              questionData.options = originalQuestion.options;
+            }
+          }
+          errorQuestions.push(questionData);
+        }
+      });
+
+      if (errorQuestions.length === 0) {
+        alert('没有错题可以导出！');
+        return;
+      }
+
+      const content = JSON.stringify(errorQuestions, null, 4);
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const now = new Date();
+      link.href = url;
+      link.download = `错题集-${formatDate(now)}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function importErrorQuestions() {
+      dom.importFileInput.click();
+    }
+
+    function handleFileImport(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const content = e.target.result;
+          const questions = JSON.parse(content);
+
+          if (!Array.isArray(questions) || questions.length === 0) {
+            alert('导入的错题集为空或格式不正确！');
+            return;
+          }
+
+          const isValid = questions.every(q => q.id && q.content && q.correct_answer);
+          if (!isValid) {
+            alert('错题集格式不正确，缺少必要的题目信息！');
+            return;
+          }
+
+          state.importedQuestions = questions;
+          startImportedExam(questions);
+        } catch (error) {
+          alert('解析错题集文件失败：' + error.message);
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    async function startImportedExam(questions) {
+      clearAutoTimer();
+      state.isImportedExam = true;
+      state.currentBank = { file: '导入的错题集', type: questions[0].options ? '选择' : '填空' };
+
+      state.questions = shuffle(questions).map((question, index) => ({
+        ...question,
+        uid: `${Date.now()}-${index}-${Math.random().toString(16).slice(2)}`,
+        options: question.options ? shuffle(question.options.map(String)) : [],
+        correctAnswers: normalizeAnswers(question.correct_answer)
+      }));
+
+      state.currentIndex = 0;
+      state.selectedAnswers = new Map();
+      state.results = new Map();
+
+      showView('exam');
+      renderQuestion();
+    }
+
     dom.reloadBtn.addEventListener("click", loadBanks);
+    dom.importBtn.addEventListener("click", importErrorQuestions);
+    dom.importFileInput.addEventListener("change", handleFileImport);
     dom.homeBtn.addEventListener("click", goHome);
     dom.prevBtn.addEventListener("click", goPrev);
     dom.nextBtn.addEventListener("click", goNext);
@@ -1037,6 +1201,7 @@
         submitFillAnswer();
       }
     });
+    dom.exportErrorBtn.addEventListener("click", exportErrorQuestions);
     dom.restartBtn.addEventListener("click", restartExam);
     dom.resultHomeBtn.addEventListener("click", goHome);
 
