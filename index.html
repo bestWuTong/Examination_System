@@ -460,12 +460,12 @@
       }
 
       .exam-bar {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .progress {
         grid-column: 1 / -1;
-        grid-row: 1;
+        grid-row: 2;
         justify-content: center;
         min-height: 32px;
       }
