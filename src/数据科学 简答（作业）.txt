@@ -1,0 +1,160 @@
+{
+    "type": "简答",
+    "questions": [
+        {
+            "id": 1,
+            "content": "说明NumPy中切片操作的基本规则。",
+            "correct_answer": "索引可正可负，若索引为正，则表示从左往右进行切片，从0开始；若索引为负，则表示从右往左进行切片，从-1开始，切片遵循左闭右开原则，即包含起始值，不包含终止值。多维数组切片仅需分别设定行和列的切片即可。"
+        },
+        {
+            "id": 2,
+            "content": "numpy小练习：1、使用不同函数创建numpy数组（二维）2、数组访问和切片操作3、数组函数练习-数学函数、统计函数",
+            "correct_answer": "import numpy as np\narr2=np.array([[1,2,3],[4,5,6]])\narr3=np.arange(6).reshape(2,3)\narr4 =np.linspace(0,1,10)\nprint(arr2)\nprint(arr3)\nprint(arr4)\n#切片访问\nprint(arr2[0])\nprint(arr2[:,1])\nprint(arr2[1, 0:2])\n#数学函数\nprint(np.add(arr2,2))\nprint(np.subtract(arr2,2))\nprint(np.multiply(arr2,3))\n#统计函数\nprint(np.sum(arr2))\nprint(np.max(arr2))\nprint(np.min(arr2))\nprint(np.mean(arr2))\nprint(np.median(arr2))\nprint(np.std(arr2))\nprint(np.var(arr2))"
+        },
+        {
+            "id": 3,
+            "content": "简述Pandas中read_csv()函数的常用参数及其作用。",
+            "correct_answer": "1. filepath_or_buffer：指定要读取的CSV文件的路径或者文件类对象，是必传的核心参数。\n2. sep：指定字段分隔符，默认是逗号，当CSV文件使用其他符号比如制表符、分号分隔时，可通过此参数设置。\n3. header：指定用作列名的行号，默认值是0，即第一行作为列名；如果文件没有列名，可设置为None。\n4. index_col：指定某一列作为DataFrame的行索引，可以是列名或者列的索引位置。\n5. usecols：指定要读取的列，可以是列名列表或者列索引列表，用于只加载需要的数据，提升效率。\n6. dtype：指定各列的数据类型，传入字典格式，比如{\"id\":int, \"score\":float}，避免数据类型自动识别出错。\n7. skiprows：指定要跳过的行数，可以是整数，比如跳过前n行，也可以是行索引列表，跳过指定行。\n8. na_values：指定哪些值被识别为缺失值NaN，可以是单个值、列表或者字典。\n9. encoding：指定文件的编码格式，比如\"utf-8\"、\"gbk\"等，解决文件读取时的中文乱码问题。\n10. nrows：指定读取的行数，用于读取大文件时只加载前n行数据，快速预览文件内容。"
+        },
+        {
+            "id": 4,
+            "content": "列举常用的缺失值填充方法，并说明各自的适用场景。",
+            "correct_answer": "均值填充：适用于数值型数据，数据分布近似正态分布且无极端值的场景\n中位数填充：适用于数值型数据，数据存在极端值、呈偏态分布的场景\n众数填充：适用于类别型数据，或者数值型数据中重复值较多的场景\nffill前向填充：适用于时间序列数据，数据存在连续性，缺失值的合理取值与前一个观测值一致的场景\nbfill后向填充：适用于时间序列数据，缺失值的合理取值与后一个观测值一致的场景\n线性插值：适用于时间序列或有连续顺序的数据，数据变化趋势近似线性的场景\n样条插值：适用于数据有非线性连续变化趋势的场景，能更贴合数据的变化曲线\n模型预测填充：适用于数据集特征间有较强关联关系，可通过其他特征构建模型来预测缺失值的场景，适合缺失值占比适中且数据特征丰富的情况\n常量填充：适用于缺失值代表特定含义的场景，比如用\"未知\"填充类别型数据的缺失值，用0填充明确代表无数值的缺失场景\n多重插补：适用于缺失值机制复杂，需要考虑缺失值不确定性的场景，常用于统计分析要求较高的研究场景"
+        },
+        {
+            "id": 5,
+            "content": "简述Series和DataFrame的主要区别。",
+            "correct_answer": "Series是一维数据结构，DataFrame是二维表格型数据结构，可看作是由多个Series组成。\nSeries包含一组数据和与之对应的索引，只有行索引；DataFrame有行索引和列索引，数据以列的形式组织，每一列可以是不同的数据类型。\nSeries用于存储单一列的数据；DataFrame可以存储多列不同类型的数据，更适合表示结构化的表格数据。"
+        },
+        {
+            "id": 6,
+            "content": "请描述处理数据中缺失值和错误值的一般流程，并说明如何在Pandas中实现该流程。",
+            "correct_answer": "一、缺失值处理\n1. 检测缺失值：df.isnull()、df.isna()生成布尔值表标记缺失值；df.isnull().sum()统计各列缺失值数量；df.info()查看数据概况，非空计数可反映缺失情况。\n2. 处理缺失值：\n删除法：df.dropna(axis=0, how='any', thresh=None, subset=None)\n填充法：常数填充df.fillna(value=0)；统计值填充df.fillna(df.mean())、df.fillna(df.median())、df.fillna(df.mode().iloc[0])；前后值填充df.fillna(method='ffill')、df.fillna(method='bfill')；插值法df.interpolate(method='linear')\n\n二、错误值处理\n1. 检测错误值：规则校验、统计分析、唯一性校验\n2. 处理错误值：删除、修正、标记"
+        },
+        {
+            "id": 7,
+            "content": "请写出一段代码，读取一个名为 data.csv 的文件，并打印前5行。",
+            "correct_answer": "import pandas as pd\ndf = pd.read_csv('data.csv')\nprint(df.head())"
+        },
+        {
+            "id": 8,
+            "content": "请编写一段代码，读取一个CSV文件，将其中的 'age' 列的缺失值填充为 30，然后筛选出'age'列大于30的所有行，并将结果保存为'output.csv'。",
+            "correct_answer": "import pandas as pd\ndf = pd.read_csv('file.csv')\ndf['age'] = df['age'].fillna(30)\nfiltered_df = df[df['age'] > 30]\nfiltered_df.to_csv('output.csv', index=False)"
+        },
+        {
+            "id": 9,
+            "content": "1、读取Euro.csv文件，命名为euro；2、输出其前5行；3、查看其所有列的信息；4、只选取Goals列；5、计算黄牌Yellow Cards数的算术平均值；6、将数据集中的Team、Yellow Cards、Red Cards列单独存储在一个名为discipline的数据框对象中",
+            "correct_answer": "import pandas as pd\neuro = pd.read_csv(\"Euro.csv\")\nprint(euro.head())\nprint(euro.info())\nprint(euro[\"Goals\"])\nprint(euro[\"Yellow Cards\"].mean())\ndiscipline = euro[[\"Team\",\"Yellow Cards\",\"Red Cards\"]]"
+        },
+        {
+            "id": 10,
+            "content": "编写代码，对自选数据集进行EDA，并说明每个步骤的目的。",
+            "correct_answer": "#1.导入所需库\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.datasets import load_iris\n#2.加载数据集\niris = load_iris()\ndf=pd.DataFrame(iris.data,columns=iris.feature_names)\ndf['target'] = iris.target\n#3.查看数据基本信息\nprint(\"===数据基本信息===\")\nprint(df.info())\n#目的:快速获取样本量、特征数、数据类型、是否存在缺失值,判断数据基础结构\n#4.查看数据统计摘要\nprint(\"\\n====数据统计摘要====\")\nprint(df.describe())\n#目的:获取均值、标准差、最值、分位数等,识别数据的集中趋势和离散程度\n#5.检查缺失值\nprint(\"\\n====缺失值统计====\")\nprint(df.isnull().sum())\n#目的:确认数据完整性,为后续清洗做准备\n#6.查看类别分布\nprint(\"\\n====样本类别分布====\")\nprint(df[\"target\"].value_counts())\n#目的:判断数据集是否均衡\n#7.绘制特征分布直方图\ndf.iloc[:,:-1].hist(figsize=(10,8))\nplt.tight_layout()\nplt.show()\n#目的:观察单个特征的数据分布形态(正态/偏态)\n#8.绘制特征相关性热力图\ncorr=df.corr()\nsns.heatmap(corr, annot=True,cmap='coolwarm')\nplt.show()\n#目的:分析特征间的线性相关性,识别冗余特征\n#9.绘制特征散点图(不同类别区分)\nsns.scatterplot(x='sepal length (cm)',y=\"petal length (cm)\",hue='target',data=df)\nplt.show()\n#目的:直观观察不同类别样本在特征空间的分布差异"
+        },
+        {
+            "id": 11,
+            "content": "解释方差过滤的原理，并说明如何确定过滤阈值。",
+            "correct_answer": "原理：方差过滤是一种简单的特征选择方法，特征的方差代表其取值的波动程度。方差越小，说明该特征的取值几乎无变化，对样本的区分能力极弱，属于无效 / 冗余特征；方差越大，特征的区分度越高。因此通过设定阈值，剔除方差小于阈值的特征，实现特征筛选。\n阈值确定方法：\n经验法：常用固定阈值，适合通用场景\n分位数法：按方差从小到大排序，剔除前 10%/20% 方差最小的特征\n业务法：结合业务需求，自定义方差阈值。"
+        },
+        {
+            "id": 12,
+            "content": "请简述主成分分析(PCA)的基本步骤。",
+            "correct_answer": "1. 数据标准化：对原始数据进行中心化，消除量纲影响\n2. 计算协方差矩阵：分析特征之间的线性相关关系\n3. 求解特征值与特征向量：计算协方差矩阵的特征值和对应的特征向量\n4. 选取主成分：将特征值按降序排列，选取前 k 个最大特征值对应的特征向量，构成投影矩阵\n5. 数据投影：将原始高维数据投影到 k 维主成分空间，得到降维后的数据"
+        },
+        {
+            "id": 13,
+            "content": "对比分析ID3算法、C4.5算法和CART算法在特征选择标准上的差异。",
+            "correct_answer": "ID3：采用信息增益，偏好取值多的特征，生成多叉树\nC4.5：采用信息增益率，修正多取值特征偏好，可处理连续值、缺失值，多叉树\nCART：分类用基尼系数、回归用均方误差，强制二叉划分"
+        },
+        {
+            "id": 14,
+            "content": "解释支持向量机中核函数的作用，并列举两种常用的核函数及其适用场景。",
+            "correct_answer": "作用：低维线性不可分数据，借助核技巧隐式映射高维空间，避免维度爆炸、降低计算量\n线性核：适用于线性可分、高维数据，速度快\n高斯核：通用型，适用于线性不可分、中低维数据"
+        },
+        {
+            "id": 15,
+            "content": "请比较信息熵、信息增益率和基尼系数在决策树算法中的作用，并说明ID3、C4.5和CART算法分别使用哪种指标进行特征选择。",
+            "correct_answer": "信息熵：衡量样本混乱 / 纯度，熵越大越杂乱\n信息增益：熵的减少量，表征特征分类能力\n信息增益率：归一化增益，消除对多取值特征偏好\n基尼系数：衡量纯度，值越小纯度越高，计算简单\n对应算法：ID3→信息增益；C4.5→信息增益率；CART→基尼系数"
+        },
+        {
+            "id": 16,
+            "content": "请简述从线性回归到逻辑回归的演变过程，并说明两者的主要区别。",
+            "correct_answer": "演变：线性回归输出全域实数，不适合分类；加入Sigmoid 函数，将结果映射到 (0,1) 概率区间，转为分类模型\n区别\n任务：线性回归（回归，预测连续值）；逻辑回归（分类，预测概率）\n损失：线性回归（均方误差）；逻辑回归（对数似然 / 交叉熵）\n输出：线性回归（全体实数）；逻辑回归 (0,1) 概率"
+        },
+        {
+            "id": 17,
+            "content": "在k近邻算法中，k值的选择会对模型性能产生什么影响？此外，量纲效应会带来什么问题，如何解决？",
+            "correct_answer": "k 值影响\nk 过小：模型复杂，易过拟合，对噪声敏感\nk 过大：模型简单，易欠拟合，边界模糊\n量纲问题：取值范围大的特征主导距离计算，模型失真\n解决：标准化 / 归一化"
+        },
+        {
+            "id": 18,
+            "content": "在k近邻算法中，k值的选择对模型性能有什么影响？如何选择合适的k值？",
+            "correct_answer": "k 影响：k 小易过拟合；k 大易欠拟合；二分类优先选奇数\n选取：经验初选、网格搜索 + 交叉验证、绘制验证曲线，选取泛化最优值"
+        },
+        {
+            "id": 19,
+            "content": "简述朴素贝叶斯算法的基本步骤，包括训练过程和预测过程。",
+            "correct_answer": "核心前提：特征条件独立假设\n训练：统计类别先验概率、各特征条件概率，拉普拉斯平滑避免零概率\n预测：依据贝叶斯公式计算各类别后验概率，取概率最大类别作为结果"
+        },
+        {
+            "id": 20,
+            "content": "K-Means算法对非球形聚类簇的处理效果较差，请结合算法原理分析原因。",
+            "correct_answer": "K-Means 基于欧氏距离度量相似度，以簇均值为中心、最小化簇内平方误差为目标；该机制仅适配球形、密集、大小均匀的簇；非球形簇的样本分布不符合球形假设，距离计算会导致簇划分错误，因此处理效果差"
+        },
+        {
+            "id": 21,
+            "content": "请列举至少三种常见的聚类算法，并分别说明其适用场景。",
+            "correct_answer": "K-Means：适用于大规模数据、球形密集簇、无明显噪声的场景\nDBSCAN：适用于任意形状簇、含噪声数据、无需预设簇数的场景\n层次聚类：适用于小数据集、需展示簇层次结构的场景"
+        },
+        {
+            "id": 22,
+            "content": "请简述DBSCAN算法的基本流程，并说明其与K-Means算法的主要区别。",
+            "correct_answer": "基本流程：设定 ε 和 MinPts，遍历未访问样本；识别核心对象，将密度可达样本归为一簇；标记边界点，剩余点为噪声点\n主要区别：K-Means 需预设簇数 K，DBSCAN 无需预设；K-Means 基于距离、仅识别球形簇，DBSCAN 基于密度、识别任意形状簇；K-Means 易受异常值影响，DBSCAN 抗噪声"
+        },
+        {
+            "id": 23,
+            "content": "在Python中使用scikit-learn库实现K-Means聚类时，需要导入哪个类？请写出基本的代码步骤（包括数据准备、模型初始化、训练、预测）。",
+            "correct_answer": "导入类：from sklearn.cluster import KMeans\n代码：\nfrom sklearn.cluster import KMeans\nimport numpy as np\nX = np.array([[1,2],[1,4],[2,2],[8,4],[9,3],[10,5]])\nkmeans = KMeans(n_clusters=2, random_state=0)\nkmeans.fit(X)\nlabels = kmeans.labels_\ncenters = kmeans.cluster_centers_\nprint(\"聚类标签：\", labels)\nprint(\"聚类中心：\", centers)"
+        },
+        {
+            "id": 24,
+            "content": "DBSCAN算法将数据点分为核心对象、边界点和噪声点三类，请分别描述这三类点的定义，并说明噪声点对DBSCAN聚类结果的影响。",
+            "correct_answer": "定义：\n核心对象：ε 邻域内样本数≥MinPts 的点\n边界点：ε 邻域内样本数＜MinPts，但位于核心对象邻域内的点\n噪声点：既非核心对象也非边界点的孤立点\n影响：噪声点会被直接识别排除，不干扰正常簇的划分，提升聚类鲁棒性"
+        },
+        {
+            "id": 25,
+            "content": "请简述集成学习的基本步骤，并解释偏差和方差的定义，以及它们与欠拟合和过拟合的关系。",
+            "correct_answer": "步骤：训练多个基学习器，再通过融合策略整合输出最终结果\n偏差：模型预测值与真实值的平均偏差，体现拟合能力\n方差：模型在不同数据集上预测结果的波动程度，体现稳定性\n高偏差易造成欠拟合，高方差易造成过拟合"
+        },
+        {
+            "id": 26,
+            "content": "请简述随机森林的算法原理，并说明其相比单个决策树的优势。",
+            "correct_answer": "原理：基于Bagging思想，结合样本与特征双重随机，构建多棵决策树，通过投票或平均得到预测结果\n优势：有效缓解单决策树过拟合，泛化能力、鲁棒性更强，预测结果更稳定，可计算特征重要性"
+        },
+        {
+            "id": 27,
+            "content": "请解释Boosting的基本思想，并以AdaBoost为例说明其工作原理。",
+            "correct_answer": "思想：串行训练一系列基学习器，不断修正前序模型的错误，将弱学习器组合为强学习器\n原理：初始化样本权重，训练基学习器，依据误差更新样本权重与模型权重，迭代训练后加权投票输出结果"
+        },
+        {
+            "id": 28,
+            "content": "简述Bagging策略的步骤。",
+            "correct_answer": "使用自助采样抽取多组子数据集，每组数据分别训练一个基学习器，分类采用投票、回归采用均值，融合得到最终结果"
+        },
+        {
+            "id": 29,
+            "content": "简述随机森林算法的原理。",
+            "correct_answer": "随机森林以决策树为基模型，通过自助采样选取样本、随机选取特征构建多棵独立决策树，综合所有树的输出得到预测结果"
+        },
+        {
+            "id": 30,
+            "content": "简述Bagging与Boosting的区别。",
+            "correct_answer": "训练模式：Bagging并行训练，Boosting串行训练\n样本权重：Bagging权重不变，Boosting动态更新样本权重\n优化目标：Bagging降低方差，Boosting降低偏差\n基模型权重：Bagging权重均等，Boosting差异化分配权重"
+        },
+        {
+            "id": 31,
+            "content": "随机森林算法有哪些特性？",
+            "correct_answer": "支持并行训练、不易过拟合、抗噪声与异常值、鲁棒性好、可输出特征重要性、引入双重随机性"
+        }
+    ]
+}

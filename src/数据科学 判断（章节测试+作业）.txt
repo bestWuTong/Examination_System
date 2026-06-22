@@ -1,0 +1,180 @@
+{
+    "type": "判断",
+    "questions": [
+        {
+            "id": 1,
+            "content": "数据科学的核心目标是从数据中提取有价值的信息和知识。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 2,
+            "content": "关闭Jupyter Notebook时，直接关闭浏览器窗口即可完全停止服务。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 3,
+            "content": "数据科学仅涉及计算机科学领域，与其他学科无关。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 4,
+            "content": "numpy.power()与运算符**的作用相同。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 5,
+            "content": "DataFrame中，同一列的数据类型可以不同。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 6,
+            "content": "使用ndarray创建DataFrame时，参数 index 和 columns 的元素个数必须分别等于数组的行数与列数，否则会抛出错误。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 7,
+            "content": "在 fillna() 中，method='bfill' 表示用后面的值向前填充。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 8,
+            "content": "增加训练样本数量通常可以缓解过拟合问题。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 9,
+            "content": "基于GBDT的特征组合方法可以自动生成新的特征，这些特征通常是原始特征的非线性组合。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 10,
+            "content": "k折交叉验证将数据集分为k个相等的子集，每次用k-1个子集训练模型，1个子集验证模型，重复k次后取平均性能。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 11,
+            "content": "t-SNE算法的降维结果对参数（如 perplexity）的选择不敏感。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 12,
+            "content": "OneClassSVM算法只能用于单变量异常检测。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 13,
+            "content": "互信息只能用于衡量离散特征与标签之间的相关性。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 14,
+            "content": "逻辑回归是一种回归模型，其输出是连续值。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 15,
+            "content": "决策树剪枝的目的是减少模型的过拟合风险。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 16,
+            "content": "聚类是一种无监督学习方法，不需要预先标注的训练数据。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 17,
+            "content": "DBSCAN算法需要预先指定聚类数量k。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 18,
+            "content": "CART决策树既可以用于分类任务，也可以用于回归任务。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 19,
+            "content": "One-Class SVM是一种无监督学习算法，主要用于异常值检测。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 20,
+            "content": "K-Means算法的聚类结果不受初始聚类中心选择的影响。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 21,
+            "content": "集成学习的性能一定优于所有单个基学习器。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 22,
+            "content": "Bagging 算法通过减小方差来提升模型性能。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 23,
+            "content": "随机森林的基学习器只能是决策树。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 24,
+            "content": "AdaBoost 算法中，分类误差率越低的基学习器权重越大。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 25,
+            "content": "GBDT 算法的基学习器通常是深度较浅的决策树。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 26,
+            "content": "Stacking 泛化中，初级学习器和元学习器必须是同类型算法。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 27,
+            "content": "概率校准会改变模型的分类准确率。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 28,
+            "content": "subplot(2, 2, 3) 创建的图形将出现在第一行第二列的位置。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 29,
+            "content": "散点图只能展示二维数据，无法展示更多维度的信息。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 30,
+            "content": "在箱线图中，箱子中间的线代表算术平均值。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 31,
+            "content": "要绘制箱线图，除了使用 plot(kind='box')，还可以直接调用 df.box() 方法。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 32,
+            "content": "学习曲线采用交叉验证的目的是为了更稳定地评估模型在不同训练集大小下的表现。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 33,
+            "content": "NumPy数组中的所有元素必须是同一数据类型。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 34,
+            "content": "使用np.zeros((3,4))创建的数组元素全为0，形状为3行4列。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 35,
+            "content": "numpy.reshape函数可以改变数组的形状，但不能改变数组的元素总数。",
+            "correct_answer": "正确"
+        }
+    ]
+}

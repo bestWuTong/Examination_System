@@ -155,22 +155,6 @@
       line-height: 1.45;
     }
 
-    .exam-bar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: grid;
-      grid-template-columns: minmax(82px, auto) minmax(82px, auto) 1fr minmax(82px, auto);
-      align-items: center;
-      gap: 10px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 12px 36px rgba(23, 32, 51, 0.08);
-      backdrop-filter: blur(12px);
-    }
-
     .nav-btn,
     .primary-btn,
     .ghost-btn {
@@ -206,38 +190,36 @@
       border: 1px solid var(--line);
     }
 
-    .progress {
-      display: flex;
-      justify-content: center;
-      min-width: 0;
-      color: var(--muted);
-      font-weight: 700;
-      text-align: center;
-    }
-
     .question-panel {
-      margin-top: 16px;
       padding: 24px;
     }
 
-    .exam-name {
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 14px;
-      overflow-wrap: anywhere;
+    .question-meta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      margin-bottom: 14px;
     }
 
-    .question-type {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      margin-bottom: 14px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: #fef3c7;
-      color: #92400e;
-      font-size: 13px;
+    .exam-name {
+      min-width: 0;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(10px, 2.6vw, 14px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .progress {
+      min-width: max-content;
+      color: var(--muted);
+      font-size: clamp(10px, 2.6vw, 14px);
       font-weight: 700;
+      text-align: right;
+      white-space: nowrap;
     }
 
     .question-title {
@@ -306,13 +288,15 @@
     }
 
     .option.correct {
-      border-color: rgba(21, 128, 61, 0.65);
-      background: var(--success-soft);
+      border-color: rgba(21, 128, 61, 0.9);
+      background: #d1fadf;
+      color: #14532d;
     }
 
     .option.wrong {
-      border-color: rgba(180, 35, 24, 0.6);
-      background: var(--danger-soft);
+      border-color: rgba(180, 35, 24, 0.88);
+      background: #fee4e2;
+      color: #7a271a;
     }
 
     .option-key {
@@ -326,6 +310,16 @@
       font-weight: 750;
     }
 
+    .option.correct .option-key {
+      background: var(--success);
+      color: #ffffff;
+    }
+
+    .option.wrong .option-key {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
     .option-text {
       min-width: 0;
       overflow-wrap: anywhere;
@@ -334,7 +328,7 @@
 
     .multi-actions {
       display: flex;
-      justify-content: flex-end;
+      justify-content: flex-start;
       margin-top: 18px;
     }
 
@@ -368,7 +362,38 @@
 
     .fill-actions {
       display: flex;
-      justify-content: flex-end;
+      justify-content: flex-start;
+    }
+
+    .question-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      min-width: 0;
+    }
+
+    .short-answer {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .short-answer summary {
+      min-height: 52px;
+      padding: 14px;
+      cursor: pointer;
+      color: var(--primary);
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    .short-answer-content {
+      padding: 16px 14px;
+      border-top: 1px solid var(--line);
+      line-height: 1.6;
     }
 
     .feedback {
@@ -500,19 +525,20 @@
         padding: 12px;
       }
 
-      .exam-bar {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
       .progress {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-content: center;
-        min-height: 32px;
+        font-size: clamp(10px, 2.8vw, 13px);
       }
 
       .question-panel {
         padding: 18px;
+      }
+
+      .question-meta {
+        gap: 8px;
+      }
+
+      .exam-name {
+        font-size: clamp(10px, 2.8vw, 13px);
       }
 
       .question-title {
@@ -527,6 +553,27 @@
       .option-key {
         width: 28px;
         height: 28px;
+      }
+
+      .multi-actions,
+      .fill-actions {
+        width: 100%;
+      }
+
+      .multi-actions .primary-btn,
+      .fill-actions .primary-btn {
+        width: 100%;
+      }
+
+      .question-nav {
+        width: 100%;
+      }
+
+      .question-nav .nav-btn {
+        flex: 1 1 0;
+        min-width: 0;
+        padding-right: 8px;
+        padding-left: 8px;
       }
     }
   </style>
@@ -558,16 +605,11 @@
     </section>
 
     <section id="examView" class="hidden">
-      <div class="exam-bar">
-        <button id="homeBtn" class="nav-btn" type="button">首页</button>
-        <button id="prevBtn" class="nav-btn" type="button">上一题</button>
-        <div id="progressText" class="progress">第 0 题 / 共 0 题</div>
-        <button id="nextBtn" class="nav-btn" type="button">下一题</button>
-      </div>
-
       <div class="panel question-panel">
-        <p id="examName" class="exam-name"></p>
-        <span id="questionType" class="question-type">单选题</span>
+        <div class="question-meta">
+          <p id="examName" class="exam-name"></p>
+          <div id="progressText" class="progress">第 0 题 / 共 0 题</div>
+        </div>
         <div id="questionTitle" class="question-title" role="heading" aria-level="2"></div>
         <div id="options" class="options"></div>
         <div id="fillAnswer" class="fill-answer hidden">
@@ -579,7 +621,16 @@
         <div id="multiActions" class="multi-actions hidden">
           <button id="submitMultiBtn" class="primary-btn" type="button">提交答案</button>
         </div>
+        <details id="shortAnswer" class="short-answer hidden">
+          <summary>查看答案</summary>
+          <div id="shortAnswerContent" class="short-answer-content"></div>
+        </details>
         <div id="feedback" class="feedback idle"></div>
+        <div class="question-nav">
+          <button id="homeBtn" class="nav-btn" type="button">首页</button>
+          <button id="prevBtn" class="nav-btn" type="button">上一题</button>
+          <button id="nextBtn" class="nav-btn" type="button">下一题</button>
+        </div>
       </div>
     </section>
 
@@ -611,7 +662,6 @@
       nextBtn: document.querySelector("#nextBtn"),
       progressText: document.querySelector("#progressText"),
       examName: document.querySelector("#examName"),
-      questionType: document.querySelector("#questionType"),
       questionTitle: document.querySelector("#questionTitle"),
       options: document.querySelector("#options"),
       fillAnswer: document.querySelector("#fillAnswer"),
@@ -619,6 +669,8 @@
       submitFillBtn: document.querySelector("#submitFillBtn"),
       multiActions: document.querySelector("#multiActions"),
       submitMultiBtn: document.querySelector("#submitMultiBtn"),
+      shortAnswer: document.querySelector("#shortAnswer"),
+      shortAnswerContent: document.querySelector("#shortAnswerContent"),
       feedback: document.querySelector("#feedback"),
       scoreText: document.querySelector("#scoreText"),
       scoreSubText: document.querySelector("#scoreSubText"),
@@ -658,31 +710,56 @@
 
     function normalizeAnswers(answer) {
       if (Array.isArray(answer)) {
-        return answer.map(String);
+        return answer.map((item) => String(item).trim()).filter(Boolean);
       }
-      return [String(answer)];
+      return [String(answer ?? "").trim()].filter(Boolean);
+    }
+
+    function normalizeQuestionType(type) {
+      const value = String(type || "").trim();
+      if (["单选", "多选", "判断", "填空", "简答"].includes(value)) {
+        return value;
+      }
+      if (value === "选择") {
+        return "单选";
+      }
+      return "单选";
+    }
+
+    function getQuestionType(question) {
+      return normalizeQuestionType(question && question.type);
+    }
+
+    function isChoiceType(type) {
+      return ["单选", "多选", "判断"].includes(normalizeQuestionType(type));
+    }
+
+    function isFillQuestion(question) {
+      return getQuestionType(question) === "填空";
+    }
+
+    function isMultiQuestion(question) {
+      return getQuestionType(question) === "多选";
+    }
+
+    function isShortAnswerQuestion(question) {
+      return getQuestionType(question) === "简答";
+    }
+
+    function isGradableQuestion(question) {
+      return !isShortAnswerQuestion(question);
     }
 
     function normalizeBank(item) {
       if (typeof item === "string") {
         return {
-          file: item,
-          type: "选择"
+          file: item
         };
       }
 
       return {
-        file: String(item.file || ""),
-        type: String(item.type || "选择")
+        file: String(item.file || "")
       };
-    }
-
-    function isFillExam() {
-      return state.currentBank && state.currentBank.type === "填空";
-    }
-
-    function isMultiQuestion(question) {
-      return Array.isArray(question.correct_answer);
     }
 
     function sameAnswerSet(left, right) {
@@ -691,6 +768,66 @@
       }
       const rightSet = new Set(right);
       return left.every((item) => rightSet.has(item));
+    }
+
+    function normalizeBankData(rawData, fallbackType = "") {
+      if (Array.isArray(rawData)) {
+        const firstQuestion = rawData[0] || {};
+        const inferredType = firstQuestion.type
+          || (Array.isArray(firstQuestion.options) && firstQuestion.options.length > 0
+            ? (Array.isArray(firstQuestion.correct_answer) ? "多选" : "单选")
+            : "填空");
+        const type = normalizeQuestionType(fallbackType || inferredType);
+        return { type, questions: rawData };
+      }
+
+      if (rawData && Array.isArray(rawData.questions)) {
+        const type = normalizeQuestionType(rawData.type || fallbackType);
+        return { type, questions: rawData.questions };
+      }
+
+      throw new Error("题库格式不正确");
+    }
+
+    function getOriginalQuestion(question) {
+      if (!state.isImportedExam) {
+        return question;
+      }
+
+      return state.importedQuestions.find((item) => item.id === question.id && item.content === question.content) || question;
+    }
+
+    function normalizeQuestion(question, type, index) {
+      const questionType = normalizeQuestionType(question.type || type);
+      const originalOptions = Array.isArray(question.options) ? question.options.map(String) : [];
+      const options = questionType === "判断"
+        ? ["正确", "错误"]
+        : (isChoiceType(questionType) ? shuffle(originalOptions) : []);
+      const correctAnswers = questionType === "判断"
+        ? normalizeJudgementAnswers(question.correct_answer)
+        : normalizeAnswers(question.correct_answer);
+
+      return {
+        ...question,
+        type: questionType,
+        uid: `${Date.now()}-${index}-${Math.random().toString(16).slice(2)}`,
+        options,
+        originalOptions,
+        correctAnswers
+      };
+    }
+
+    function normalizeJudgementAnswers(answer) {
+      return normalizeAnswers(answer).map((item) => {
+        const value = String(item).trim().toUpperCase();
+        if (["A", "TRUE", "T", "对", "是"].includes(value)) {
+          return "正确";
+        }
+        if (["B", "FALSE", "F", "错", "否"].includes(value)) {
+          return "错误";
+        }
+        return item;
+      });
     }
 
     function clearAutoTimer() {
@@ -809,20 +946,13 @@
       dom.bankList.innerHTML = '<div class="loading">正在载入题目</div>';
 
       try {
-        const rawQuestions = await fetchJson(`src/${encodeURIComponent(bank.file)}`);
-        if (!Array.isArray(rawQuestions) || rawQuestions.length === 0) {
+        const bankData = normalizeBankData(await fetchJson(`src/${encodeURIComponent(bank.file)}`));
+        if (bankData.questions.length === 0) {
           throw new Error("题库中没有题目");
         }
 
-        state.currentBank = bank;
-        state.questions = shuffle(rawQuestions).map((question, index) => ({
-          ...question,
-          uid: `${Date.now()}-${index}-${Math.random().toString(16).slice(2)}`,
-          options: bank.type === "选择"
-            ? shuffle(Array.isArray(question.options) ? question.options.map(String) : [])
-            : [],
-          correctAnswers: normalizeAnswers(question.correct_answer)
-        }));
+        state.currentBank = { ...bank, type: bankData.type };
+        state.questions = shuffle(bankData.questions).map((question, index) => normalizeQuestion(question, bankData.type, index));
         state.currentIndex = 0;
         state.selectedAnswers = new Map();
         state.results = new Map();
@@ -849,24 +979,34 @@
 
       const selected = state.selectedAnswers.get(question.uid) || [];
       const result = state.results.get(question.uid);
-      const fill = isFillExam();
-      const multi = !fill && isMultiQuestion(question);
+      const type = getQuestionType(question);
+      const fill = isFillQuestion(question);
+      const multi = isMultiQuestion(question);
+      const shortAnswer = isShortAnswerQuestion(question);
+      const choice = isChoiceType(type);
 
       dom.examName.textContent = getBankDisplayName(state.currentBank.file);
       dom.progressText.textContent = `第 ${state.currentIndex + 1} 题 / 共 ${state.questions.length} 题`;
       dom.prevBtn.disabled = state.currentIndex === 0;
       dom.nextBtn.textContent = state.currentIndex === state.questions.length - 1 ? "交卷" : "下一题";
-      dom.questionType.textContent = fill ? "填空题" : (multi ? "多选题" : "单选题");
       renderFormattedText(dom.questionTitle, question.content || "未命名题目");
-      dom.options.classList.toggle("hidden", fill);
+      dom.options.classList.toggle("hidden", !choice);
       dom.fillAnswer.classList.toggle("hidden", !fill);
       dom.multiActions.classList.toggle("hidden", fill || !multi || Boolean(result));
+      dom.shortAnswer.classList.toggle("hidden", !shortAnswer);
+      dom.shortAnswer.open = false;
       dom.submitMultiBtn.disabled = selected.length === 0;
       setFeedback("", "idle");
       dom.options.innerHTML = "";
       dom.fillInput.value = selected[0] || "";
       dom.fillInput.disabled = Boolean(result);
       dom.submitFillBtn.disabled = Boolean(result);
+      dom.shortAnswerContent.replaceChildren();
+
+      if (shortAnswer) {
+        renderFormattedText(dom.shortAnswerContent, question.correctAnswers.join("、") || "暂无答案");
+        return;
+      }
 
       if (fill) {
         if (result) {
@@ -930,12 +1070,12 @@
 
     function submitAnswer(answer) {
       const question = state.questions[state.currentIndex];
-      if (!question || state.results.has(question.uid)) {
+      if (!question || state.results.has(question.uid) || isShortAnswerQuestion(question)) {
         return;
       }
 
       const selected = answer.map(String);
-      const correct = isFillExam()
+      const correct = isFillQuestion(question)
         ? selected[0] === question.correctAnswers[0]
         : sameAnswerSet(selected, question.correctAnswers);
       const result = {
@@ -948,7 +1088,7 @@
       state.results.set(question.uid, result);
       renderQuestion();
 
-      if (correct && !isFillExam()) {
+      if (correct && !isFillQuestion(question)) {
         state.autoTimer = window.setTimeout(() => {
           goNext();
         }, 700);
@@ -972,6 +1112,45 @@
         return;
       }
       submitAnswer([value]);
+    }
+
+    function handleExamEnter(event) {
+      if (event.key !== "Enter" || dom.examView.classList.contains("hidden")) {
+        return;
+      }
+
+      const question = state.questions[state.currentIndex];
+      if (!question) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (isShortAnswerQuestion(question)) {
+        if (dom.shortAnswer.open) {
+          goNext();
+        } else {
+          dom.shortAnswer.open = true;
+        }
+        return;
+      }
+
+      const result = state.results.get(question.uid);
+      if (result) {
+        if (!result.correct) {
+          goNext();
+        }
+        return;
+      }
+
+      if (isFillQuestion(question)) {
+        submitFillAnswer();
+        return;
+      }
+
+      if (isMultiQuestion(question)) {
+        submitMultiAnswer();
+      }
     }
 
     function showStoredResult(result) {
@@ -1008,14 +1187,18 @@
 
     function finishExam() {
       clearAutoTimer();
-      const correctCount = state.questions.reduce((total, question) => {
+      const gradableQuestions = state.questions.filter(isGradableQuestion);
+      const correctCount = gradableQuestions.reduce((total, question) => {
         const result = state.results.get(question.uid);
         return total + (result && result.correct ? 1 : 0);
       }, 0);
-      const total = state.questions.length;
+      const total = gradableQuestions.length;
+      const shortAnswerCount = state.questions.length - total;
 
       dom.scoreText.textContent = `${correctCount} / ${total}`;
-      dom.scoreSubText.textContent = `做对了 ${correctCount} 道，共 ${total} 道`;
+      dom.scoreSubText.textContent = shortAnswerCount > 0
+        ? `做对了 ${correctCount} 道，共 ${total} 道；${shortAnswerCount} 道简答题不计分`
+        : `做对了 ${correctCount} 道，共 ${total} 道`;
       showView("result");
     }
 
@@ -1097,19 +1280,16 @@
       const errorQuestions = [];
       state.questions.forEach((question) => {
         const result = state.results.get(question.uid);
-        if (result && !result.correct) {
+        if (isGradableQuestion(question) && result && !result.correct) {
+          const originalQuestion = getOriginalQuestion(question);
           const questionData = {
             id: question.id,
+            type: getQuestionType(question),
             content: question.content,
             correct_answer: question.correctAnswers.length === 1 ? question.correctAnswers[0] : question.correctAnswers
           };
-          if (question.options && question.options.length > 0) {
-            const originalQuestion = state.isImportedExam
-              ? state.importedQuestions.find(q => q.id === question.id)
-              : question;
-            if (originalQuestion && originalQuestion.options) {
-              questionData.options = originalQuestion.options;
-            }
+          if (originalQuestion && Array.isArray(originalQuestion.options) && originalQuestion.options.length > 0) {
+            questionData.options = originalQuestion.options.map(String);
           }
           errorQuestions.push(questionData);
         }
@@ -1120,7 +1300,10 @@
         return;
       }
 
-      const content = JSON.stringify(errorQuestions, null, 4);
+      const content = JSON.stringify({
+        type: normalizeQuestionType(state.currentBank && state.currentBank.type),
+        questions: errorQuestions
+      }, null, 4);
       const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -1145,21 +1328,20 @@
       reader.onload = function(e) {
         try {
           const content = e.target.result;
-          const questions = JSON.parse(content);
+          const importedData = normalizeBankData(parseJsonText(content));
 
-          if (!Array.isArray(questions) || questions.length === 0) {
+          if (importedData.questions.length === 0) {
             alert('导入的错题集为空或格式不正确！');
             return;
           }
 
-          const isValid = questions.every(q => q.id && q.content && q.correct_answer);
+          const isValid = importedData.questions.every(q => q.id && q.content && q.correct_answer);
           if (!isValid) {
             alert('错题集格式不正确，缺少必要的题目信息！');
             return;
           }
 
-          state.importedQuestions = questions;
-          startImportedExam(questions);
+          startImportedExam(importedData);
         } catch (error) {
           alert('解析错题集文件失败：' + error.message);
         }
@@ -1168,17 +1350,14 @@
       event.target.value = '';
     }
 
-    async function startImportedExam(questions) {
+    async function startImportedExam(importedData) {
       clearAutoTimer();
+      const bankData = normalizeBankData(importedData);
       state.isImportedExam = true;
-      state.currentBank = { file: '导入的错题集', type: questions[0].options ? '选择' : '填空' };
+      state.importedQuestions = bankData.questions;
+      state.currentBank = { file: '导入的错题集', type: bankData.type };
 
-      state.questions = shuffle(questions).map((question, index) => ({
-        ...question,
-        uid: `${Date.now()}-${index}-${Math.random().toString(16).slice(2)}`,
-        options: question.options ? shuffle(question.options.map(String)) : [],
-        correctAnswers: normalizeAnswers(question.correct_answer)
-      }));
+      state.questions = shuffle(bankData.questions).map((question, index) => normalizeQuestion(question, bankData.type, index));
 
       state.currentIndex = 0;
       state.selectedAnswers = new Map();
@@ -1196,11 +1375,7 @@
     dom.nextBtn.addEventListener("click", goNext);
     dom.submitMultiBtn.addEventListener("click", submitMultiAnswer);
     dom.submitFillBtn.addEventListener("click", submitFillAnswer);
-    dom.fillInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        submitFillAnswer();
-      }
-    });
+    document.addEventListener("keydown", handleExamEnter);
     dom.exportErrorBtn.addEventListener("click", exportErrorQuestions);
     dom.restartBtn.addEventListener("click", restartExam);
     dom.resultHomeBtn.addEventListener("click", goHome);

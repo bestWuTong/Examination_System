@@ -1,10 +1,20 @@
 [
     {
-        "file": "Python选择题.txt",
-        "type": "选择"
+        "file": "Python 单选.txt"
     },
     {
-        "file": "Python读程序题.txt",
-        "type": "填空"
+        "file": "Python 读程序.txt"
+    },
+    {
+        "file": "数据科学 单选（章节测试+作业）.txt"
+    },
+    {
+        "file": "数据科学 多选（章节测试+作业）.txt"
+    },
+    {
+        "file": "数据科学 判断（章节测试+作业）.txt"
+    },
+    {
+        "file": "数据科学 简答（作业）.txt"
     }
 ]
