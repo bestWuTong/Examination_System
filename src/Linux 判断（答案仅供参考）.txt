@@ -1,0 +1,255 @@
+{
+    "type": "判断",
+    "questions": [
+        {
+            "id": 51,
+            "content": "ls命令可以查看文件的类型",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 52,
+            "content": "/etc目录中的文件与系统运行的配置有关()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 53,
+            "content": "在linux系统中,以文件方式访问设备()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 54,
+            "content": "Linux系统的网络可通过远程登录来维护。()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 55,
+            "content": "Linux 的特点之一是它是一个开放、免费的操作系统（）",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 56,
+            "content": "Linux 安装时，至少要有 / 分区和 swap 分区（）",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 57,
+            "content": "Ubuntu Linux安装时默认不启用root用户()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 58,
+            "content": "Linux shell对命令的大小写敏感。()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 59,
+            "content": "在vi编辑器中按i键可以从命令模式转换到插入模式。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 60,
+            "content": "在命令行界面环境中,可用ctrl+D结束一个前端命令的执行()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 61,
+            "content": "在Linux中,引用环境变量的值时需要在环境变量前面加上$()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 62,
+            "content": "在 Shell 中的引号有 3 种，即单引号、双引号和反引号。（）",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 63,
+            "content": "Linux中删除用户的命令是userdel()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 64,
+            "content": "Linux系统普通用户不能修改系统的ip地址()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 65,
+            "content": "/proc目录中的文件是系统运行时创建的()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 66,
+            "content": "Ubuntu系统中普通用户登录后,命令提示符为#。()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 67,
+            "content": "在Shell编程中,不必指定变量是数字还是字符串。()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 68,
+            "content": "Linux中用户密码保存在shadow文件中()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 69,
+            "content": "Linux中用户密码保存在passwd文件中()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 70,
+            "content": "在Ubuntu中,超级用户的主目录为/home/root()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 71,
+            "content": "apt update命令可以更新系统中所有已安装的软件包及其依赖关系。()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 72,
+            "content": "Linux系统普通用户编号从1000开始()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 73,
+            "content": "Linux修用户号的命usermod()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 74,
+            "content": "Uniq命令可以对排序以后的文件去除重复行()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 75,
+            "content": "可以使用命令ps来查看Linux系统下运行的进程()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 76,
+            "content": "vi编辑器中,在命令模式下按x键可以删除当前字符。",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 77,
+            "content": "Linux系统只有root用户才具有系统设置的权限。",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 78,
+            "content": "GPT系统格式下,一个硬盘最多能够被分成4个主分区()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 79,
+            "content": "在Ubuntu中,root用户根目录为/root()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 80,
+            "content": "普通用户登录Ubuntu后,提示符是$()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 81,
+            "content": "file命令可以查看文件的类型",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 82,
+            "content": "修改用户密码可使用gpassword命令",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 83,
+            "content": "在Linux中,对文件的访问权限可以分为三种:读、写和执行()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 84,
+            "content": "在Linux中,mkdir命令可以删除所有的目录()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 85,
+            "content": "Linux是一种开源的软件系统()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 86,
+            "content": "Ubuntu默认使用的文件系统格式为ext4",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 87,
+            "content": "Ubuntu系统软件管理工具apt具有通用性,可以在其他版本下使用。()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 88,
+            "content": "Linux中用户密码修改命令为passwd()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 89,
+            "content": "超级用户就是根账户root()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 90,
+            "content": "/dev/sda6对应第一个SCSI硬盘(或SATA硬盘)第2个逻辑分区()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 91,
+            "content": "在Linux系统中,一切资源都是以文件方式存在()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 92,
+            "content": "Linux 是一种单用户多任务的操作系统（）",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 93,
+            "content": "在 Linux 中，mkdir 命令可以删除所有的目录（）",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 94,
+            "content": "Ubuntu系统的任何用户都可以设置计算机名称()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 95,
+            "content": "Ubuntu系统可以直接安装RPM包()",
+            "correct_answer": "错误"
+        },
+        {
+            "id": 96,
+            "content": "命令renice可以调整进程的优先级()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 97,
+            "content": "Linux 中添加用户的命令是 useradd（）",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 98,
+            "content": "Linux中的反引号可以执行命令操作()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 99,
+            "content": "可以使用命令kill来结束Linux系统下运行的进程()",
+            "correct_answer": "正确"
+        },
+        {
+            "id": 100,
+            "content": "Linux系统中root的ID为0()",
+            "correct_answer": "正确"
+        }
+    ]
+}

@@ -1,12 +1,12 @@
 [
     {
-        "name": "Python",
+        "name": "Linux",
         "banks": [
             {
-                "file": "Python 单选.txt"
+                "file": "Linux 单选（答案仅供参考）.txt"
             },
             {
-                "file": "Python 读程序.txt"
+                "file": "Linux 判断（答案仅供参考）.txt"
             }
         ]
     },
@@ -36,6 +36,17 @@
             },
             {
                 "file": "数据科学 学习通 期中试卷 简答（答案仅供参考）.txt"
+            }
+        ]
+    },
+    {
+        "name": "Python",
+        "banks": [
+            {
+                "file": "Python 单选.txt"
+            },
+            {
+                "file": "Python 读程序.txt"
             }
         ]
     }

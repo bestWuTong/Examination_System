@@ -1,0 +1,555 @@
+{
+    "type": "单选",
+    "questions": [
+        {
+            "id": 1,
+            "content": "在文件内部查找字符的命令为()。",
+            "options": [
+                "find",
+                "which",
+                "grep",
+                "locate"
+            ],
+            "correct_answer": "grep"
+        },
+        {
+            "id": 2,
+            "content": "哪个目录存放着Linux内核源代码()",
+            "options": [
+                "/usr/src",
+                "/etc",
+                "/usr",
+                "/home"
+            ],
+            "correct_answer": "/usr/src"
+        },
+        {
+            "id": 3,
+            "content": "执行命令chmod 664 test.txt后该文件的权限是()",
+            "options": [
+                "rwxr--rw-",
+                "rw-rw-r--",
+                "rwxrw-r--",
+                "rw-r-r-"
+            ],
+            "correct_answer": "rw-rw-r--"
+        },
+        {
+            "id": 4,
+            "content": "输出重定向符号右边的文件实现覆盖而不是追加内容的定向符是",
+            "options": [
+                ">",
+                ">>",
+                "2>",
+                "|"
+            ],
+            "correct_answer": ">"
+        },
+        {
+            "id": 5,
+            "content": "用来保存用户名、个人目录等资料的文件是()",
+            "options": [
+                "/etc/shadow",
+                "/etc/passwd",
+                "/etc/inittab",
+                "/etc/group"
+            ],
+            "correct_answer": "/etc/passwd"
+        },
+        {
+            "id": 6,
+            "content": "Ubuntu默认使用的Shell是()。",
+            "options": [
+                "T Shell",
+                "CShell",
+                "bash",
+                "Korn Shell"
+            ],
+            "correct_answer": "bash"
+        },
+        {
+            "id": 7,
+            "content": "Linux有三个查看文件的命令,若希望在查看文件过程中可以用光标上下移动来查看文件内容,应使用命令()。",
+            "options": [
+                "cat",
+                "man",
+                "less",
+                "more"
+            ],
+            "correct_answer": "less"
+        },
+        {
+            "id": 8,
+            "content": "Ubuntu系统的命令行界面可用以下那条命令打开?",
+            "options": [
+                "Ctrl+Alt+t",
+                "Ctrl+l",
+                "Ctrl+d",
+                "Alt+p"
+            ],
+            "correct_answer": "Ctrl+Alt+t"
+        },
+        {
+            "id": 9,
+            "content": "/dev/sdc6分区表示()",
+            "options": [
+                "第2块IDE硬盘的第6个分区,是逻辑分区",
+                "第3块IDE硬盘的第6个分区,是逻辑分区",
+                "第3块SCSI硬盘的第6个分区,是逻辑分区",
+                "第3块SCSI硬盘的第2个分区,是逻辑分区"
+            ],
+            "correct_answer": "第3块SCSI硬盘的第6个分区,是逻辑分区"
+        },
+        {
+            "id": 10,
+            "content": "下面对Linux命令的描述哪个是正确的?",
+            "options": [
+                "不是大小写敏感的",
+                "都是大写的",
+                "都是小写的",
+                "大小写敏感的"
+            ],
+            "correct_answer": "大小写敏感的"
+        },
+        {
+            "id": 11,
+            "content": "一般来说,Linux系统下的各种系统日志文件log主要存放在系统的目录下。()",
+            "options": [
+                "/usr",
+                "/tem",
+                "/var",
+                "/home"
+            ],
+            "correct_answer": "/var"
+        },
+        {
+            "id": 12,
+            "content": "在下列命令中无法实现关机的是:()。",
+            "options": [
+                "shutdown -h now",
+                "halt",
+                "init3",
+                "poweroff"
+            ],
+            "correct_answer": "init3"
+        },
+        {
+            "id": 13,
+            "content": "Mozilla FireFox是一款什么软件()。",
+            "options": [
+                "即时通讯软件",
+                "网络浏览器",
+                "媒体播放器",
+                "游戏"
+            ],
+            "correct_answer": "网络浏览器"
+        },
+        {
+            "id": 14,
+            "content": "Tomcat 服务器是()",
+            "options": [
+                "DNS服务器",
+                "Web服务器",
+                "FTP服务器",
+                "Sendmail服务器"
+            ],
+            "correct_answer": "Web服务器"
+        },
+        {
+            "id": 15,
+            "content": "如果把当前目录下的file.doc复制为file2.txt,正确的命令是()",
+            "options": [
+                "copy file.doc file2.txt",
+                "cp file.doc file2.txt",
+                "cat file.txt file1.doc",
+                "copy file.docfile2.txt"
+            ],
+            "correct_answer": "cp file.doc file2.txt"
+        },
+        {
+            "id": 16,
+            "content": "查看当前进程的命令是（）",
+            "options": [
+                "history",
+                "shutdown",
+                "ps",
+                "init"
+            ],
+            "correct_answer": "ps"
+        },
+        {
+            "id": 17,
+            "content": "Tomcat服务器是（）",
+            "options": [
+                "DNS服务器",
+                "Web服务器",
+                "FTP服务器",
+                "Sendmail服务器"
+            ],
+            "correct_answer": "Web服务器"
+        },
+        {
+            "id": 18,
+            "content": "下面哪个系统目录中包含超级用户使用的系统管理命令（）。",
+            "options": [
+                "/bin",
+                "/sbin",
+                "/boot",
+                "/etc"
+            ],
+            "correct_answer": "/sbin"
+        },
+        {
+            "id": 19,
+            "content": "在vi编辑器中,命令\"dd\"的作用是()",
+            "options": [
+                "复制当前的行",
+                "删除当前的行",
+                "删除当前的字符",
+                "复制当前的单词"
+            ],
+            "correct_answer": "删除当前的行"
+        },
+        {
+            "id": 20,
+            "content": "Ubuntu系统的软件包管理工具是()。",
+            "options": [
+                "apt",
+                "yum",
+                "rpm",
+                "Dos"
+            ],
+            "correct_answer": "apt"
+        },
+        {
+            "id": 21,
+            "content": "在系统内部查找可执行文件路径的命令为()。",
+            "options": [
+                "find",
+                "which",
+                "grep",
+                "locate"
+            ],
+            "correct_answer": "which"
+        },
+        {
+            "id": 22,
+            "content": "以下Linux命令中，可以合并文件内容的命令是（）",
+            "options": [
+                "cat",
+                "less",
+                "man",
+                "more"
+            ],
+            "correct_answer": "cat"
+        },
+        {
+            "id": 23,
+            "content": "存放组密码的文件是()。",
+            "options": [
+                "shadow",
+                "group",
+                "gshadow",
+                "passwd"
+            ],
+            "correct_answer": "gshadow"
+        },
+        {
+            "id": 24,
+            "content": "下列哪一个命令用来查看系统进程?",
+            "options": [
+                "df",
+                "top",
+                "halt",
+                "exit"
+            ],
+            "correct_answer": "top"
+        },
+        {
+            "id": 25,
+            "content": "以下哪个不是Linux的发行版本？（）",
+            "options": [
+                "Firefox",
+                "Ubuntu",
+                "Redhat",
+                "OpenSUSE"
+            ],
+            "correct_answer": "Firefox"
+        },
+        {
+            "id": 26,
+            "content": "用来保存用户名、个人目录等资料的文件是()",
+            "options": [
+                "/etc/shadow",
+                "/etc/passwd",
+                "/etc/inittab",
+                "/etc/group"
+            ],
+            "correct_answer": "/etc/passwd"
+        },
+        {
+            "id": 27,
+            "content": "用\"rm -i\"命令,系统会提示什么来让你确认?",
+            "options": [
+                "是否继续",
+                "是否真的删除",
+                "是否有写的权限",
+                "文件的位置"
+            ],
+            "correct_answer": "是否真的删除"
+        },
+        {
+            "id": 28,
+            "content": "在使用mkdir命令创建新的目录时,在其父目录不存在时,需要级联创建多级目录的选项是()。",
+            "options": [
+                "-m",
+                "-d",
+                "-f",
+                "-p"
+            ],
+            "correct_answer": "-p"
+        },
+        {
+            "id": 29,
+            "content": "想显示文件\"logfile\"的开始的前5行,下面哪个命令是正确的。",
+            "options": [
+                "tail logfile",
+                "head -5 logfile",
+                "tail -d 10 logfile",
+                "head logfile"
+            ],
+            "correct_answer": "head -5 logfile"
+        },
+        {
+            "id": 30,
+            "content": "/dev/sda6分区表示。()",
+            "options": [
+                "第1块IDE硬盘的第6个逻辑分区",
+                "第1块IDE硬盘的第2个逻辑分区",
+                "第1块SCSI硬盘的第6个逻辑分区",
+                "第1块SCSI硬盘的第2个逻辑分区"
+            ],
+            "correct_answer": "第1块SCSI硬盘的第2个逻辑分区"
+        },
+        {
+            "id": 31,
+            "content": "下列哪一个是中止一个前台进程可能用到的命令和操作()",
+            "options": [
+                "<ctrl>+c",
+                "shutdown",
+                "halt",
+                "init"
+            ],
+            "correct_answer": "<ctrl>+c"
+        },
+        {
+            "id": 32,
+            "content": "可显示指定目录下所有子目录与文件的ls命令形式是()",
+            "options": [
+                "ls -aR",
+                "ls -d",
+                "ls -l",
+                "ls -h"
+            ],
+            "correct_answer": "ls -aR"
+        },
+        {
+            "id": 33,
+            "content": "执行命令chmod 744 test.txt后该文件的权限是()。",
+            "options": [
+                "rwxr--rw-",
+                "rw-rw-r--",
+                "rwxrw-r--",
+                "rwxr--r--"
+            ],
+            "correct_answer": "rwxr--r--"
+        },
+        {
+            "id": 34,
+            "content": "Ubuntu 20.04默认的文件系统是()。",
+            "options": [
+                "ext2",
+                "ext3",
+                "ext4",
+                "ext"
+            ],
+            "correct_answer": "ext4"
+        },
+        {
+            "id": 35,
+            "content": "Apache服务器是（）。",
+            "options": [
+                "DNS服务器",
+                "Web服务器",
+                "FTP服务器",
+                "邮件服务器"
+            ],
+            "correct_answer": "Web服务器"
+        },
+        {
+            "id": 36,
+            "content": "以下那条命令可将当前目录下的t1.doc重命名为f2.txt。（）",
+            "options": [
+                "mv t1.doc f2.txt",
+                "cp f2.txt t1.doc",
+                "cat f2.txt t1.doc",
+                "cp t1.doc>f2.txt"
+            ],
+            "correct_answer": "mv t1.doc f2.txt"
+        },
+        {
+            "id": 37,
+            "content": "以下哪个目录存放Linux用户主目录?()",
+            "options": [
+                "/bin",
+                "/dev",
+                "/boot",
+                "/home"
+            ],
+            "correct_answer": "/home"
+        },
+        {
+            "id": 38,
+            "content": "如何在文件中查找显示所有以\"*\"打头的行?",
+            "options": [
+                "find * file",
+                "wc -l * <file",
+                "grep -n * file",
+                "grep '^*' file"
+            ],
+            "correct_answer": "grep '^*' file"
+        },
+        {
+            "id": 39,
+            "content": "在vi中退出不保存的命令是?",
+            "options": [
+                ":q",
+                ":w",
+                ":wq",
+                ":q!"
+            ],
+            "correct_answer": ":q!"
+        },
+        {
+            "id": 40,
+            "content": "Vsftpd服务器提供的是()",
+            "options": [
+                "域名解析",
+                "Web服务",
+                "FTP服务",
+                "邮件服务"
+            ],
+            "correct_answer": "FTP服务"
+        },
+        {
+            "id": 41,
+            "content": "以下哪条命令可以返回用户主目录()",
+            "options": [
+                "pwd",
+                "cd",
+                "who",
+                "ls"
+            ],
+            "correct_answer": "cd"
+        },
+        {
+            "id": 42,
+            "content": "Ubuntu中账号管理的文件是",
+            "options": [
+                "shadow",
+                "passwd",
+                "init",
+                "su"
+            ],
+            "correct_answer": "passwd"
+        },
+        {
+            "id": 43,
+            "content": "下面哪个系统目录中包含Linux使用的系统命令()。",
+            "options": [
+                "/bin",
+                "/dev",
+                "/usr",
+                "/home"
+            ],
+            "correct_answer": "/bin"
+        },
+        {
+            "id": 44,
+            "content": "改变文件执行权限的命令为()",
+            "options": [
+                "chmod",
+                "touch",
+                "chown",
+                "cat"
+            ],
+            "correct_answer": "chmod"
+        },
+        {
+            "id": 45,
+            "content": "用ls -al命令列出下面的文件列表,是符号链接文件的是()。",
+            "options": [
+                "-rw-rw-rw- 2 hel-s users 56 Sep 09 11:05 hello",
+                "-rwxrwxrwx 2 hel-s users 56 Sep 09 11:05 goodbey",
+                "drwxr-r-1 hel users 1024 Sep 10 08:10 zhang",
+                "lrwxr---1 hel users 7 Sep 12 08:12 cheng"
+            ],
+            "correct_answer": "lrwxr---1 hel users 7 Sep 12 08:12 cheng"
+        },
+        {
+            "id": 46,
+            "content": "下列哪个命令可以查看Linux内核版本号?()",
+            "options": [
+                "uname -a",
+                "kernel",
+                "version",
+                "top"
+            ],
+            "correct_answer": "uname -a"
+        },
+        {
+            "id": 47,
+            "content": "文件example的访问权限为744,现要取消文件所有者的执行权限,同时增加同组用户的写权限,下面的命令中正确的是()。",
+            "options": [
+                "chmod u+x,g+w example",
+                "chmod 646 example",
+                "chmod u-x,g+w example",
+                "chmod g+w example"
+            ],
+            "correct_answer": "chmod u-x,g+w example"
+        },
+        {
+            "id": 48,
+            "content": "当使用mount进行设备或者文件系统挂载的时候,需要用到的设备名称位于()目录。",
+            "options": [
+                "/home",
+                "/bin",
+                "/etc",
+                "/dev"
+            ],
+            "correct_answer": "/dev"
+        },
+        {
+            "id": 49,
+            "content": "Linux中普通用户要使用系统管理员权限来进行操作,应在命令前使用()。",
+            "options": [
+                "su",
+                "sudo",
+                "man",
+                "root"
+            ],
+            "correct_answer": "sudo"
+        },
+        {
+            "id": 50,
+            "content": "文件test的访问权限为rw-r-r-,现要增加所有用户的执行权限和同组用户的写权限,下列命令正确的是()。",
+            "options": [
+                "chmod a+x, g+w test",
+                "chmod 765 test",
+                "chmod o+x test",
+                "chmod g+w test"
+            ],
+            "correct_answer": "chmod a+x, g+w test"
+        }
+    ]
+}
