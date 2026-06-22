@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <title>考试系统</title>
   <style>
     :root {
@@ -124,6 +125,69 @@
       display: grid;
       gap: 10px;
       padding: 14px;
+    }
+
+    .bank-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bank-group-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      min-height: 52px;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafc;
+      color: var(--text);
+      text-align: left;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+
+    .bank-group-toggle:hover,
+    .bank-group-toggle:focus-visible {
+      border-color: rgba(37, 99, 235, 0.55);
+      background: #eef4ff;
+      outline: none;
+    }
+
+    .bank-group-name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 17px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .bank-group-count {
+      margin-left: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .bank-group-arrow {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 160ms ease;
+    }
+
+    .bank-group.expanded .bank-group-arrow {
+      transform: rotate(90deg);
+    }
+
+    .bank-group-items {
+      display: grid;
+      gap: 8px;
+      padding-left: 12px;
     }
 
     .bank-card {
@@ -680,7 +744,8 @@
     };
 
     const state = {
-      banks: [],
+      bankGroups: [],
+      expandedGroupIndex: null,
       currentBank: null,
       questions: [],
       currentIndex: 0,
@@ -760,6 +825,53 @@
       return {
         file: String(item.file || "")
       };
+    }
+
+    function normalizeBankGroup(item, index) {
+      if (Array.isArray(item)) {
+        return {
+          name: `分组 ${index + 1}`,
+          banks: item.map(normalizeBank).filter((bank) => bank.file)
+        };
+      }
+
+      if (item && (Array.isArray(item.banks) || Array.isArray(item.items) || Array.isArray(item.questions))) {
+        const banks = item.banks || item.items || item.questions;
+        return {
+          name: String(item.name || item.group || item.title || `分组 ${index + 1}`),
+          banks: banks.map(normalizeBank).filter((bank) => bank.file)
+        };
+      }
+
+      return {
+        name: "默认分组",
+        banks: [normalizeBank(item)].filter((bank) => bank.file)
+      };
+    }
+
+    function normalizeBankGroups(list) {
+      if (!Array.isArray(list)) {
+        return [];
+      }
+
+      const groups = list.map(normalizeBankGroup).filter((group) => group.banks.length > 0);
+      if (groups.length === 0) {
+        return [];
+      }
+
+      const oldFlatList = list.every((item) => typeof item === "string" || (item && item.file));
+      if (oldFlatList) {
+        return [{
+          name: "默认分组",
+          banks: groups.flatMap((group) => group.banks)
+        }];
+      }
+
+      return groups;
+    }
+
+    function getBankTotalCount() {
+      return state.bankGroups.reduce((total, group) => total + group.banks.length, 0);
     }
 
     function sameAnswerSet(left, right) {
@@ -910,9 +1022,8 @@
 
       try {
         const list = await fetchJson("src/list.json");
-        state.banks = Array.isArray(list)
-          ? list.map(normalizeBank).filter((bank) => bank.file)
-          : [];
+        state.bankGroups = normalizeBankGroups(list);
+        state.expandedGroupIndex = null;
         renderBankList();
       } catch (error) {
         setBankCount("读取失败");
@@ -921,21 +1032,49 @@
     }
 
     function renderBankList() {
-      setBankCount(`${state.banks.length} 个题库`);
+      const bankCount = getBankTotalCount();
+      setBankCount(`${bankCount} 个题库`);
 
-      if (state.banks.length === 0) {
+      if (bankCount === 0) {
         dom.bankList.innerHTML = '<div class="empty">src/list.json 中没有题库。</div>';
         return;
       }
 
       dom.bankList.innerHTML = "";
-      state.banks.forEach((bank) => {
-        const button = document.createElement("button");
-        button.className = "bank-card";
-        button.type = "button";
-        button.innerHTML = `<span class="bank-name">${escapeHtml(getBankDisplayName(bank.file))}</span>`;
-        button.addEventListener("click", () => startExam(bank));
-        dom.bankList.appendChild(button);
+      state.bankGroups.forEach((group, groupIndex) => {
+        const expanded = state.expandedGroupIndex === groupIndex;
+        const groupElement = document.createElement("div");
+        groupElement.className = `bank-group${expanded ? " expanded" : ""}`;
+
+        const toggle = document.createElement("button");
+        toggle.className = "bank-group-toggle";
+        toggle.type = "button";
+        toggle.setAttribute("aria-expanded", String(expanded));
+        toggle.innerHTML = `
+          <span class="bank-group-name">${escapeHtml(group.name)}<span class="bank-group-count">${group.banks.length} 个</span></span>
+          <span class="bank-group-arrow" aria-hidden="true">›</span>
+        `;
+        toggle.addEventListener("click", () => {
+          state.expandedGroupIndex = expanded ? null : groupIndex;
+          renderBankList();
+        });
+        groupElement.appendChild(toggle);
+
+        if (expanded) {
+          const groupItems = document.createElement("div");
+          groupItems.className = "bank-group-items";
+          group.banks.forEach((bank) => {
+            const button = document.createElement("button");
+            button.className = "bank-card";
+            button.type = "button";
+            button.innerHTML = `<span class="bank-name">${escapeHtml(getBankDisplayName(bank.file))}</span>`;
+            button.addEventListener("click", () => startExam(bank));
+            groupItems.appendChild(button);
+          });
+          groupElement.appendChild(groupItems);
+        }
+
+        dom.bankList.appendChild(groupElement);
       });
     }
 
