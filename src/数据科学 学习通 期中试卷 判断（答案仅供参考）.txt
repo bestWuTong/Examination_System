@@ -1,0 +1,55 @@
+{
+"type": "判断",
+"questions": [
+{
+"id": 26,
+"content": "在 pandas 中，DataFrame 的行索引和列索引均可使用默认的整数索引。",
+"correct_answer": "正确"
+},
+{
+"id": 27,
+"content": "数据科学的核心目标是从数据中提取有价值的信息和知识。",
+"correct_answer": "正确"
+},
+{
+"id": 28,
+"content": "使用 np.arange () 创建数组时，不包含上限值。",
+"correct_answer": "正确"
+},
+{
+"id": 29,
+"content": "数据科学仅涉及计算机科学领域，与其他学科无关。",
+"correct_answer": "错误"
+},
+{
+"id": 30,
+"content": "pandas 的 Series 只能存储一维数据。",
+"correct_answer": "正确"
+},
+{
+"id": 31,
+"content": "numpy.reshape 函数可以改变数组的形状，但不能改变数组的元素总数。",
+"correct_answer": "正确"
+},
+{
+"id": 32,
+"content": "数据科学流程仅包含数据收集与清洗环节，后续的建模与评估不属于核心流程",
+"correct_answer": "错误"
+},
+{
+"id": 33,
+"content": "使用 np.zeros ((3,4)) 创建的数组元素全为 0，形状为 3 行 4 列。",
+"correct_answer": "正确"
+},
+{
+"id": 34,
+"content": "NumPy 数组中的所有元素必须是同一数据类型。",
+"correct_answer": "正确"
+},
+{
+"id": 35,
+"content": "pandas 的 Series 只能存储一维数据。",
+"correct_answer": "正确"
+}
+]
+}
