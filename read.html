@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <title>考试系统 - 阅读模式</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-soft: #eef4ff;
+      --text: #172033;
+      --muted: #667085;
+      --line: #d8dee9;
+      --primary: #2563eb;
+      --primary-strong: #1d4ed8;
+      --success: #15803d;
+      --success-soft: #e9f8ef;
+      --danger: #b42318;
+      --danger-soft: #fff0ed;
+      --warning: #b54708;
+      --shadow: 0 18px 50px rgba(23, 32, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 30rem),
+        linear-gradient(180deg, #f9fbff 0%, var(--bg) 46%, #edf3f8 100%);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    button {
+      font: inherit;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .app {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+
+    .shell {
+      display: grid;
+      gap: 18px;
+    }
+
+    .top-title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 4px 0 8px;
+    }
+
+    .top-title h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 750;
+    }
+
+    .top-title p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(216, 222, 233, 0.9);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .home-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .home-head h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .bank-list {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .bank-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bank-group-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      min-height: 52px;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafc;
+      color: var(--text);
+      text-align: left;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+
+    .bank-group-toggle:hover,
+    .bank-group-toggle:focus-visible {
+      border-color: rgba(37, 99, 235, 0.55);
+      background: #eef4ff;
+      outline: none;
+    }
+
+    .bank-group.expanded .bank-group-toggle {
+      border-color: rgba(37, 99, 235, 0.9);
+      background: #dbeafe;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.14);
+    }
+
+    .bank-group-name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 17px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .bank-group-count {
+      margin-left: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .bank-group.expanded .bank-group-count {
+      color: var(--primary);
+    }
+
+    .bank-group-arrow {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 160ms ease;
+    }
+
+    .bank-group.expanded .bank-group-arrow {
+      transform: rotate(90deg);
+      color: var(--primary);
+    }
+
+    .bank-group-items {
+      display: grid;
+      gap: 8px;
+      padding-left: 12px;
+    }
+
+    .bank-card {
+      display: block;
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      text-align: left;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    .bank-card:hover,
+    .bank-card:focus-visible {
+      border-color: rgba(37, 99, 235, 0.55);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .bank-name {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .ghost-btn {
+      min-height: 42px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .ghost-btn:hover:not(:disabled) {
+      background: #f8fafc;
+      border-color: rgba(37, 99, 235, 0.4);
+    }
+
+    .nav-btn {
+      min-height: 42px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: var(--surface-soft);
+      color: var(--primary);
+      border: 1px solid #bfd2ff;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: #e2ecff;
+    }
+
+    .loading,
+    .empty {
+      padding: 36px 20px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .back-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 2px 12px rgba(23, 32, 51, 0.06);
+    }
+
+    .back-btn {
+      min-height: 38px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: var(--surface-soft);
+      color: var(--primary);
+      border: 1px solid #bfd2ff;
+    }
+
+    .back-btn:hover:not(:disabled) {
+      background: #e2ecff;
+    }
+
+    .back-bar-title {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .read-view {
+      padding-top: 72px;
+    }
+
+    .read-panel {
+      padding: 24px;
+    }
+
+    .read-bank-title {
+      margin: 0 0 24px;
+      font-size: 22px;
+      font-weight: 750;
+      line-height: 1.4;
+    }
+
+    .read-question {
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .read-question:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .read-q-head {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .read-q-num {
+      flex: 0 0 auto;
+      font-size: 15px;
+      font-weight: 750;
+      color: var(--primary);
+    }
+
+    .read-q-type {
+      flex: 0 0 auto;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--surface-soft);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .read-q-content {
+      font-size: 16px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .read-options {
+      margin: 10px 0 0;
+      padding-left: 24px;
+      list-style: none;
+    }
+
+    .read-options li {
+      position: relative;
+      padding: 4px 0;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .read-options li::before {
+      content: attr(data-key) ". ";
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .read-answer {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      background: var(--success-soft);
+      color: var(--success);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .formatted-text {
+      display: block;
+      white-space: pre-wrap;
+    }
+
+    .formatted-code {
+      margin: 12px 0;
+      padding: 14px;
+      overflow-x: auto;
+      border-radius: 8px;
+      background: #111827;
+      color: #f8fafc;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.55;
+      white-space: pre;
+    }
+
+    .formatted-code code {
+      font: inherit;
+    }
+
+    @media (max-width: 720px) {
+      .app {
+        width: min(100% - 20px, 1080px);
+        padding: 18px 0 32px;
+      }
+
+      .top-title {
+        display: grid;
+      }
+
+      .top-title h1 {
+        font-size: 25px;
+      }
+
+      .home-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .bank-list {
+        padding: 12px;
+      }
+
+      .read-panel {
+        padding: 18px;
+      }
+
+      .read-q-content {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section id="homeView" class="shell">
+      <div class="top-title">
+        <div>
+          <h1>考试系统 阅读模式</h1>
+          <p>选择题库后浏览题目与答案。</p>
+        </div>
+        <span id="bankCount" class="badge">读取题库中</span>
+      </div>
+
+      <div class="panel">
+        <div class="home-head">
+          <h2>题库列表</h2>
+          <div style="display: flex; gap: 8px;">
+            <button id="reloadBtn" class="ghost-btn" type="button">刷新列表</button>
+            <a href="index.html" class="nav-btn" style="text-decoration:none;display:inline-flex;align-items:center;">前往答题模式</a>
+          </div>
+        </div>
+        <div id="bankList" class="bank-list">
+          <div class="loading">正在读取题库列表</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="readView" class="hidden read-view">
+      <div class="back-bar">
+        <button id="backBtn" class="back-btn" type="button">返回题库列表</button>
+        <span id="backTitle" class="back-bar-title"></span>
+      </div>
+      <div class="panel read-panel">
+        <h2 id="readBankTitle" class="read-bank-title"></h2>
+        <div id="readContent"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const dom = {
+      homeView: document.querySelector("#homeView"),
+      readView: document.querySelector("#readView"),
+      bankCount: document.querySelector("#bankCount"),
+      bankList: document.querySelector("#bankList"),
+      reloadBtn: document.querySelector("#reloadBtn"),
+      backBtn: document.querySelector("#backBtn"),
+      backTitle: document.querySelector("#backTitle"),
+      readBankTitle: document.querySelector("#readBankTitle"),
+      readContent: document.querySelector("#readContent")
+    };
+
+    const state = {
+      bankGroups: [],
+      expandedGroupIndex: null
+    };
+
+    function showView(name) {
+      dom.homeView.classList.toggle("hidden", name !== "home");
+      dom.readView.classList.toggle("hidden", name !== "read");
+    }
+
+    function normalizeAnswers(answer) {
+      if (Array.isArray(answer)) {
+        return answer.map(item => String(item).trim()).filter(Boolean);
+      }
+      return [String(answer ?? "").trim()].filter(Boolean);
+    }
+
+    function normalizeQuestionType(type) {
+      const value = String(type || "").trim();
+      if (["单选", "多选", "判断", "填空", "简答"].includes(value)) {
+        return value;
+      }
+      if (value === "选择") {
+        return "单选";
+      }
+      return "单选";
+    }
+
+    function normalizeBank(item) {
+      if (typeof item === "string") {
+        return { file: item };
+      }
+      return { file: String(item.file || "") };
+    }
+
+    function normalizeBankGroup(item, index) {
+      if (Array.isArray(item)) {
+        return {
+          name: `分组 ${index + 1}`,
+          banks: item.map(normalizeBank).filter(bank => bank.file)
+        };
+      }
+      if (item && (Array.isArray(item.banks) || Array.isArray(item.items) || Array.isArray(item.questions))) {
+        const banks = item.banks || item.items || item.questions;
+        return {
+          name: String(item.name || item.group || item.title || `分组 ${index + 1}`),
+          banks: banks.map(normalizeBank).filter(bank => bank.file)
+        };
+      }
+      return {
+        name: "默认分组",
+        banks: [normalizeBank(item)].filter(bank => bank.file)
+      };
+    }
+
+    function normalizeBankGroups(list) {
+      if (!Array.isArray(list)) {
+        return [];
+      }
+      const groups = list.map(normalizeBankGroup).filter(group => group.banks.length > 0);
+      if (groups.length === 0) {
+        return [];
+      }
+      const oldFlatList = list.every(item => typeof item === "string" || (item && item.file));
+      if (oldFlatList) {
+        return [{ name: "默认分组", banks: groups.flatMap(group => group.banks) }];
+      }
+      return groups;
+    }
+
+    function getBankTotalCount() {
+      return state.bankGroups.reduce((total, group) => total + group.banks.length, 0);
+    }
+
+    function normalizeBankData(rawData, fallbackType = "") {
+      if (Array.isArray(rawData)) {
+        const firstQuestion = rawData[0] || {};
+        const inferredType = firstQuestion.type
+          || (Array.isArray(firstQuestion.options) && firstQuestion.options.length > 0
+            ? (Array.isArray(firstQuestion.correct_answer) ? "多选" : "单选")
+            : "填空");
+        const type = normalizeQuestionType(fallbackType || inferredType);
+        return { type, questions: rawData };
+      }
+      if (rawData && Array.isArray(rawData.questions)) {
+        const type = normalizeQuestionType(rawData.type || fallbackType);
+        return { type, questions: rawData.questions };
+      }
+      throw new Error("题库格式不正确");
+    }
+
+    async function fetchJson(path) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`读取失败：${response.status}`);
+      }
+      const text = await response.text();
+      return parseJsonText(text);
+    }
+
+    function parseJsonText(text) {
+      try {
+        return JSON.parse(text);
+      } catch (error) {
+        return JSON.parse(escapeControlCharactersInStrings(text));
+      }
+    }
+
+    function escapeControlCharactersInStrings(text) {
+      let result = "";
+      let inString = false;
+      let escaped = false;
+
+      for (let index = 0; index < text.length; index += 1) {
+        const char = text[index];
+
+        if (!inString) {
+          result += char;
+          if (char === '"') {
+            inString = true;
+          }
+          continue;
+        }
+
+        if (escaped) {
+          result += char;
+          escaped = false;
+          continue;
+        }
+
+        if (char === "\\") {
+          result += char;
+          escaped = true;
+        } else if (char === '"') {
+          result += char;
+          inString = false;
+        } else if (char === "\r") {
+          result += "\\n";
+          if (text[index + 1] === "\n") {
+            index += 1;
+          }
+        } else if (char === "\n") {
+          result += "\\n";
+        } else if (char === "\t") {
+          result += "\\t";
+        } else {
+          result += char;
+        }
+      }
+
+      return result;
+    }
+
+    function setBankCount(text) {
+      dom.bankCount.textContent = text;
+    }
+
+    function getBankDisplayName(fileName) {
+      return String(fileName).replace(/\.txt$/i, "");
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderFormattedText(target, value) {
+      const source = String(value);
+      const fragment = document.createDocumentFragment();
+      const codeBlockPattern = /```[^\n]*\n?([\s\S]*?)```/g;
+      let lastIndex = 0;
+      let match;
+
+      while ((match = codeBlockPattern.exec(source)) !== null) {
+        appendTextBlock(fragment, source.slice(lastIndex, match.index));
+        const pre = document.createElement("pre");
+        const code = document.createElement("code");
+        pre.className = "formatted-code";
+        code.textContent = match[1].replace(/\n$/, "");
+        pre.appendChild(code);
+        fragment.appendChild(pre);
+        lastIndex = codeBlockPattern.lastIndex;
+      }
+
+      appendTextBlock(fragment, source.slice(lastIndex));
+      target.replaceChildren(fragment);
+    }
+
+    function appendTextBlock(fragment, text) {
+      if (!text) {
+        return;
+      }
+      const span = document.createElement("span");
+      span.className = "formatted-text";
+      span.textContent = text;
+      fragment.appendChild(span);
+    }
+
+    async function loadBanks() {
+      showView("home");
+      setBankCount("读取题库中");
+      dom.bankList.innerHTML = '<div class="loading">正在读取 src/list.json</div>';
+
+      try {
+        const list = await fetchJson("src/list.json");
+        state.bankGroups = normalizeBankGroups(list);
+        state.expandedGroupIndex = null;
+        renderBankList();
+      } catch (error) {
+        setBankCount("读取失败");
+        dom.bankList.innerHTML = `<div class="empty">${escapeHtml(error.message)}。请通过本地 HTTP 服务打开本页面。</div>`;
+      }
+    }
+
+    function renderBankList() {
+      const bankCount = getBankTotalCount();
+      setBankCount(`${bankCount} 个题库`);
+
+      if (bankCount === 0) {
+        dom.bankList.innerHTML = '<div class="empty">src/list.json 中没有题库。</div>';
+        return;
+      }
+
+      dom.bankList.innerHTML = "";
+      state.bankGroups.forEach((group, groupIndex) => {
+        const expanded = state.expandedGroupIndex === groupIndex;
+        const groupElement = document.createElement("div");
+        groupElement.className = `bank-group${expanded ? " expanded" : ""}`;
+
+        const toggle = document.createElement("button");
+        toggle.className = "bank-group-toggle";
+        toggle.type = "button";
+        toggle.setAttribute("aria-expanded", String(expanded));
+        toggle.innerHTML = `
+          <span class="bank-group-name">${escapeHtml(group.name)}<span class="bank-group-count">${group.banks.length} 个</span></span>
+          <span class="bank-group-arrow" aria-hidden="true">›</span>
+        `;
+        toggle.addEventListener("click", () => {
+          state.expandedGroupIndex = expanded ? null : groupIndex;
+          renderBankList();
+        });
+        groupElement.appendChild(toggle);
+
+        if (expanded) {
+          const groupItems = document.createElement("div");
+          groupItems.className = "bank-group-items";
+          group.banks.forEach(bank => {
+            const button = document.createElement("button");
+            button.className = "bank-card";
+            button.type = "button";
+            button.innerHTML = `<span class="bank-name">${escapeHtml(getBankDisplayName(bank.file))}</span>`;
+            button.addEventListener("click", () => openBank(bank));
+            groupItems.appendChild(button);
+          });
+          groupElement.appendChild(groupItems);
+        }
+
+        dom.bankList.appendChild(groupElement);
+      });
+    }
+
+    async function openBank(bank) {
+      dom.bankList.innerHTML = '<div class="loading">正在载入题目</div>';
+
+      try {
+        const rawData = await fetchJson(`src/${encodeURIComponent(bank.file)}`);
+        const bankData = normalizeBankData(rawData);
+        if (bankData.questions.length === 0) {
+          throw new Error("题库中没有题目");
+        }
+
+        dom.backTitle.textContent = getBankDisplayName(bank.file);
+        dom.readBankTitle.textContent = getBankDisplayName(bank.file);
+        dom.readContent.innerHTML = "";
+
+        bankData.questions.forEach((question, idx) => {
+          const qType = normalizeQuestionType(question.type || bankData.type);
+          const correctAnswers = normalizeAnswers(question.correct_answer);
+          const originalOptions = Array.isArray(question.options) ? question.options.map(String) : [];
+
+          const card = document.createElement("div");
+          card.className = "read-question";
+
+          const head = document.createElement("div");
+          head.className = "read-q-head";
+          head.innerHTML = `
+            <span class="read-q-num">${idx + 1}.</span>
+            <span class="read-q-type">${escapeHtml(qType)}</span>
+          `;
+          card.appendChild(head);
+
+          const content = document.createElement("div");
+          content.className = "read-q-content";
+          renderFormattedText(content, question.content || "未命名题目");
+          card.appendChild(content);
+
+          if (originalOptions.length > 0) {
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+            const list = document.createElement("ul");
+            list.className = "read-options";
+            originalOptions.forEach((opt, i) => {
+              const li = document.createElement("li");
+              li.setAttribute("data-key", letters[i] || String(i + 1));
+              renderFormattedText(li, opt);
+              list.appendChild(li);
+            });
+            card.appendChild(list);
+          }
+
+          const answer = document.createElement("div");
+          answer.className = "read-answer";
+          answer.textContent = "答案：" + (correctAnswers.join("、") || "暂无答案");
+          card.appendChild(answer);
+
+          dom.readContent.appendChild(card);
+        });
+
+        showView("read");
+        window.scrollTo(0, 0);
+      } catch (error) {
+        renderBankList();
+        dom.bankList.prepend(Object.assign(document.createElement("div"), {
+          className: "empty",
+          textContent: `题库加载失败：${error.message}`
+        }));
+      }
+    }
+
+    function goHome() {
+      showView("home");
+      renderBankList();
+    }
+
+    dom.reloadBtn.addEventListener("click", loadBanks);
+    dom.backBtn.addEventListener("click", goHome);
+
+    loadBanks();
+  </script>
+</body>
+</html>
