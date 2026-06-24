@@ -1030,7 +1030,7 @@
     async function loadBanks() {
       showView("home");
       setBankCount("读取题库中");
-      dom.bankList.innerHTML = '<div class="loading">正在读取 src/list.json</div>';
+      dom.bankList.innerHTML = '<div class="loading">正在读取题库列表</div>';
 
       try {
         const list = await fetchJson("src/list.json");
