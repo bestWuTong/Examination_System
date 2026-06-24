@@ -1,0 +1,35 @@
+{
+    "type": "简答",
+    "questions": [
+        {
+            "id": 1,
+            "content": "编写程序，运行后用户输入4位整数作为年份，判断其是否为闰年。如果年份能被400整除，则为闰年；如果年份能被4整除但不能被100整除也为闰年。",
+            "correct_answer": "```python\nx = input('Please input an integer of 4 digits meaning the year:')\nx = int(x)\nif x%400==0 or (x%4==0 and not x % 100==0):\n    print('Yes')\nelse:\n    print('No')\n```"
+        },
+        {
+            "id": 2,
+            "content": "编程求 200 以内能被 17 整除的最大正整数。",
+            "correct_answer": "```python\nfor i in range(200,0,-1):\n    if i%17 == 0:\n        print(i)\n        break\nelse:\n    print('no exist')\n```\n运行结果：187"
+        },
+        {
+            "id": 3,
+            "content": "计算小于 100 的最大素数。",
+            "correct_answer": "```python\nfor n in range(100, 1, -1):\n    for i in range(2, n):\n        if n%i == 0:\n            break\n    else:\n        print(n,end=' ')\n        break\n```\n运行结果：97"
+        },
+        {
+            "id": 4,
+            "content": "编写代码完成如下功能：（1）初始化建立字典 d，包含内容是：\"Zhang San\": 45, \"Li Si\": 78, \"Wang Wu\": 40。（2）向字典中添加键值对\"Ly\":81。（3）修改\"Li Si\"对应的值为 80。（4）删除\"Wang Wu\"对应的键值对。（5）按顺序打印字典 d 全部信息，参考格式如下：45:Zhang San",
+            "correct_answer": "```python\nd = {\"Zhang San\": 45, \"Li Si\": 78, \"Wang Wu\": 40}\nd[\"Ly\"] = 81\nd[\"Li Si\"] = 80\ndel d[\"Wang Wu\"]\nfor key in d:\n    print(\"{}:{}\".format(d[key], key))\n```"
+        },
+        {
+            "id": 5,
+            "content": "用户输入分数，根据分数来判断对应的级别，并将级别输出，学习成绩>=90分的同学用A表示，60-89分之间的用B表示，60分以下的用C表示。",
+            "correct_answer": "```python\npoints=int(input('输入分数：'))\nif points>=90:\n    grade='A'\nelif points<60:\n    grade='C'\nelse:\n    grade='B'\nprint(grade)\n```"
+        },
+        {
+            "id": 6,
+            "content": "定义两个列表L1和L2，遍历L1和L2，获取两个列表中均存在的元素。",
+            "correct_answer": "```python\nl1 = [11, 22, 33]\nl2 = [22, 33, 44]\nfor i1 in l1:\n    for i2 in l2:\n        if i1 == i2:\n            print(i1)\n```"
+        }
+    ]
+}
