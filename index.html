@@ -1238,10 +1238,10 @@
       state.results.set(question.uid, result);
       renderQuestion();
 
-      if (correct && !isFillQuestion(question)) {
+      if (correct) {
         state.autoTimer = window.setTimeout(() => {
           goNext();
-        }, 700);
+        }, 350);
       }
     }
 
