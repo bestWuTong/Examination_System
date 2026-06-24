@@ -9,12 +9,12 @@
         {
             "id": 2,
             "content": "编程求 200 以内能被 17 整除的最大正整数。",
-            "correct_answer": "```python\nfor i in range(200,0,-1):\n    if i%17 == 0:\n        print(i)\n        break\nelse:\n    print('no exist')\n```\n运行结果：187"
+            "correct_answer": "```python\nfor i in range(200,0,-1):\n    if i%17 == 0:\n        print(i)\n        break\nelse:\n    print('no exist')\n```"
         },
         {
             "id": 3,
             "content": "计算小于 100 的最大素数。",
-            "correct_answer": "```python\nfor n in range(100, 1, -1):\n    for i in range(2, n):\n        if n%i == 0:\n            break\n    else:\n        print(n,end=' ')\n        break\n```\n运行结果：97"
+            "correct_answer": "```python\nfor n in range(100, 1, -1):\n    for i in range(2, n):\n        if n%i == 0:\n            break\n    else:\n        print(n,end=' ')\n        break\n```"
         },
         {
             "id": 4,
