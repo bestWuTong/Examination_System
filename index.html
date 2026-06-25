@@ -1407,10 +1407,125 @@
         return;
       }
 
-      const span = document.createElement("span");
-      span.className = "formatted-text";
-      span.textContent = text;
-      fragment.appendChild(span);
+      const lines = text.split('\n');
+      lines.forEach((line, lineIndex) => {
+        if (lineIndex > 0) {
+          fragment.appendChild(document.createElement('br'));
+        }
+
+        const headingMatch = line.match(/^(#{1,6})\s+(.*)/);
+        if (headingMatch) {
+          const level = headingMatch[1].length;
+          const heading = document.createElement(`h${level}`);
+          heading.textContent = headingMatch[2];
+          heading.style.margin = '0.5em 0';
+          heading.style.fontWeight = '700';
+          fragment.appendChild(heading);
+          return;
+        }
+
+        const quoteMatch = line.match(/^>\s+(.*)/);
+        if (quoteMatch) {
+          const blockquote = document.createElement('blockquote');
+          blockquote.textContent = quoteMatch[1];
+          blockquote.style.margin = '0.5em 0';
+          blockquote.style.padding = '0.5em 1em';
+          blockquote.style.borderLeft = '4px solid var(--primary)';
+          blockquote.style.background = 'var(--surface-soft)';
+          fragment.appendChild(blockquote);
+          return;
+        }
+
+        const ulMatch = line.match(/^[-*]\s+(.*)/);
+        if (ulMatch) {
+          const li = document.createElement('div');
+          li.textContent = ulMatch[1];
+          li.style.marginLeft = '1.5em';
+          li.style.listStyleType = 'disc';
+          fragment.appendChild(li);
+          return;
+        }
+
+        const olMatch = line.match(/^\d+\.\s+(.*)/);
+        if (olMatch) {
+          const li = document.createElement('div');
+          li.textContent = olMatch[1];
+          li.style.marginLeft = '1.5em';
+          fragment.appendChild(li);
+          return;
+        }
+
+        processInlineMarkdown(fragment, line);
+      });
+    }
+
+    function processInlineMarkdown(fragment, text) {
+      const regex = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|!\[.*?\]\(.*?\)|\[.*?\]\(.*?\))/g;
+      let lastIndex = 0;
+      let match;
+
+      while ((match = regex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          const span = document.createElement('span');
+          span.className = 'formatted-text';
+          span.textContent = text.slice(lastIndex, match.index);
+          fragment.appendChild(span);
+        }
+
+        const matched = match[0];
+
+        if (matched.startsWith('`') && matched.endsWith('`')) {
+          const code = document.createElement('code');
+          code.textContent = matched.slice(1, -1);
+          code.style.background = 'var(--surface-soft)';
+          code.style.padding = '0.2em 0.4em';
+          code.style.borderRadius = '4px';
+          code.style.fontFamily = 'Consolas, "Courier New", monospace';
+          fragment.appendChild(code);
+        }
+        else if (matched.startsWith('**') && matched.endsWith('**')) {
+          const strong = document.createElement('strong');
+          strong.textContent = matched.slice(2, -2);
+          fragment.appendChild(strong);
+        }
+        else if (matched.startsWith('*') && matched.endsWith('*')) {
+          const em = document.createElement('em');
+          em.textContent = matched.slice(1, -1);
+          fragment.appendChild(em);
+        }
+        else if (matched.startsWith('![')) {
+          const imgMatch = matched.match(/!\[(.*?)\]\((.*?)\)/);
+          if (imgMatch) {
+            const img = document.createElement('img');
+            img.alt = imgMatch[1];
+            img.src = imgMatch[2];
+            img.style.maxWidth = '100%';
+            img.style.borderRadius = '8px';
+            fragment.appendChild(img);
+          }
+        }
+        else if (matched.startsWith('[')) {
+          const linkMatch = matched.match(/\[(.*?)\]\((.*?)\)/);
+          if (linkMatch) {
+            const a = document.createElement('a');
+            a.textContent = linkMatch[1];
+            a.href = linkMatch[2];
+            a.target = '_blank';
+            a.style.color = 'var(--primary)';
+            a.style.textDecoration = 'underline';
+            fragment.appendChild(a);
+          }
+        }
+
+        lastIndex = match.index + matched.length;
+      }
+
+      if (lastIndex < text.length) {
+        const span = document.createElement('span');
+        span.className = 'formatted-text';
+        span.textContent = text.slice(lastIndex);
+        fragment.appendChild(span);
+      }
     }
 
     function getBankDisplayName(fileName) {

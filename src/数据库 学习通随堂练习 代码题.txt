@@ -1,0 +1,75 @@
+{
+    "type": "简答",
+    "questions": [
+        {
+            "id": 1,
+            "content": "设置学生表中的姓名属性不能取空值，写出SQL语句",
+            "correct_answer": "豆包答案：\n# 建表时设置非空约束\nCREATE TABLE student(\n    S# CHAR(10) PRIMARY KEY,\n    SNAME VARCHAR(20) NOT NULL,\n    SEX CHAR(2),\n    AGE INT\n);\n# 已有表修改字段添加非空约束\nALTER TABLE student MODIFY SNAME VARCHAR(20) NOT NULL;"
+        },
+        {
+            "id": 2,
+            "content": "![题目图](img/数据库/图片1.png)\n(1) 检索”程军”老师所授课的课程号(C#)和课程名(CNAME)。\n(2) 检索年龄大于21的男学生学号(S#)和姓名(SNAME)。\n(3) 检索至少选修”程军”老师所授全部课程的学生姓名(SNAME)。\n(4) 检索”李强”同学不学课程的课程号(C#)。\n(5) 检索至少选修两门课程的学生学号(S#)。\n(6) 检索全部学生都选修的课程的课程号(C#)和课程名(CNAME)。",
+            "correct_answer": "豆包答案：\n(1)\nSELECT C#, CNAME FROM Course WHERE teacher = '程军';\n\n(2)\nSELECT S#, SNAME FROM Student WHERE AGE > 21 AND SEX = '男';\n\n(3)\nSELECT SNAME\nFROM Student S\nWHERE NOT EXISTS (\n    SELECT * FROM Course C\n    WHERE teacher = '程军' AND NOT EXISTS (\n        SELECT * FROM SC\n        WHERE SC.S# = S.S# AND SC.C# = C.C#\n    )\n);\n\n(4)\nSELECT C# FROM Course C\nWHERE NOT EXISTS (\n    SELECT * FROM SC, Student S\n    WHERE SC.S# = S.S# AND S.SNAME = '李强' AND SC.C# = C.C#\n);\n\n(5)\nSELECT S# FROM SC GROUP BY S# HAVING COUNT(*) >= 2;\n\n(6)\nSELECT C#, CNAME FROM Course C\nWHERE NOT EXISTS (\n    SELECT * FROM Student S\n    WHERE NOT EXISTS (\n        SELECT * FROM SC\n        WHERE SC.S# = S.S# AND SC.C# = C.C#\n    )\n);"
+        },
+        {
+            "id": 3,
+            "content": "查询第二个字符是’_’的课程名的详细信息，写出SQL语句",
+            "correct_answer": "豆包答案：\nSELECT * FROM Course WHERE CNAME LIKE '_$_%' ESCAPE '$';"
+        },
+        {
+            "id": 4,
+            "content": "查询以\"DB_\"开头，且倒数第3个字符为 i的课程的详细情况，写出SQL语句",
+            "correct_answer": "SELECT * FROM Course WHERE Cname LIKE 'DB$_%i__' ESCAPE '$';"
+        },
+        {
+            "id": 5,
+            "content": "查询课程名中有‘数’字，或者第二个字是‘库’的课程名，写出SQL语句",
+            "correct_answer": "豆包答案：\nSELECT CNAME FROM Course WHERE CNAME LIKE '%数%' OR CNAME LIKE '_库%';"
+        },
+        {
+            "id": 6,
+            "content": "使用左外连接查询没有选修课程的学生姓名，写出SQL语句",
+            "correct_answer": "豆包答案：\nSELECT S.SNAME\nFROM Student S\nLEFT JOIN SC ON S.S# = SC.S#\nWHERE SC.C# IS NULL;"
+        },
+        {
+            "id": 7,
+            "content": "使用自连接查询与“张三”在同一个系学习的其它学生姓名和年龄，写出SQL语句",
+            "correct_answer": "豆包答案：\nSELECT DISTINCT S2.SNAME, S2.AGE\nFROM Student S1, Student S2\nWHERE S1.SDEPT = S2.SDEPT AND S1.SNAME = '张三' AND S2.SNAME != '张三';"
+        },
+        {
+            "id": 8,
+            "content": "![题目图](img/数据库/图片1.png)\n(1) 检索至少选修”程军”老师所授全部课程的学生姓名(SNAME)。\n(2) 检索”李强”同学不学课程的课程号(C#)。",
+            "correct_answer": "(1)\nselect sname\nfrom student s, course c, sc\nwhere s.sno = sc.sno and sc.cno = c.cno and teacher = '程军'\ngroup by s.sno\nhaving count(*) = (select count(*) from course where teacher = '程军')\n(2)豆包答案：\nSELECT C# FROM Course C\nWHERE NOT EXISTS (\n    SELECT * FROM SC, Student S\n    WHERE SC.S# = S.S# AND S.SNAME = '李强' AND SC.C# = C.C#\n);"
+        },
+        {
+            "id": 9,
+            "content": "使用分组方式查询至少选修了两门课的学生学号，写出SQL",
+            "correct_answer": "豆包答案：\nSELECT S# FROM SC GROUP BY S# HAVING COUNT(C#) >= 2;"
+        },
+        {
+            "id": 10,
+            "content": "使用自连接查询至少选修了两门课的学生学号，写出SQL",
+            "correct_answer": "豆包答案：\nSELECT DISTINCT SC1.S#\nFROM SC SC1, SC SC2\nWHERE SC1.S# = SC2.S# AND SC1.C# != SC2.C#;"
+        },
+        {
+            "id": 11,
+            "content": "查询没有选修课程的学生学号和姓名，写出SQL",
+            "correct_answer": "豆包答案：\nSELECT S#, SNAME\nFROM Student S\nWHERE NOT EXISTS (SELECT * FROM SC WHERE SC.S# = S.S#);"
+        },
+        {
+            "id": 12,
+            "content": "查询选修了“管理学”或“计算机基础”的学生学号，写出SQL",
+            "correct_answer": "豆包答案：\nSELECT DISTINCT S#\nFROM SC, Course C\nWHERE SC.C# = C.C# AND (CNAME = '管理学' OR CNAME = '计算机基础');"
+        },
+        {
+            "id": 13,
+            "content": "将学生所在班级及班级的平均年龄信息，插入到表Classage（Sclass, avgage），写出SQL",
+            "correct_answer": "豆包答案：\nINSERT INTO Classage(Sclass, avgage)\nSELECT SCLASS, AVG(AGE) FROM Student GROUP BY SCLASS;"
+        },
+        {
+            "id": 14,
+            "content": "将“数据结构”和“数据库”两门课的成绩置为空，写出SQL",
+            "correct_answer": "豆包答案：\nUPDATE SC\nSET GRADE = NULL\nWHERE C# IN (SELECT C# FROM Course WHERE CNAME IN ('数据结构','数据库'));"
+        }
+    ]
+}
