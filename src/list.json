@@ -3,10 +3,16 @@
         "name": "Linux",
         "banks": [
             {
-                "file": "Linux 单选（答案仅供参考）.txt"
+                "file": "Linux 知到 单选（答案仅供参考）.txt"
             },
             {
-                "file": "Linux 判断（答案仅供参考）.txt"
+                "file": "Linux 知到 判断（答案仅供参考）.txt"
+            },
+            {
+                "file": "Linux 知到 命令行操作（答案仅供参考）.txt"
+            },
+            {
+                "file": "Linux 知到 写脚本（答案仅供参考）.txt"
             }
         ]
     },
@@ -43,13 +49,16 @@
         "name": "Python",
         "banks": [
             {
-                "file": "Python 单选.txt"
+                "file": "Python 题库 单选.txt"
             },
             {
-                "file": "Python 读程序.txt"
+                "file": "Python 题库 读程序.txt"
             },
             {
-                "file": "Python 编程题.txt"
+                "file": "Python 题库 编程题.txt"
+            },
+            {
+                "file": "Python 慕课讨论题 简答（仅供参考）.txt"
             }
         ]
     }
