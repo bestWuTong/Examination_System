@@ -1,0 +1,375 @@
+{
+    "type": "简答",
+    "questions": [
+        {
+            "id": 1,
+            "content": "给student表添加自增属性id，写出对应SQL语句",
+            "correct_answer": "alter table student add column id int auto_increment not null unique;"
+        },
+        {
+            "id": 2,
+            "content": "给Student表中的ssex添加默认值‘男’，写出三种实现SQL语句",
+            "correct_answer": "alter table Student alter ssex set default '男';\nalter table Student change ssex ssex varchar(2) default '男';\nalter table Student modify ssex varchar(2) default '男';"
+        },
+        {
+            "id": 3,
+            "content": "修改course表中的职工号字段名`T#`为tno，写出对应SQL语句",
+            "correct_answer": "Alter table course change `T#` tno varchar(20);"
+        },
+        {
+            "id": 4,
+            "content": "修改SC表中的score数据类型为float(6,3)，取值可以为空，写出SQL",
+            "correct_answer": "Alter table sc modify score float(6,3) null;"
+        },
+        {
+            "id": 5,
+            "content": "删除SC表中的sno、cno两条外键约束，写出SQL并补充查询外键名说明",
+            "correct_answer": "alter table sc drop foreign key FK_sno;\nalter table sc drop foreign key FK_cno;\n-- 可先通过 show create table sc; 查看实际外键名称"
+        },
+        {
+            "id": 6,
+            "content": "对SC表中sno、cno添加外键约束，分别关联student、course表主键，写出SQL",
+            "correct_answer": "alter table sc add foreign key(sno) references student(sno), add foreign key(cno) references course(cno);"
+        },
+        {
+            "id": 7,
+            "content": "删除Student表中在SNAME上定义的unique候选键约束，写出SQL",
+            "correct_answer": "alter table student drop index sname;"
+        },
+        {
+            "id": 8,
+            "content": "对Student表中ssex添加check约束，限定ssex只能取值‘男’和‘女’，写出SQL",
+            "correct_answer": "Alter table student add check(ssex = '男' or ssex='女');"
+        },
+        {
+            "id": 9,
+            "content": "修改成绩表sc中的成绩数据类型为小数，保留1位小数，写出SQL",
+            "correct_answer": "ALTER TABLE sc MODIFY COLUMN score DECIMAL(5,1);"
+        },
+        {
+            "id": 10,
+            "content": "在学生表中新增字段“邮箱”email，类型VARCHAR(50)，添加唯一约束，写出SQL",
+            "correct_answer": "ALTER TABLE student ADD COLUMN email VARCHAR(50) UNIQUE;"
+        },
+        {
+            "id": 11,
+            "content": "在学生表中新增“身份证号”id_card，放置在性别ssex字段后面，类型CHAR(18)，唯一且非空，写出SQL",
+            "correct_answer": "ALTER TABLE student\nADD COLUMN id_card CHAR(18) NOT NULL UNIQUE AFTER Ssex;"
+        },
+        {
+            "id": 12,
+            "content": "在课程表中新增“课程简介”intro，类型TEXT，写出SQL并说明TEXT无法设置默认值",
+            "correct_answer": "ALTER TABLE course ADD COLUMN intro TEXT;\nTEXT类型字段不支持设置默认值"
+        },
+        {
+            "id": 13,
+            "content": "给学生表email属性添加唯一约束，默认值为“无”，写出修改字段SQL",
+            "correct_answer": "ALTER TABLE student MODIFY email VARCHAR(50) DEFAULT '无' UNIQUE;"
+        },
+        {
+            "id": 14,
+            "content": "为course表添加自定义check约束：16课时对应1学分，写出SQL",
+            "correct_answer": "ALTER TABLE course \nADD CONSTRAINT chk_c CHECK (Chours = Credit * 16);"
+        },
+        {
+            "id": 15,
+            "content": "删除学生表中学生姓名的唯一性约束，若无约束需先添加再删除，写出完整SQL",
+            "correct_answer": "-- 先添加约束（字段无约束时执行）\nALTER TABLE student ADD CONSTRAINT uk_student_sname UNIQUE (Sname);\n-- 删除约束\nALTER TABLE student DROP INDEX sname;"
+        },
+        {
+            "id": 16,
+            "content": "将学生表中sno='98030102'学生的姓名修改为‘李峰’，年龄改为‘18’，写出UPDATE语句",
+            "correct_answer": "UPDATE student SET sname='李峰',sage='18' WHERE sno='98030102';"
+        },
+        {
+            "id": 17,
+            "content": "将班级sclass='980301'的学生成绩提高20%，写出关联子查询的UPDATE语句",
+            "correct_answer": "Update sc\nSet score = score *1.2\nWhere sno in(\nSelect sno\nFrom student\nWhere sclass = '980301');"
+        },
+        {
+            "id": 18,
+            "content": "将课程名为“数据结构”和“数据库”的所有选课成绩置为NULL，写出UPDATE语句",
+            "correct_answer": "UPDATE sc \nSET score=NULL\nWHERE cno IN(\nSELECT cno FROM course WHERE cname='数据结构' or cname='数据库');"
+        },
+        {
+            "id": 19,
+            "content": "将同时选修了cno='001'和cno='003'课程的学生班级号修改为‘200103’，写出SQL",
+            "correct_answer": "update student\nset sclass = '200103'\nwhere sno in(\n  select a.sno\n  from sc a, sc b\n  where a.sno = b.sno and a.cno = '001' and b.cno ='003');"
+        },
+        {
+            "id": 20,
+            "content": "对student表进行完整备份，备份表名为 student_copy，写出建表备份SQL",
+            "correct_answer": "create table student_copy\nselect *\nfrom student;"
+        },
+        {
+            "id": 21,
+            "content": "删除备份表student_copy中选修了两门及两门以上课程的学生信息，写出DELETE语句",
+            "correct_answer": "delete\nfrom student_copy\nwhere sno in\n(select sno from sc\ngroup by sno\nhaving count(*)>=2);"
+        },
+        {
+            "id": 22,
+            "content": "向SC表一次性插入三条选课记录：98040201选005、98040201选002、98040203选004，成绩为空；若学生不存在，补充插入学生98040201（姓名刘林），写出两段SQL",
+            "correct_answer": "--插入选课记录\nInsert into sc(sno, cno,score) values('98040201', '005',null),('98040201', '002',null),('98040203', '004',null);\n--学生不存在时插入学生\ninsert into student(sno, sname) values('98040201', '刘林');"
+        },
+        {
+            "id": 23,
+            "content": "对每一个班，统计学生平均年龄，结果存入新表Classage，包含班号Sclass、平均年龄Avgage，写出两种实现SQL",
+            "correct_answer": "写法一：\ncreate table Classage\nselect sclass,avg(sage)\nfrom student\ngroup by sclass;\n写法二：\ncreate table Classage\n(Sclass varchar(10) primary key,\nAvgage float);\nInsert into Classage\nselect sclass,avg(sage)\nfrom student\ngroup by sclass;"
+        },
+        {
+            "id": 24,
+            "content": "将每个学生学号、姓名、平均分、总成绩存入新表stu_Grade，左连接student与sc，写出SQL",
+            "correct_answer": "Create table stu_Grade\nSelect s.sno, sname, avg(score) 平均分, sum( score) 总分 \nFrom student s left join sc on s.sno =sc.sno\nGroup by s.sno;"
+        },
+        {
+            "id": 25,
+            "content": "删除student表中从未选修任何课程的学生，写出DELETE子查询语句",
+            "correct_answer": "Delete from student\nwhere sno not in (select sno from sc);"
+        },
+        {
+            "id": 26,
+            "content": "查询学生姓名及其出生年份，使用当前年份减去年龄计算，写出SELECT语句",
+            "correct_answer": "select sname as 姓名, year(now()) - sage as 出生年份 from student;"
+        },
+        {
+            "id": 27,
+            "content": "查询以\"DB_\"开头，且倒数第3个字符为 i的课程的详细情况，使用转义字符#，写出SQL",
+            "correct_answer": "select * from course where cname like 'DB#_%i__' escape '#';"
+        },
+        {
+            "id": 28,
+            "content": "查询课程名中第2个字符是下横线“_”的课程信息，提供两种写法",
+            "correct_answer": "写法1：select * from course where cname like '_#_%' escape '#';\n写法2：select * from course where cname like '_\\_%';"
+        },
+        {
+            "id": 29,
+            "content": "查询SC表中成绩在88（包含）到100（包含）的选修成绩信息，使用between关键字，写出SQL",
+            "correct_answer": "select * from sc where score between 88 and 100;"
+        },
+        {
+            "id": 30,
+            "content": "查询Student表中“980301”班或年龄小于20岁的男同学信息，写出条件筛选SQL",
+            "correct_answer": "select * from student where (sclass = '980301' or sage < 20) and ssex = '男';"
+        },
+        {
+            "id": 31,
+            "content": "查询SC表中具有最高分的学生学号和课程号，提供两种写法",
+            "correct_answer": "写法1：select sno, cno from sc where score = (select max(score) from sc);\n写法2：select sno,cno,score from sc order by score desc limit 1;"
+        },
+        {
+            "id": 32,
+            "content": "查询年龄不在18~22岁之间的学生姓名、系别和年龄，写出SQL",
+            "correct_answer": "select sname, dno, sage from student where sage not between 18 and 22;"
+        },
+        {
+            "id": 33,
+            "content": "查询姓\"欧阳\"且全名为四个汉字的学生的姓名和学号，使用模糊匹配like，写出SQL",
+            "correct_answer": "select sname, sno from student where sname like '欧阳__';"
+        },
+        {
+            "id": 34,
+            "content": "查询各科成绩最高和最低的分，输出课程号、最高分、最低分，分组统计，写出SQL",
+            "correct_answer": "select cno as 课程号,max(score) 最高分,min(score) 最低分\nfrom sc\ngroup by cno;"
+        },
+        {
+            "id": 35,
+            "content": "查询有3门以上课程成绩在90分以上的学生的学号及对应课程数量，写出带having的分组SQL",
+            "correct_answer": "SELECT sno, COUNT(*)\nFROM sc\nWHERE score>=90\nGROUP BY sno\nHAVING COUNT(cno)>3;"
+        },
+        {
+            "id": 36,
+            "content": "查询课程名中包含‘信’字，同时第二个字是‘数’的课程名，写出多条件like查询SQL",
+            "correct_answer": "SELECT Cname\nFROM course\nWHERE Cname LIKE '%信%' AND Cname LIKE '_数%';"
+        },
+        {
+            "id": 37,
+            "content": "查询选修表中至少有5名学生选修、课程号以‘00’开头的课程平均分数，写出分组筛选SQL",
+            "correct_answer": "SELECT Cno, AVG(Score)\nFROM sc\nWHERE Cno LIKE '00%'\nGROUP BY Cno\nHAVING COUNT(Sno) >= 5;"
+        },
+        {
+            "id": 38,
+            "content": "查询成绩在80分以上的各科的学生人数，按课程号分组，写出SQL",
+            "correct_answer": "select cno, COUNT(sno) \nfrom sc \nwhere score >80 \nGROUP by cno;"
+        },
+        {
+            "id": 39,
+            "content": "查询学生姓名中有‘王’字，且‘王’后紧跟0-9数字的学生全部信息，使用正则regexp，写出SQL",
+            "correct_answer": "SELECT * \nFROM student\nWHERE student.Sname REGEXP '王[0123456789]';"
+        },
+        {
+            "id": 40,
+            "content": "统计每门课程的选修人数，仅统计超过2人选修的课程；输出课程号、人数，按人数降序、同人数按课程号升序排序，写出SQL",
+            "correct_answer": "SELECT Cno, COUNT(Sno)\nFROM sc\nGROUP BY Cno \nHAVING COUNT(Sno) >= 2 \nORDER BY COUNT(Sno) DESC, Cno;"
+        },
+        {
+            "id": 41,
+            "content": "查询学生选修课程信息（学号、姓名、课程号、成绩），成绩≥90输出“优秀”，其余输出“其他”，使用if函数，写出多表连接SQL",
+            "correct_answer": "select student.Sno,student.Sname,sc.Cno,sc.score,if(sc.score>=90,\"优秀\",\"其他\") as 等级\nfrom student,sc\nwhere student.Sno=sc.Sno;"
+        },
+        {
+            "id": 42,
+            "content": "查询所有学生的选修课程信息，按分数段划分等级：≥90优秀、60~89及格、<60不及格，使用case语句，右连接student、左连接course，写出SQL",
+            "correct_answer": "SELECT student.Sname AS '学生姓名', course.Cname AS '课程名',\n(CASE WHEN sc.Score >= 90 THEN '优秀'\n    WHEN sc.Score < 90 AND sc.Score >=60 THEN '及格'\n    WHEN sc.Score < 60 THEN '不及格' END) AS '课程成绩情况'\nFROM sc Right JOIN student \nON sc.Sno = student.Sno\nLEFT JOIN course\nON sc.Cno = course.Cno;"
+        },
+        {
+            "id": 43,
+            "content": "使用自连接查询与“数据库”学分相同的其他课程信息，写出SQL",
+            "correct_answer": "select c2.cno,c2.cname,c2.credit\nfrom course c1,course c2\nwhere c1.credit = c2.credit and c1.cname = '数据库' \nand c2.cname != '数据库';"
+        },
+        {
+            "id": 44,
+            "content": "查询没有选修任何课程的学生学号、姓名，分别提供子查询not in、左连接判空两种写法",
+            "correct_answer": "--子查询写法\nselect sno 学号,sname 姓名\nfrom student \nwhere sno not in (select sno from sc);\n-- 外连接写法\nselect student.sno, sname from student left join sc\non student.sno=sc.sno where sc.sno is null;"
+        },
+        {
+            "id": 45,
+            "content": "查询选了001课程且001成绩高于002课程成绩的学生姓名、两门课课程号与分数，使用sc自连接，写出SQL",
+            "correct_answer": "select student.sname, t1.cno, t1.score, t2.cno, t2.score\nfrom student,sc t1,sc t2\nwhere student.sno = t1.sno and t1.sno = t2.sno and t1.score > t2.score\nand t1.cno = '001' \nand t2.cno='002';"
+        },
+        {
+            "id": 46,
+            "content": "查询同时学过001和003课程的学生全部信息，提供两种写法（自连接子查询、多表关联子查询）",
+            "correct_answer": "-- 子查询自连接写法\nSelect *\nFrom student \nWhere sno in (select s1.sno from sc s1, sc s2\nWhere s1.sno = s2.sno and s1.cno = '001' and s2.cno = '003');\n-- 多表关联+子查询写法\nSelect student.*\nFrom student, sc\nWhere student.sno = sc.sno and sc.cno = '001' \nand sc.sno in (select sno from sc where cno = '003');"
+        },
+        {
+            "id": 47,
+            "content": "查询没有选修“数据库”这门课的学生全部信息，多表子查询实现，写出SQL",
+            "correct_answer": "select * from student \nwhere sno not in (select sno from sc, course c\nwhere sc.cno = c.cno and cname = '数据库');"
+        },
+        {
+            "id": 48,
+            "content": "查询与“张三”同系的其他学生姓名和年龄，提供子查询、自连接两种写法",
+            "correct_answer": "-- 子查询写法\nselect sname, sage \nfrom student s1 \nwhere dno=(select dno from student s2 where sname= '张三') and sname != '张三';\n-- 自连接写法\nselect s2.sname, s2.sage \nfrom student s1, student s2\nWhere s1.dno = s2.dno and s1.sname = '张三' and s2.sname != '张三';"
+        },
+        {
+            "id": 49,
+            "content": "查询与学号98030102至少有一门共同选课的其他学生信息，提供自连接、子查询两种写法",
+            "correct_answer": "-- 自连接写法\nselect distinct s.* \nfrom student s, sc sc1, sc sc2 \nwhere s.sno = sc1.sno and sc1.cno = sc2.cno and sc2.sno = '98030102' \nand s.sno != '98030102';\n-- 子查询写法\nselect s.*\nfrom sc join student s on sc.sno = s.sno \nwhere cno in (select cno from sc where sno = '98030102') and s.sno != '98030102';"
+        },
+        {
+            "id": 50,
+            "content": "查询取得全表最高分的课程名、学生姓名、对应成绩，三表内连接实现，写出SQL",
+            "correct_answer": "select c.cname, s.sname, sc.score \nfrom sc join student s on sc.sno = s.sno join course c on sc.cno = c.cno \nwhere sc.score = (select max(score) from sc);"
+        },
+        {
+            "id": 51,
+            "content": "查询选修了所有课程的学生姓名，分别用相关子查询、不相关子查询实现",
+            "correct_answer": "-- 相关子查询\nselect sname from student s where not exists (\n        select * from course c where not exists (\n              select * from sc where sc.sno = s.sno and sc.cno = c.cno));\n-- 不相关子查询\nselect sname \nfrom student \nwhere sno in (\n              select sno \nfrom sc \ngroup by sno \n              having count(*) = (select count(*) from course));"
+        },
+        {
+            "id": 52,
+            "content": "查询被所有学生选修的课程名，分别用相关子查询、不相关子查询实现",
+            "correct_answer": "-- 相关子查询\nselect cname from course c where not exists (\n              select * from student s where not exists (\n                   select * from sc where sc.cno = c.cno and sc.sno = s.sno));\n-- 不相关子查询\nselect cname from course where cno in (\n            select cno \nfrom sc \ngroup by cno \n            having count(*) = (select count(*) from student));"
+        },
+        {
+            "id": 53,
+            "content": "使用左外连接查询没有选修任何课程的学生学号、姓名，写出SQL",
+            "correct_answer": "select s.sno, s.sname \nfrom student s left join sc on s.sno = sc.sno \nwhere sc.cno is null;"
+        },
+        {
+            "id": 54,
+            "content": "查询课程名称为“数据库”且分数低于60的学生姓名和分数，三表内连接，写出SQL",
+            "correct_answer": "select sname, score\n from student s join sc on s.sno = sc.sno join course c on sc.cno = c.cno \nwhere c.cname = '数据库' and sc.score < 60;"
+        },
+        {
+            "id": 55,
+            "content": "查询选修001但未选修002课程的学生姓名，写出正确实现思路（原文档该题代码存在笔误，说明正确逻辑）",
+            "correct_answer": "正确逻辑：学号存在选001记录，同时不存在选002记录；示例写法：\nselect distinct s.sname from student s\nwhere exists(select 1 from sc where sno=s.sno and cno='001')\nand not exists(select 1 from sc where sno=s.sno and cno='002');"
+        },
+        {
+            "id": 56,
+            "content": "查询既选修“数据库”也选修“数据结构”的学生姓名，两层in子查询实现，写出SQL",
+            "correct_answer": "select sname from student s\nwhere sno in (\n              select sc.sno from sc join course c on sc.cno = c.cno \n               where c.cname = '数据库')\nand s.sno in (\n           select sc.sno from sc join course c on sc.cno = c.cno \n           where c.cname = '数据结构');"
+        },
+        {
+            "id": 57,
+            "content": "使用相关子查询not exists查询没有选修“数据库”课程的学生姓名，写出SQL",
+            "correct_answer": "Select sname\nfrom student s\nwhere not exists (select * from sc, course c \nwhere sc.cno = c.cno and s.sno =sc.sno and cname =\"数据库\");"
+        },
+        {
+            "id": 58,
+            "content": "查询至少选修了张三全部课程的其他学生学号、姓名，写出嵌套exists子查询SQL",
+            "correct_answer": "select s.sno, sname\nfrom student s where not exists (select * from \n(select sc.cno, s.sno, s.sname from student s join sc on s.sno =sc.sno) as x \nwhere sname =\"张三\" and not exists\n(select * from sc where s.sno =sc.sno and x.cno = sc.cno)) and sname != \"张三\";"
+        },
+        {
+            "id": 59,
+            "content": "子查询not in实现查询未选修“数据库”的学生姓名，写出SQL",
+            "correct_answer": "Select sname \nfrom student \nwhere sno not in\n (select sno from course c,sc where c.cno = sc.cno and cname = \"数据库\");"
+        },
+        {
+            "id": 60,
+            "content": "查询选修了“数据库”课程，且个人所有课程平均分低于60的学生姓名，多表连接+分组having，写出SQL",
+            "correct_answer": "select sname\nfrom student\njoin sc on student.sno=sc.sno\njoin course on sc.cno=course.cno\nwhere sno in (select sno from course c, sc where c.cno = sc.cno \nand cname='数据库')\ngroup by student.sno\nhaving avg(score) < 60;"
+        },
+        {
+            "id": 61,
+            "content": "查询每个班级中各个科目的平均分，三表连接按班级、课程分组，写出SQL",
+            "correct_answer": "select sclass, cname, avg(score) 平均分\nfrom student join sc on student.sno=sc.sno join course on sc.cno=course.cno\ngroup by sclass, cname;"
+        },
+        {
+            "id": 62,
+            "content": "查询没有选修“数据结构”的学生学号、姓名和总成绩，左连接分组求和，写出SQL",
+            "correct_answer": "select s.sno, sname, sum(score) 总成绩\nfrom student s left join sc on s.sno=sc.sno\nwhere s.sno not in (\n select sno from sc join course on sc.cno=course.cno where cname='数据结构')\ngroup by s.sno;"
+        },
+        {
+            "id": 63,
+            "content": "使用sc表自连接查询至少选修两门课程的学生学号和姓名，去重distinct，写出SQL",
+            "correct_answer": "select distinct s.sno, sname\nfrom student s join sc a on s.sno=a.sno join sc b on s.sno=b.sno\nwhere a.cno != b.cno;"
+        },
+        {
+            "id": 64,
+            "content": "查询至少3名学生选修、课程名以“数”开头的课程名和平均分，分组筛选，写出SQL",
+            "correct_answer": "select cname 课程名, avg(score) 平均分\nfrom course join sc on course.cno=sc.cno\nwhere cname like '数%'\ngroup by course.cno, cname\nhaving count(sno) >= 3;"
+        },
+        {
+            "id": 65,
+            "content": "创建视图Avgrade，包含课程号、课程名、最高分、最低分、平均分，仅保留课程名以“数”开头的课程，写出建视图SQL",
+            "correct_answer": "Create view Avgrade(cno, cname, `最高分`,`最低分`,`平均分`)\nAs\nSelect course.cno, cname, max(score), min(score), avg(score)\nFrom course, sc\nWhere course.cno = sc.cno and cname like '数%' \nGroup by sc.cno;"
+        },
+        {
+            "id": 66,
+            "content": "创建视图vs，包含学生学号、姓名、平均成绩，筛选平均分大于60且姓名含“丽”的学生，写出SQL",
+            "correct_answer": "create view vs\nas\nselect s.sno,sname,avg(score)\nfrom student s,sc\nwhere s.sno = sc.sno and sname like '%丽%' \ngroup by sc.sno\nhaving avg(score)>60;"
+        },
+        {
+            "id": 67,
+            "content": "查看视图vs的定义语句，写出对应SQL",
+            "correct_answer": "show create view vs;"
+        },
+        {
+            "id": 68,
+            "content": "创建视图v_stu：包含比任意一名女生年龄小的男生信息，添加with check option约束，写出SQL",
+            "correct_answer": "create or replace view v_stu\nas\nSelect s1.*\nfrom student s1, student s2\nwhere s1.sage<s2.sage and s2.ssex = '女' \nand s1.ssex = '男' with check option;"
+        },
+        {
+            "id": 69,
+            "content": "执行更新视图v_stu，将所有学生年龄+1，说明该语句执行失败原因，写出更新SQL",
+            "correct_answer": "Update v_stu\nSet sage = sage + 1;\n失败原因：with check option约束要求视图数据必须满足“男生且年龄小于任意女生”，年龄+1后部分数据不满足视图筛选条件，更新被拦截。"
+        },
+        {
+            "id": 70,
+            "content": "1.创建视图stu_info，包含学号、姓名、课程号、课程名、成绩；2.将所有“数据库”课程成绩置为NULL，写出两段SQL",
+            "correct_answer": "-- 创建视图\nCreate or replace view stu_info\nAs\nSelect student.sno, sname, sc.cno, cname,sc.score\nFrom student left join sc on student.sno = sc.sno left join course on sc.cno = course.cno;\n-- 修改基本表成绩\nUpdate sc\nSet score = null\nWhere cno = (select cno from course where cname like '数据库');"
+        },
+        {
+            "id": 71,
+            "content": "创建视图vs_class，存储班级号、学生数量、班级平均分；查询视图所有数据，写出两段SQL",
+            "correct_answer": "-- 创建视图\nCreate view vs_class\nas\nselect sclass, count(sno), avg(score)\nfrom student s left join sc on s.sno = sc.sno \ngroup by sclass;\n-- 查看视图\nSelect * from vs_class;"
+        },
+        {
+            "id": 72,
+            "content": "在sc表创建前置更新触发器sc_update_trigger，更新成绩时自动在原分数基础上加1，写出触发器SQL",
+            "correct_answer": "CREATE TRIGGER sc_update_trigger \nBEFORE UPDATE ON sc\nFOR EACH ROW\nSET new.score = old.score + 1;"
+        },
+        {
+            "id": 73,
+            "content": "创建后置插入触发器ins_stu，新增学生后自动为该生插入001课程选课记录（成绩null），写出SQL",
+            "correct_answer": "CREATE TRIGGER ins_stu  \nAFTER INSERT ON student  \nFOR EACH ROW \nINSERT INTO sc VALUES(new.sno, '001', null);"
+        },
+        {
+            "id": 74,
+            "content": "创建后置插入触发器ins_stu2，新增学生后自动查询“数据库”课程编号并插入对应选课记录，写出带变量的触发器SQL",
+            "correct_answer": "CREATE TRIGGER ins_stu2 \nAFTER INSERT ON student \nFOR EACH ROW \nBEGIN\nDECLARE cid CHAR(10);\nSET cid = (SELECT cno FROM course WHERE cname = '数据库');\nINSERT INTO sc VALUES(new.sno, cid, null);\nEND"
+        }
+    ]
+}
