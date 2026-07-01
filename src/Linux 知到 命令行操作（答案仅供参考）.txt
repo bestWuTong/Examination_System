@@ -204,7 +204,7 @@
         {
             "id": 41,
             "content": "解释命令 `systemctl start sshd` 的作用与执行结果",
-            "correct_answer": "- 作用：通过systemd服务管理器启动SSH服务（sshd守护进程）。\n- 执行结果：SSH服务被启动，本机开放22端口，允许其他主机通过SSH协议远程登录连接到当前系统；无报错则执行成功，可通过 systemctl status sshd 确认运行状态。"
+            "correct_answer": "- 作用：通过systemd服务管理器启动SSH服务（sshd守护进程）。\n- 执行结果：SSH服务被启动，本机开放22端口，允许其他主机通过SSH协议远程登录连接到当前系统；无报错则执行成功，可通过 ```systemctl status sshd``` 确认运行状态。"
         },
         {
             "id": 42,
