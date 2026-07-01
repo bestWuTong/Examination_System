@@ -1386,7 +1386,8 @@
     function renderFormattedText(target, value) {
       const source = String(value);
       const fragment = document.createDocumentFragment();
-      const codeBlockPattern = /```[^\n]*\n?([\s\S]*?)```/g;
+      // 匹配多行代码块：```language\ncode\n``` 或行内代码块：```code```
+      const codeBlockPattern = /```([^\n]*)\n([\s\S]*?)```|```([^\n`]*)```/g;
       let lastIndex = 0;
       let match;
 
@@ -1395,7 +1396,9 @@
         const pre = document.createElement("pre");
         const code = document.createElement("code");
         pre.className = "formatted-code";
-        code.textContent = match[1].replace(/\n$/, "");
+        // 多行代码块使用 match[2]，行内代码块使用 match[3]
+        const codeContent = match[2] !== undefined ? match[2].replace(/\n$/, "") : match[3];
+        code.textContent = codeContent;
         pre.appendChild(code);
         fragment.appendChild(pre);
         lastIndex = codeBlockPattern.lastIndex;
