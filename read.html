@@ -880,23 +880,22 @@
           
           // 为选择题添加选项字母
           const answerLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-          let answerText = "答案：";
+          let answerLabel = "答案：";
+          let answerContent = "";
           
           if (correctAnswers.length === 0) {
-            answerText += "暂无答案";
+            answerContent = "暂无答案";
           } else if (qType === "单选" || qType === "多选" || qType === "判断") {
-            // 找到正确答案对应的选项字母
             const answerLetterList = correctAnswers.map(ans => {
               const index = originalOptions.findIndex(opt => opt === ans);
               return index >= 0 ? answerLetters[index] : ans;
             });
-            answerText += answerLetterList.join("");
+            answerContent = answerLetterList.join("");
           } else {
-            answerText += correctAnswers.join("、");
+            answerContent = correctAnswers.join("、");
           }
           
-          // 使用markdown渲染答案内容
-          renderFormattedText(answer, answerText);
+          renderFormattedText(answer, answerLabel + "\n" + answerContent);
           card.appendChild(answer);
 
           dom.readContent.appendChild(card);
