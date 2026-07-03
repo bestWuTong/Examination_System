@@ -14,7 +14,7 @@
         {
             "id": 3,
             "content": "写出Ubuntu22.04下监测系统端口服务状态的原生命令",
-            "correct_answer": "```bash\nss -tulnp\n```"
+            "correct_answer": "```bash\nsudo ss -tulnp\n```"
         },
         {
             "id": 4,
