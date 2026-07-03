@@ -1,225 +1,225 @@
 {
-"type": "简答",
-"questions": [
-{
-"id": 1,
-"content": "查看当前登录到系统中的用户；",
-"correct_answer": " bash\nwho\n "
-},
-{
-"id": 2,
-"content": "查看当前系统中运行的进程和进程资源占用情况；",
-"correct_answer": " bash\n# 动态实时查看资源占用\ntop\n# 静态查看所有进程详情\nps aux\n "
-},
-{
-"id": 3,
-"content": "用适当的命令监测你的系统中端口服务状态；",
-"correct_answer": " bash\nsudo ss -tulnp\n "
-},
-{
-"id": 4,
-"content": "查看最后一次启动系统的时间；",
-"correct_answer": " bash\nwho -b\n "
-},
-{
-"id": 5,
-"content": "重启系统。",
-"correct_answer": " bash\nsudo reboot\n "
-},
-{
-"id": 6,
-"content": "为用户liu设置密码liu8888；",
-"correct_answer": " bash\n# 交互式命令，执行后输入两次密码 liu8888 即可\nsudo passwd liu\n# 非交互一行命令\necho \"liu:liu8888\" | sudo chpasswd\n "
-},
-{
-"id": 7,
-"content": "查看/home下所有文件和目录情况；",
-"correct_answer": " bash\nls -la /home\n "
-},
-{
-"id": 8,
-"content": "切换到超级用户root；",
-"correct_answer": " bash\nsudo -i\n "
-},
-{
-"id": 9,
-"content": "查看系统当前运行过那些命令；",
-"correct_answer": " bash\nhistory\n "
-},
-{
-"id": 10,
-"content": "删除用户liu；",
-"correct_answer": " bash\n# -r 同时删除用户家目录与邮箱\nsudo userdel -r liu\n "
-},
-{
-"id": 11,
-"content": "user1用户登录系统后，查看用户所在工作目录并写出所在目录；",
-"correct_answer": "命令：\n bash\npwd\n 执行后输出/home/user1"
-},
-{
-"id": 12,
-"content": "将/home目录下的所有文件打包压缩成home.tar.gz；",
-"correct_answer": " bash\nsudo tar -zcvf home.tar.gz /home\n "
-},
-{
-"id": 13,
-"content": "查看文件home.tar.gz的磁盘空间占用情况；",
-"correct_answer": " bash\n# 查看文件本身大小\nls -lh home.tar.gz\n# 查看文件占用磁盘大小，受文件系统块对齐影响，数值可能略大于 ls 显示的文件大小\ndu -h home.tar.gz\n "
-},
-{
-"id": 14,
-"content": "在/user1目录下创建file1.doc和file2.odt文件；",
-"correct_answer": " bash\ntouch /user1/file1.doc /user1/file2.odt\n "
-},
-{
-"id": 15,
-"content": "将file2.odt文件复制到/tmp文件夹；",
-"correct_answer": " bash\ncp /home/user1/file2.odt /tmp\n "
-},
-{
-"id": 16,
-"content": "查看你使用的计算机上登录用户主目录下的树状目录",
-"correct_answer": " bash\n# 需先安装tree：\nsudo apt install tree\n# 查看家目录树结构\ntree ~\n "
-},
-{
-"id": 17,
-"content": "在用户主目录中创建一个名为yestoday的文件，并在文件内容中添加你今天的考试科目名称",
-"correct_answer": " bash\necho \"Linux操作系统\" > ~/yestoday\n "
-},
-{
-"id": 18,
-"content": "创建一个today的文件，要求文件内容与yestoday内容相同",
-"correct_answer": " bash\ncp ~/yestoday ~/today\n "
-},
-{
-"id": 19,
-"content": "将两个文件合并成名为justnow的文件",
-"correct_answer": " bash\ncat ~/yestoday ~/today > ~/justnow\n "
-},
-{
-"id": 20,
-"content": "查看最后访问系统的用户并将结果追加存储到名为justnow的文件中。",
-"correct_answer": " bash\nlast | head -1 >> ~/justnow\n "
-},
-{
-"id": 21,
-"content": "以用户wang登录系统并创建test目录",
-"correct_answer": " bash\nsu - wang\nmkdir ~/test\n "
-},
-{
-"id": 22,
-"content": "在test目录中新建目录wang1、wang2、wang3和文件wangfei",
-"correct_answer": " bash\ncd ~/test\nmkdir wang1 wang2 wang3\ntouch wangfei\n "
-},
-{
-"id": 23,
-"content": "将/test目录下的所有文件打包压缩成/tmp/test.tar.gz",
-"correct_answer": " bash\ntar -zcvf /tmp/test.tar.gz /test\n "
-},
-{
-"id": 24,
-"content": "在/tmp中将压缩包恢复为普通文件",
-"correct_answer": " bash\ncd /tmp\ntar -zxvf test.tar.gz\n "
-},
-{
-"id": 25,
-"content": "在文件zhangfei中查找是否含有如下字符“hehe”.",
-"correct_answer": " bash\ngrep \"hehe\" zhangfei\n "
-},
-{
-"id": 26,
-"content": "列出当前系统中的路由信息",
-"correct_answer": " bash\nip route\n "
-},
-{
-"id": 27,
-"content": "添加一条默认路由到网关 10.10.10.1",
-"correct_answer": " bash\nsudo ip route add default via 10.10.10.1\n "
-},
-{
-"id": 28,
-"content": "检测本机到网关10.10.10.1是否畅通",
-"correct_answer": " bash\nping 10.10.10.1\n "
-},
-{
-"id": 29,
-"content": "将t1修改为隐藏文件",
-"correct_answer": " bash\nmv t1 .t1\n "
-},
-{
-"id": 30,
-"content": "在系统中查询t1文件并将其复制到用户主目录。",
-"correct_answer": " bash\nsudo find / -name \"t1\" -exec cp {} ~ \\;\n "
-},
-{
-"id": 31,
-"content": "列出当前系统中的磁盘使用情况",
-"correct_answer": " bash\ndf -h\n "
-},
-{
-"id": 32,
-"content": "查看本机的端口占用情况",
-"correct_answer": " bash\nsudo ss -tulnp\n "
-},
-{
-"id": 33,
-"content": "查看当前系统运行的进程",
-"correct_answer": " bash\nps aux\n "
-},
-{
-"id": 34,
-"content": "查看文件/etc/passwd 的内容并将其重定向写入文件userbackup;",
-"correct_answer": " bash\ncat /etc/passwd > userbackup\n "
-},
-{
-"id": 35,
-"content": "查看本机网卡的IP地址;",
-"correct_answer": " bash\n# 系统原生无需额外安装\nip addr show\n# 需要安装net-tools工具包\nifconfig\n "
-},
-{
-"id": 36,
-"content": "查看你的系统中TCP端口服务状态；",
-"correct_answer": " bash\nsudo ss -tlnp\n "
-},
-{
-"id": 37,
-"content": "查看本机的Linux系统分区情况；",
-"correct_answer": " bash\n# 普通用户可执行\nlsblk\n# 需要root权限，查看详细分区表\nsudo fdisk -l\n "
-},
-{
-"id": 38,
-"content": "设置系统5分钟后关机。",
-"correct_answer": " bash\nsudo shutdown -h +5\n "
-},
-{
-"id": 39,
-"content": "将用户user1加入nobody组；",
-"correct_answer": " bash\nsudo usermod -aG nobody user1\n "
-},
-{
-"id": 40,
-"content": "将U盘/dev/sdb1挂载到/mnt/usbdisk",
-"correct_answer": " bash\n# 先创建挂载点\nsudo mkdir -p /mnt/usbdisk\n# 执行挂载\nsudo mount /dev/sdb1 /mnt/usbdisk\n "
-},
-{
-"id": 41,
-"content": "请解释如下命令的执行结果和作用：systemctl start sshd",
-"correct_answer": "- 作用：通过systemd服务管理器启动SSH服务（sshd守护进程）。\n- 执行结果：SSH服务被启动，本机开放22端口，允许其他主机通过SSH协议远程登录连接到当前系统。"
-},
-{
-"id": 42,
-"content": "请解释如下命令的执行结果和作用：route add -net 192.168.10.0/24 gw 192.168.10.1",
-"correct_answer": "- 作用：向系统路由表添加一条静态路由规则，指定目标网段  192.168.10.0/24  的网络数据包，全部通过网关地址  192.168.10.1  进行转发。\n- 执行结果：系统路由表新增该路由条目，后续访问192.168.10.0网段的流量都会走指定的网关路径。"
-},
-{
-"id": 43,
-"content": "请解释如下命令的执行结果和作用：ifconfig eth1 down",
-"correct_answer": "- 作用：禁用（关闭）名为  eth1  的物理网卡接口。\n- 执行结果：eth1网卡停止网络工作，不再收发数据包，该网卡上配置的IP地址、子网掩码等网络参数暂时失效。"
-},
-{
-"id": 44,
-"content": "请解释如下命令的执行结果和作用：echo $SHELL",
-"correct_answer": "- 作用：打印输出当前登录用户所使用的默认Shell程序的路径。\n- 执行结果：终端输出环境变量  SHELL  的值，Ubuntu系统默认通常为 /bin/bash 。"
-}
-]
+    "type": "简答",
+    "questions": [
+        {
+            "id": 1,
+            "content": "写出在命令行模式下完成下面操作的命令：查看当前登录到系统中的用户",
+            "correct_answer": "```bash\nwho\n```"
+        },
+        {
+            "id": 2,
+            "content": "写出在命令行模式下完成下面操作的命令：查看当前系统中运行的进程和进程资源占用情况",
+            "correct_answer": "```bash\n# 动态实时查看资源占用\ntop\n# 静态查看所有进程详情\nps aux\n```"
+        },
+        {
+            "id": 3,
+            "content": "写出在命令行模式下完成下面操作的命令：用适当的命令监测你的系统中端口服务状态",
+            "correct_answer": "```bash\nsudo ss -tulnp\n```"
+        },
+        {
+            "id": 4,
+            "content": "写出在命令行模式下完成下面操作的命令：查看最后一次启动系统的时间",
+            "correct_answer": "```bash\nwho -b\n```"
+        },
+        {
+            "id": 5,
+            "content": "写出在命令行模式下完成下面操作的命令：重启系统",
+            "correct_answer": "```bash\nsudo reboot\n```"
+        },
+        {
+            "id": 6,
+            "content": "请写出操作命令：为用户liu设置密码liu8888",
+            "correct_answer": "```bash\n# 交互式命令，执行后输入两次密码 liu8888 即可\nsudo passwd liu\n# 非交互一行命令\necho \"liu:liu8888\" | sudo chpasswd\n```"
+        },
+        {
+            "id": 7,
+            "content": "请写出操作命令：查看/home下所有文件和目录情况",
+            "correct_answer": "```bash\nls -la /home\n```"
+        },
+        {
+            "id": 8,
+            "content": "请写出操作命令：切换到超级用户root",
+            "correct_answer": "```bash\nsudo -i\n```"
+        },
+        {
+            "id": 9,
+            "content": "请写出操作命令：查看系统当前运行过那些命令",
+            "correct_answer": "```bash\nhistory\n```"
+        },
+        {
+            "id": 10,
+            "content": "请写出操作命令：删除用户liu",
+            "correct_answer": "```bash\n# -r 同时删除用户家目录与邮箱\nsudo userdel -r liu\n```"
+        },
+        {
+            "id": 11,
+            "content": "请写出如下操作的命令行文本：user1用户登录系统后，查看用户所在工作目录并写出所在目录",
+            "correct_answer": "命令：\n```bash\npwd\n```执行后输出/home/user1"
+        },
+        {
+            "id": 12,
+            "content": "请写出如下操作的命令行文本：将/home目录下的所有文件打包压缩成home.tar.gz",
+            "correct_answer": "```bash\nsudo tar -zcvf home.tar.gz /home\n```"
+        },
+        {
+            "id": 13,
+            "content": "请写出如下操作的命令行文本：查看文件home.tar.gz的磁盘空间占用情况",
+            "correct_answer": "```bash\n# 查看文件本身大小\nls -lh home.tar.gz\n# 查看文件占用磁盘大小，受文件系统块对齐影响，数值可能略大于 ls 显示的文件大小\ndu -h home.tar.gz\n```"
+        },
+        {
+            "id": 14,
+            "content": "请写出如下操作的命令行文本：在/user1目录下创建file1.doc和file2.odt文件",
+            "correct_answer": "```bash\ntouch /user1/file1.doc /user1/file2.odt\n```"
+        },
+        {
+            "id": 15,
+            "content": "请写出如下操作的命令行文本：将file2.odt文件复制到/tmp文件夹",
+            "correct_answer": "```bash\ncp /home/user1/file2.odt /tmp\n```"
+        },
+        {
+            "id": 16,
+            "content": "请写出命令行操作命令和步骤：查看你使用的计算机上登录用户主目录下的树状目录",
+            "correct_answer": "```bash\n# 需先安装tree：\nsudo apt install tree\n# 查看家目录树结构\ntree ~\n```"
+        },
+        {
+            "id": 17,
+            "content": "请写出命令行操作命令和步骤：在用户主目录中创建一个名为yestoday的文件，并在文件内容中添加你今天的考试科目名称",
+            "correct_answer": "```bash\necho \"Linux操作系统\" > ~/yestoday\n```"
+        },
+        {
+            "id": 18,
+            "content": "请写出命令行操作命令和步骤：创建一个today的文件，要求文件内容与yestoday内容相同",
+            "correct_answer": "```bash\ncp ~/yestoday ~/today\n```"
+        },
+        {
+            "id": 19,
+            "content": "请写出命令行操作命令和步骤：将两个文件合并成名为justnow的文件",
+            "correct_answer": "```bash\ncat ~/yestoday ~/today > ~/justnow\n```"
+        },
+        {
+            "id": 20,
+            "content": "请写出命令行操作命令和步骤：查看最后访问系统的用户并将结果追加存储到名为justnow的文件中",
+            "correct_answer": "```bash\nlast | head -1 >> ~/justnow\n```"
+        },
+        {
+            "id": 21,
+            "content": "请写出命令行操作命令：以用户wang登录系统并创建test目录",
+            "correct_answer": "```bash\nsu - wang\nmkdir ~/test\n```"
+        },
+        {
+            "id": 22,
+            "content": "请写出命令行操作命令：在test目录中新建目录wang1、wang2、wang3和文件wangfei",
+            "correct_answer": "```bash\ncd ~/test\nmkdir wang1 wang2 wang3\ntouch wangfei\n```"
+        },
+        {
+            "id": 23,
+            "content": "请写出命令行操作命令：将/test目录下的所有文件打包压缩成/tmp/test.tar.gz",
+            "correct_answer": "```bash\ntar -zcvf /tmp/test.tar.gz /test\n```"
+        },
+        {
+            "id": 24,
+            "content": "请写出命令行操作命令：在/tmp中将压缩包恢复为普通文件",
+            "correct_answer": "```bash\ncd /tmp\ntar -zxvf test.tar.gz\n```"
+        },
+        {
+            "id": 25,
+            "content": "请写出命令行操作命令：在文件zhangfei中查找是否含有如下字符“hehe”",
+            "correct_answer": "```bash\ngrep \"hehe\" zhangfei\n```"
+        },
+        {
+            "id": 26,
+            "content": "请写出命令行操作指令：列出当前系统中的路由信息",
+            "correct_answer": "```bash\nip route\n```"
+        },
+        {
+            "id": 27,
+            "content": "请写出命令行操作指令：添加一条默认路由到网关10.10.10.1",
+            "correct_answer": "```bash\nsudo ip route add default via 10.10.10.1\n```"
+        },
+        {
+            "id": 28,
+            "content": "请写出命令行操作指令：检测本机到网关10.10.10.1是否畅通",
+            "correct_answer": "```bash\nping 10.10.10.1\n```"
+        },
+        {
+            "id": 29,
+            "content": "请写出命令行操作指令：将t1修改为隐藏文件",
+            "correct_answer": "```bash\nmv t1 .t1\n```"
+        },
+        {
+            "id": 30,
+            "content": "请写出命令行操作指令：在系统中查询t1文件并将其复制到用户主目录",
+            "correct_answer": "```bash\nsudo find / -name \"t1\" -exec cp {} ~ \\;\n```"
+        },
+        {
+            "id": 31,
+            "content": "请写出命令行操作指令：列出当前系统中的磁盘使用情况",
+            "correct_answer": "```bash\ndf -h\n```"
+        },
+        {
+            "id": 32,
+            "content": "请写出命令行操作指令：查看本机的端口占用情况",
+            "correct_answer": "```bash\nsudo ss -tulnp\n```"
+        },
+        {
+            "id": 33,
+            "content": "请写出命令行操作指令：查看当前系统运行的进程",
+            "correct_answer": "```bash\nps aux\n```"
+        },
+        {
+            "id": 34,
+            "content": "请写出命令行操作指令：查看文件/etc/passwd的内容并将其重定向写入文件userbackup",
+            "correct_answer": "```bash\ncat /etc/passwd > userbackup\n```"
+        },
+        {
+            "id": 35,
+            "content": "请写出命令行操作指令：查看本机网卡的IP地址",
+            "correct_answer": "```bash\n# 系统原生无需额外安装\nip addr show\n# 需要安装net-tools工具包\nifconfig\n```"
+        },
+        {
+            "id": 36,
+            "content": "写出在命令行模式下完成下面操作的命令：查看你的系统中TCP端口服务状态",
+            "correct_answer": "```bash\nsudo ss -tlnp\n```"
+        },
+        {
+            "id": 37,
+            "content": "写出在命令行模式下完成下面操作的命令：查看本机的Linux系统分区情况",
+            "correct_answer": "```bash\n# 普通用户可执行\nlsblk\n# 需要root权限，查看详细分区表\nsudo fdisk -l\n```"
+        },
+        {
+            "id": 38,
+            "content": "写出在命令行模式下完成下面操作的命令：设置系统5分钟后关机",
+            "correct_answer": "```bash\nsudo shutdown -h +5\n```"
+        },
+        {
+            "id": 39,
+            "content": "请写出如下操作的命令行文本：将用户user1加入nobody组",
+            "correct_answer": "```bash\nsudo usermod -aG nobody user1\n```"
+        },
+        {
+            "id": 40,
+            "content": "请写出如下操作的命令行文本：将U盘/dev/sdb1挂载到/mnt/usbdisk",
+            "correct_answer": "```bash\n# 先创建挂载点\nsudo mkdir -p /mnt/usbdisk\n# 执行挂载\nsudo mount /dev/sdb1 /mnt/usbdisk\n```"
+        },
+        {
+            "id": 41,
+            "content": "请解释如下命令的执行结果和作用：systemctl start sshd",
+            "correct_answer": "- 作用：通过systemd服务管理器启动SSH服务（sshd守护进程）。\n- 执行结果：SSH服务被启动，本机开放22端口，允许其他主机通过SSH协议远程登录连接到当前系统。"
+        },
+        {
+            "id": 42,
+            "content": "请解释如下命令的执行结果和作用：route add -net 192.168.10.0/24 gw 192.168.10.1",
+            "correct_answer": "- 作用：向系统路由表添加一条静态路由规则，指定目标网段 `192.168.10.0/24` 的网络数据包，全部通过网关地址 `192.168.10.1` 进行转发。\n- 执行结果：系统路由表新增该路由条目，后续访问192.168.10.0网段的流量都会走指定的网关路径。"
+        },
+        {
+            "id": 43,
+            "content": "请解释如下命令的执行结果和作用：ifconfig eth1 down",
+            "correct_answer": "- 作用：禁用（关闭）名为 `eth1` 的物理网卡接口。\n- 执行结果：eth1网卡停止网络工作，不再收发数据包，该网卡上配置的IP地址、子网掩码等网络参数暂时失效。"
+        },
+        {
+            "id": 44,
+            "content": "请解释如下命令的执行结果和作用：echo $SHELL",
+            "correct_answer": "- 作用：打印输出当前登录用户所使用的默认Shell程序的路径。\n- 执行结果：终端输出环境变量 `SHELL` 的值，Ubuntu系统默认通常为 /bin/bash 。"
+        }
+    ]
 }
