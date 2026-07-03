@@ -69,12 +69,12 @@
         {
             "id": 14,
             "content": "在/user1目录下创建file1.doc和file2.odt文件",
-            "correct_answer": "```bash\ntouch /user1/file1.doc /user1/file2.odt\n```"
+            "correct_answer": "```bash\ncd /home/user1\ntouch file1.doc file2.odt\n```"
         },
         {
             "id": 15,
             "content": "将file2.odt文件复制到/tmp文件夹",
-            "correct_answer": "```bash\ncp /home/user1/file2.odt /tmp\n```"
+            "correct_answer": "```bash\ncp file2.odt /tmp\n```"
         },
         {
             "id": 16,
