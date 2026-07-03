@@ -113,7 +113,7 @@
         },
         {
             "id": 73,
-            "content": "Linux修用户号的命usermod()",
+            "content": "Linux修改用户名的命令是usermod()",
             "correct_answer": "正确"
         },
         {
