@@ -28,18 +28,18 @@
         },
         {
             "id": 6,
+            "content": "编写Shell脚本，找出10000~99999范围内五角星数，写出脚本与功能说明",
+            "correct_answer": "```bash\n#!/bin/bash\necho \"10000~99999 范围内的五角星数：\"\nfor ((i=10000; i<=99999; i++))\ndo\n    # 分别取出个位、十位、百位、千位、万位\n    ge=$(( i % 10 ))\n    shi=$(( i / 10 % 10 ))\n    bai=$(( i / 100 % 10 ))\n    qian=$(( i / 1000 % 10 ))\n    wan=$(( i / 10000 ))\n    # 计算各位数字的五次方之和\n    sum=$(( ge**5 + shi**5 + bai**5 + qian**5 + wan**5 ))\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```\n功能：找出 **10000~99999 五位数范围**内的所有五角星数（各位数字的 5 次方之和等于数字本身，属于五位自幂数）"
+        },
+        {
+            "id": 7,
             "content": "编写Shell脚本，找出100~999范围内所有三位回文数，写出脚本与功能说明",
             "correct_answer": "```bash\n#!/bin/bash\necho \"100~999 范围内的三位回文数：\"\nfor ((i=100; i<=999; i++))\ndo\n    # 三位回文数：百位数字 = 个位数字\n    bai=$(( i / 100 ))\n    ge=$(( i % 10 ))\n    if [ $bai -eq $ge ]\n    then\n        echo -n \"$i \"\n    fi\ndone\necho \"\"\n```\n功能：找出 **100~999 三位数范围**内的所有回文数（正读和反读完全相同的数字，如 121、131）"
         },
         {
-            "id": 7,
+            "id": 8,
             "content": "编写Shell脚本，找出1000以内全部完美数，写出脚本与功能说明",
             "correct_answer": "```bash\n#!/bin/bash\necho \"1000 以内的完美数：\"\nfor ((i=1; i<=1000; i++))\ndo\n    sum=0\n    # 遍历所有真因数（小于自身且能整除的数）\n    for ((j=1; j<i; j++))\n    do\n        if [ $(( i % j )) -eq 0 ]\n        then\n            sum=$(( sum + j ))\n        fi\n    done\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```\n功能：找出 **1000 以内**的所有完美数（所有真因数之和恰好等于数字本身，如 6、28）"
-        },
-        {
-            "id": 8,
-            "content": "编写Shell脚本，找出10000~99999范围内五角星数，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\necho \"10000~99999 范围内的五角星数：\"\nfor ((i=10000; i<=99999; i++))\ndo\n    # 分别取出个位、十位、百位、千位、万位\n    ge=$(( i % 10 ))\n    shi=$(( i / 10 % 10 ))\n    bai=$(( i / 100 % 10 ))\n    qian=$(( i / 1000 % 10 ))\n    wan=$(( i / 10000 ))\n    # 计算各位数字的五次方之和\n    sum=$(( ge**5 + shi**5 + bai**5 + qian**5 + wan**5 ))\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```\n功能：找出 **10000~99999 五位数范围**内的所有五角星数（各位数字的 5 次方之和等于数字本身，属于五位自幂数）"
         },
         {
             "id": 9,
