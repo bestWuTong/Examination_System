@@ -250,6 +250,17 @@
       background: #e2ecff;
     }
 
+    .nav-btn.selected {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .nav-btn.selected:hover:not(:disabled) {
+      background: var(--primary-strong);
+      border-color: var(--primary-strong);
+    }
+
     .primary-btn {
       background: var(--primary);
       color: #ffffff;
@@ -535,7 +546,8 @@
       display: none !important;
     }
 
-    .import-btn {
+    .import-btn,
+    .export-btn {
       min-height: 42px;
       padding: 9px 14px;
       border-radius: 8px;
@@ -545,24 +557,11 @@
       color: #ffffff;
     }
 
-    .import-btn:hover:not(:disabled) {
+    .import-btn:hover:not(:disabled),
+    .export-btn:hover:not(:disabled) {
       background: var(--success-soft);
       color: var(--success);
       border: 1px solid var(--success);
-    }
-
-    .export-btn {
-      min-height: 42px;
-      padding: 9px 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      white-space: nowrap;
-      background: #7c3aed;
-      color: #ffffff;
-    }
-
-    .export-btn:hover:not(:disabled) {
-      background: #6d28d9;
     }
 
     .result-actions {
@@ -707,6 +706,7 @@
         <div id="feedback" class="feedback idle"></div>
         <div class="question-nav">
           <button id="homeBtn" class="nav-btn" type="button">首页</button>
+          <button id="unknownBtn" class="nav-btn hidden" type="button" aria-pressed="false">不会</button>
           <button id="prevBtn" class="nav-btn" type="button">上一题</button>
           <button id="nextBtn" class="nav-btn" type="button">下一题</button>
         </div>
@@ -737,6 +737,7 @@
       importBtn: document.querySelector("#importBtn"),
       importFileInput: document.querySelector("#importFileInput"),
       homeBtn: document.querySelector("#homeBtn"),
+      unknownBtn: document.querySelector("#unknownBtn"),
       prevBtn: document.querySelector("#prevBtn"),
       nextBtn: document.querySelector("#nextBtn"),
       progressText: document.querySelector("#progressText"),
@@ -766,6 +767,7 @@
       currentIndex: 0,
       selectedAnswers: new Map(),
       results: new Map(),
+      manualErrorQuestionIds: new Set(),
       autoTimer: null,
       isImportedExam: false,
       importedQuestions: []
@@ -1110,6 +1112,7 @@
         state.currentIndex = 0;
         state.selectedAnswers = new Map();
         state.results = new Map();
+        state.manualErrorQuestionIds = new Set();
 
         showView("exam");
         renderQuestion();
@@ -1142,6 +1145,7 @@
       dom.examName.textContent = getBankDisplayName(state.currentBank.file);
       dom.progressText.textContent = `第 ${state.currentIndex + 1} 题 / 共 ${state.questions.length} 题`;
       dom.prevBtn.disabled = state.currentIndex === 0;
+      updateUnknownButton(question, shortAnswer);
       dom.nextBtn.textContent = state.currentIndex === state.questions.length - 1 ? "交卷" : "下一题";
       renderFormattedText(dom.questionTitle, question.content || "未命名题目");
       dom.options.classList.toggle("hidden", !choice);
@@ -1268,6 +1272,27 @@
       submitAnswer([value]);
     }
 
+    function updateUnknownButton(question, shortAnswer = isShortAnswerQuestion(question)) {
+      const selected = shortAnswer && state.manualErrorQuestionIds.has(question.uid);
+      dom.unknownBtn.classList.toggle("hidden", !shortAnswer);
+      dom.unknownBtn.classList.toggle("selected", selected);
+      dom.unknownBtn.setAttribute("aria-pressed", String(selected));
+    }
+
+    function toggleShortAnswerError() {
+      const question = state.questions[state.currentIndex];
+      if (!question || !isShortAnswerQuestion(question)) {
+        return;
+      }
+
+      if (state.manualErrorQuestionIds.has(question.uid)) {
+        state.manualErrorQuestionIds.delete(question.uid);
+      } else {
+        state.manualErrorQuestionIds.add(question.uid);
+      }
+      updateUnknownButton(question, true);
+    }
+
     function handleExamEnter(event) {
       if (event.key !== "Enter" || dom.examView.classList.contains("hidden")) {
         return;
@@ -1339,20 +1364,24 @@
       }
     }
 
+    function isQuestionCorrectForScore(question) {
+      if (isShortAnswerQuestion(question)) {
+        return !state.manualErrorQuestionIds.has(question.uid);
+      }
+
+      const result = state.results.get(question.uid);
+      return Boolean(result && result.correct);
+    }
+
     function finishExam() {
       clearAutoTimer();
-      const gradableQuestions = state.questions.filter(isGradableQuestion);
-      const correctCount = gradableQuestions.reduce((total, question) => {
-        const result = state.results.get(question.uid);
-        return total + (result && result.correct ? 1 : 0);
+      const correctCount = state.questions.reduce((total, question) => {
+        return total + (isQuestionCorrectForScore(question) ? 1 : 0);
       }, 0);
-      const total = gradableQuestions.length;
-      const shortAnswerCount = state.questions.length - total;
+      const total = state.questions.length;
 
       dom.scoreText.textContent = `${correctCount} / ${total}`;
-      dom.scoreSubText.textContent = shortAnswerCount > 0
-        ? `做对了 ${correctCount} 道，共 ${total} 道；${shortAnswerCount} 道简答题不计分`
-        : `做对了 ${correctCount} 道，共 ${total} 道`;
+      dom.scoreSubText.textContent = `做对了 ${correctCount} 道，共 ${total} 道`;
       showView("result");
     }
 
@@ -1487,22 +1516,28 @@
       return `${year}年${month}月${day}日${hours}时${minutes}分${seconds}秒`;
     }
 
+    function buildErrorQuestionData(question) {
+      const originalQuestion = getOriginalQuestion(question);
+      const questionData = {
+        id: question.id,
+        type: getQuestionType(question),
+        content: question.content,
+        correct_answer: question.correctAnswers.length === 1 ? question.correctAnswers[0] : question.correctAnswers
+      };
+      if (originalQuestion && Array.isArray(originalQuestion.options) && originalQuestion.options.length > 0) {
+        questionData.options = originalQuestion.options.map(String);
+      }
+      return questionData;
+    }
+
     function exportErrorQuestions() {
       const errorQuestions = [];
       state.questions.forEach((question) => {
         const result = state.results.get(question.uid);
-        if (isGradableQuestion(question) && result && !result.correct) {
-          const originalQuestion = getOriginalQuestion(question);
-          const questionData = {
-            id: question.id,
-            type: getQuestionType(question),
-            content: question.content,
-            correct_answer: question.correctAnswers.length === 1 ? question.correctAnswers[0] : question.correctAnswers
-          };
-          if (originalQuestion && Array.isArray(originalQuestion.options) && originalQuestion.options.length > 0) {
-            questionData.options = originalQuestion.options.map(String);
-          }
-          errorQuestions.push(questionData);
+        const autoWrong = isGradableQuestion(question) && result && !result.correct;
+        const manualWrong = isShortAnswerQuestion(question) && state.manualErrorQuestionIds.has(question.uid);
+        if (autoWrong || manualWrong) {
+          errorQuestions.push(buildErrorQuestionData(question));
         }
       });
 
@@ -1573,6 +1608,7 @@
       state.currentIndex = 0;
       state.selectedAnswers = new Map();
       state.results = new Map();
+      state.manualErrorQuestionIds = new Set();
 
       showView('exam');
       renderQuestion();
@@ -1582,6 +1618,7 @@
     dom.importBtn.addEventListener("click", importErrorQuestions);
     dom.importFileInput.addEventListener("change", handleFileImport);
     dom.homeBtn.addEventListener("click", goHome);
+    dom.unknownBtn.addEventListener("click", toggleShortAnswerError);
     dom.prevBtn.addEventListener("click", goPrev);
     dom.nextBtn.addEventListener("click", goNext);
     dom.submitMultiBtn.addEventListener("click", submitMultiAnswer);
