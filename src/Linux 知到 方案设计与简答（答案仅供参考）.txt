@@ -3,52 +3,52 @@
     "questions": [
         {
             "id": 1,
-            "content": "简述虚拟机安装Linux的完整步骤",
+            "content": "掌握虚拟机安装Linux的过程和步骤",
             "correct_answer": "1.准备环境：VMware/VirtualBox虚拟机软件、Ubuntu22.04 ISO镜像文件；\n2.新建虚拟机：自定义硬件兼容性，选择稍后安装操作系统，客户机操作系统选Linux-Ubuntu 64位；\n3.配置虚拟机：设置虚拟机名称、存储位置，分配CPU核心、内存≥2G；\n4.创建虚拟磁盘：选择SCSI磁盘，磁盘存储为单个文件，设置磁盘容量≥20G；\n5.挂载ISO镜像：虚拟机设置→CD/DVD，加载Ubuntu镜像；\n6.启动虚拟机进入安装界面：选择语言中文，选择安装类型，设置时区、用户名、密码；\n7.等待系统安装完成，重启虚拟机，移除ISO镜像，登录系统完成初始化。"
         },
         {
             "id": 2,
-            "content": "简述Linux中使用Apache2或Tomcat部署Web服务的过程",
+            "content": "掌握Linux中使用Apache2或Tomcat部署Web服务的过程",
             "correct_answer": "Apache2：\n1.安装服务：sudo apt install apache2\n2.管理服务：启动sudo systemctl start apache2，开机自启sudo systemctl enable apache2，查看状态systemctl status apache2\n3.部署网页：网页文件放入/var/www/html，访问http://本机IP测试\n4.防火墙放行80端口：sudo ufw allow 80/tcp\nTomcat：\n1.安装JDK：sudo apt install openjdk-11-jdk\n2.下载解压Tomcat压缩包到/opt；\n3.赋予执行权限，创建systemd服务单元文件；\n4.启动服务，放行8080端口；\n5.Web项目war包放入webapps目录，访问IP:8080。"
         },
         {
             "id": 3,
-            "content": "简述Linux三种软件包安装方式及对应命令",
+            "content": "掌握如何安装软件包",
             "correct_answer": "1.apt在线安装\nsudo apt install 软件名\n2.dpkg本地deb包安装\nsudo dpkg -i xxx.deb\n3.源码编译安装\n解压源码包→进入目录→./configure→make→sudo make install"
         },
         {
             "id": 4,
-            "content": "简述Linux的用户分类、用户组概念与核心管理命令",
+            "content": "掌握Linux的用户和组策略划分",
             "correct_answer": "1.用户分类：\nroot超级管理员（UID=0）；\n系统服务用户（UID1-999，无登录shell，运行服务）；\n普通登录用户（UID≥1000，日常使用者）。\n2.用户组概念：\n主组：用户创建时默认同名组，文件默认归属；\n附加组：附属权限组，使用usermod -aG追加。\n3.核心管理命令：\n创建用户：sudo useradd 用户名，设置密码sudo passwd 用户名\n创建组：sudo groupadd 组名\n用户加入附加组：sudo usermod -aG 组名 用户名\n删除用户：sudo userdel -r 用户名（-r同步删除家目录）\n权限策略：通过用户、组区分文件读写执行权限，遵循最小权限原则分配附属组。"
         },
         {
             "id": 5,
-            "content": "简述Linux文件系统各核心目录作用",
+            "content": "掌握Linux文件系统层次结构",
             "correct_answer": "/：根目录，所有目录起点\n/home：普通用户家目录，/home/user1为user1家目录\n/root：root管理员专属家目录\n/etc：系统所有配置文件目录\n/bin：系统基础可执行命令（所有用户可用）\n/sbin：管理员系统管理命令\n/usr：系统软件安装目录，/usr/bin存放用户程序\n/var：动态可变文件（日志/缓存/网站数据）\n/tmp：临时文件目录，重启自动清空\n/mnt、/media：磁盘、U盘临时挂载目录\n/dev：硬件设备文件（硬盘/dev/sda、分区/dev/sdb1）"
         },
         {
             "id": 6,
-            "content": "简述Linux安装新立得、微信、腾讯会议的过程",
+            "content": "掌握Linux中安装微信、腾讯会议、新立得软件包管理工具的过程",
             "correct_answer": "一、新立得Synaptic图形包管理器\nsudo apt install synaptic\n终端输入sudo synaptic打开图形界面，可视化搜索、安装、卸载软件。\n二、微信、腾讯会议（deb离线包）\n1.官网下载对应Ubuntu架构.deb安装包；\n2.终端进入deb文件所在目录，执行sudo dpkg -i wechat.deb；\n3.在应用菜单打开软件使用。"
         },
         {
             "id": 7,
-            "content": "简述Linux部署vsftpd FTP服务完整流程",
+            "content": "掌握Linux中部署FTP服务的过程",
             "correct_answer": "1.安装服务：sudo apt install vsftpd\n2.备份配置文件：sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.bak\n3.修改配置文件：sudo vim /etc/vsftpd.conf，开启本地用户登录、开启上传写入权限；\n4.重启服务生效：sudo systemctl restart vsftpd\n5.防火墙放行21端口：sudo ufw allow 21/tcp\n6.创建FTP专用用户，指定共享目录，客户端使用IP连接测试上传下载。"
         },
         {
             "id": 8,
-            "content": "简述Ubuntu系统管理、服务管理工具及使用方法",
+            "content": "掌握Ubuntu的系统管理和服务管理工具使用",
             "correct_answer": "一、系统管理工具\n1.systemctl：系统服务启停、自启管理（核心）\n启动：sudo systemctl start 服务名\n开机自启：sudo systemctl enable 服务名\n查看运行状态：systemctl status 服务名\n重启/停止：restart / stop\n2.系统信息查询\nip addr：查看网卡IP\ndf -h：磁盘分区使用\nlsblk / fdisk -l：查看硬件分区\nss -tulnp：查看端口占用\n3.用户管理：useradd/usermod/groupadd/passwd\n4.软件管理：apt / synaptic / dpkg\n二、服务管理核心操作\n所有后台服务统一由systemd管控，命令格式一致；\n查看全部服务列表：systemctl list-unit-files --type=service。"
         },
         {
             "id": 9,
-            "content": "简述Shell脚本完整编写流程",
+            "content": "掌握Shel脚本的编写过程",
             "correct_answer": "1.创建脚本文件：touch test.sh\n2.编辑脚本文件：vi test.sh\n3.脚本首行声明解释器：#!/bin/bash（必须第一行）\n4.编写业务逻辑：变量、判断if、循环for、读取输入read、输出echo；\n5.赋予脚本执行权限：sudo chmod +x test.sh\n6.运行脚本：bash test.sh"
         },
         {
             "id": 10,
-            "content": "简述Linux常用网络管理工具及功能",
+            "content": "掌握Linux系统下常用的网络管理工具",
             "correct_answer": "1.ip工具（原生首选）\nip addr：查看网卡IP地址\nip route：查看/添加路由、默认网关\n2.ss端口查看（替代netstat）\nsudo ss -tulnp：查看监听端口、占用进程\n3.连通性测试\nping IP：测试网络连通\ntraceroute IP：追踪路由跳转路径\n4.防火墙\nufw：Ubuntu防火墙工具，放行/关闭端口\n5.域名解析\nnslookup / dig：查询域名对应IP\n6.进程网络查看\nsudo lsof -i :端口号：查看指定端口占用程序"
         }
     ]
