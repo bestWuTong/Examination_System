@@ -84,32 +84,32 @@
         {
             "id": 17,
             "content": "在用户主目录中创建一个名为yestoday的文件，并在文件内容中添加你今天的考试科目名称",
-            "correct_answer": "```bash\necho \"Linux操作系统\" > ~/yestoday\n```"
+            "correct_answer": "```bash\ncd ~\necho \"Linux操作系统\" > yestoday\n```"
         },
         {
             "id": 18,
             "content": "创建一个today的文件，要求文件内容与yestoday内容相同",
-            "correct_answer": "```bash\ncp ~/yestoday ~/today\n```"
+            "correct_answer": "```bash\ncp yestoday today\n```"
         },
         {
             "id": 19,
-            "content": "将两个文件合并成名为justnow的文件",
-            "correct_answer": "```bash\ncat ~/yestoday ~/today > ~/justnow\n```"
+            "content": "将yestoday和today两个文件合并成名为justnow的文件",
+            "correct_answer": "```bash\ncat yestoday today > justnow\n```"
         },
         {
             "id": 20,
             "content": "查看最后访问系统的用户并将结果追加存储到名为justnow的文件中",
-            "correct_answer": "```bash\nlast | head -1 >> ~/justnow\n```"
+            "correct_answer": "```bash\nlast | head -1 >> justnow\n```"
         },
         {
             "id": 21,
             "content": "以用户wang登录系统并创建test目录",
-            "correct_answer": "```bash\nsu - wang\nmkdir ~/test\n```"
+            "correct_answer": "```bash\nsu - wang\nmkdir test\n```"
         },
         {
             "id": 22,
             "content": "在test目录中新建目录wang1、wang2、wang3和文件wangfei",
-            "correct_answer": "```bash\ncd ~/test\nmkdir wang1 wang2 wang3\ntouch wangfei\n```"
+            "correct_answer": "```bash\ncd test\nmkdir wang1 wang2 wang3\ntouch wangfei\n```"
         },
         {
             "id": 23,
@@ -174,7 +174,7 @@
         {
             "id": 35,
             "content": "查看本机网卡的IP地址",
-            "correct_answer": "```bash\n# 系统原生无需额外安装\nip addr show\n# 需要安装net-tools工具包\nifconfig\n```"
+            "correct_answer": "```bash\n# 系统原生无需额外安装\nip addr\n# 需要安装net-tools工具包\nifconfig\n```"
         },
         {
             "id": 36,
