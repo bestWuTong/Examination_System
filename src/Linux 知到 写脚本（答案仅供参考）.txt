@@ -3,53 +3,43 @@
     "questions": [
         {
             "id": 1,
-            "content": "编写Shell脚本，实现输入正整数上限，输出1到该数中所有奇数、偶数并分别求和，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\nread -p \"请输入正整数上限: \" n\nsum_odd=0\nsum_even=0\necho \"1~$n 范围内的奇数：\"\nfor((i=1; i<=n; i++))\ndo\n    if (( i%2 == 1 ))\n    then\n        echo -n \"$i \"\n        sum_odd=$((sum_odd + i))\n    fi\ndone\necho -e \"\\n奇数求和结果：$sum_odd\"\necho \"1~$n 范围内的偶数：\"\nfor((i=1; i<=n; i++))\ndo\n    if (( i%2 == 0 ))\n    then\n        echo -n \"$i \"\n        sum_even=$((sum_even + i))\n    fi\ndone\necho -e \"\\n偶数求和结果：$sum_even\"\n```\n功能：输入一个正整数上限，统计1到该数范围内的所有奇数、偶数，分别输出并计算求和。"
+            "content": "如何找奇数、偶数并求和输出",
+            "correct_answer": "```bash\n#!/bin/bash\nread -p \"请输入正整数上限: \" n\nsum_odd=0\nsum_even=0\necho \"1~$n 范围内的奇数：\"\nfor((i=1; i<=n; i++))\ndo\n    if (( i%2 == 1 ))\n    then\n        echo -n \"$i \"\n        sum_odd=$((sum_odd + i))\n    fi\ndone\necho -e \"\\n奇数求和结果：$sum_odd\"\necho \"1~$n 范围内的偶数：\"\nfor((i=1; i<=n; i++))\ndo\n    if (( i%2 == 0 ))\n    then\n        echo -n \"$i \"\n        sum_even=$((sum_even + i))\n    fi\ndone\necho -e \"\\n偶数求和结果：$sum_even\"\n```功能：输入一个正整数上限，统计1到该数范围内的所有奇数、偶数，分别输出并计算求和。"
         },
         {
             "id": 2,
-            "content": "编写Shell脚本，输出2~1000范围内全部素数，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\necho \"2~1000范围内的素数如下：\"\nfor i in {2..1000}\ndo\n    is_sushu=1\n    for j in `seq 2 $((i/2))`\n    do\n        if (( $((i%j)) == 0 ))\n        then\n            is_sushu=0\n            break\n        fi\n    done\n    if (( is_sushu == 1 ))\n    then\n        echo -n \"$i \"\n    fi\ndone\necho \"\"\n```\n功能：输出 2~1000 范围内的所有素数。"
+            "content": "如何找素数并输出",
+            "correct_answer": "```bash\n#!/bin/bash\necho \"2~1000范围内的素数如下：\"\nfor i in {2..1000}\ndo\n    is_sushu=1\n    for j in `seq 2 $((i/2))`\n    do\n        if (( $((i%j)) == 0 ))\n        then\n            is_sushu=0\n            break\n        fi\n    done\n    if (( is_sushu == 1 ))\n    then\n        echo -n \"$i \"\n    fi\ndone\necho \"\"\n```功能：输出 2~1000 范围内的所有素数。"
         },
         {
             "id": 3,
-            "content": "编写Shell脚本，列出/var/log下日志文件名并统计日志文件总数，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\nlog_dir=\"/var/log\"\necho \"系统日志目录 $log_dir 下的文件名称：\"\nls -p $log_dir | grep -v /\ncount=$(ls -p $log_dir | grep -v / | wc -l)\necho \"日志文件总数量：$count\"\n```\n功能：列出 Ubuntu 系统默认日志目录 `/var/log` 下的所有日志文件名，并统计文件总数量。"
+            "content": "输出系统日志文件名称和数量",
+            "correct_answer": "```bash\n#!/bin/bash\nlog_dir=\"/var/log\"\necho \"系统日志目录 $log_dir 下的文件名称：\"\nls -p $log_dir | grep -v /\ncount=$(ls -p $log_dir | grep -v / | wc -l)\necho \"日志文件总数量：$count\"\n```功能：列出 Ubuntu 系统默认日志目录 `/var/log` 下的所有日志文件名，并统计文件总数量。"
         },
         {
-            "id": 4,
-            "content": "编写Shell脚本，找出100~999范围内所有水仙花数，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\necho \"100~999 范围内的水仙花数：\"\nfor ((i=100; i<=999; i++))\ndo\n    # 分别取出个位、十位、百位\n    ge=$(( i % 10 ))\n    shi=$(( i / 10 % 10 ))\n    bai=$(( i / 100 ))\n    # 计算三次方和\n    sum=$(( ge**3 + shi**3 + bai**3 ))\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```\n功能：找出 **100~999 三位数范围**内的所有水仙花数（各位数字的 3 次方之和等于数字本身）"
+            "id": 4.1,
+            "content": "找出特定范围的特殊数，比如回文数 121",
+            "correct_answer": "```bash\n#!/bin/bash\necho \"100~999 范围内的三位回文数：\"\nfor ((i=100; i<=999; i++))\ndo\n    # 三位回文数：百位数字 = 个位数字\n    bai=$(( i / 100 ))\n    ge=$(( i % 10 ))\n    if [ $bai -eq $ge ]\n    then\n        echo -n \"$i \"\n    fi\ndone\necho \"\"\n```功能：找出 **100~999 三位数范围**内的所有回文数（正读和反读完全相同的数字，如 121、131）"
+        },
+        {
+            "id": 4.2,
+            "content": "找出特定范围的特殊数，完美数",
+            "correct_answer": "```bash\n#!/bin/bash\necho \"1000 以内的完美数：\"\nfor ((i=1; i<=1000; i++))\ndo\n    sum=0\n    # 遍历所有真因数（小于自身且能整除的数）\n    for ((j=1; j<i; j++))\n    do\n        if [ $(( i % j )) -eq 0 ]\n        then\n            sum=$(( sum + j ))\n        fi\n    done\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```功能：找出 **1000 以内**的所有完美数（所有真因数之和恰好等于数字本身，如 6、28）"
+        },
+        {
+            "id": 4.3,
+            "content": "找出特定范围的特殊数，水仙花数、四叶玫瑰数、五角星数等",
+            "correct_answer": "水仙花数:\n```bash\n#!/bin/bash\necho \"100~999 范围内的水仙花数：\"\nfor ((i=100; i<=999; i++))\ndo\n    # 分别取出个位、十位、百位\n    ge=$(( i % 10 ))\n    shi=$(( i / 10 % 10 ))\n    bai=$(( i / 100 ))\n    # 计算三次方和\n    sum=$(( ge**3 + shi**3 + bai**3 ))\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```功能：找出 **100~999 三位数范围**内的所有水仙花数（各位数字的 3 次方之和等于数字本身）\n四叶玫瑰数:\n```bash\n#!/bin/bash\necho \"1000~9999 范围内的四叶玫瑰数：\"\nfor ((i=1000; i<=9999; i++))\ndo\n    # 分别取出个位、十位、百位、千位\n    ge=$(( i % 10 ))\n    shi=$(( i / 10 % 10 ))\n    bai=$(( i / 100 % 10 ))\n    qian=$(( i / 1000 ))\n    # 计算四次方和\n    sum=$(( ge**4 + shi**4 + bai**4 + qian**4 ))\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```功能：找出 **1000~9999 四位数范围**内的所有四叶玫瑰数（各位数字的 4 次方之和等于数字本身）\n五角星数:\n```bash\n#!/bin/bash\necho \"10000~99999 范围内的五角星数：\"\nfor ((i=10000; i<=99999; i++))\ndo\n    # 分别取出个位、十位、百位、千位、万位\n    ge=$(( i % 10 ))\n    shi=$(( i / 10 % 10 ))\n    bai=$(( i / 100 % 10 ))\n    qian=$(( i / 1000 % 10 ))\n    wan=$(( i / 10000 ))\n    # 计算各位数字的五次方之和\n    sum=$(( ge**5 + shi**5 + bai**5 + qian**5 + wan**5 ))\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```功能：找出 **10000~99999 五位数范围**内的所有五角星数（各位数字的 5 次方之和等于数字本身，属于五位自幂数）"
         },
         {
             "id": 5,
-            "content": "编写Shell脚本，找出1000~9999范围内所有四叶玫瑰数，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\necho \"1000~9999 范围内的四叶玫瑰数：\"\nfor ((i=1000; i<=9999; i++))\ndo\n    # 分别取出个位、十位、百位、千位\n    ge=$(( i % 10 ))\n    shi=$(( i / 10 % 10 ))\n    bai=$(( i / 100 % 10 ))\n    qian=$(( i / 1000 ))\n    # 计算四次方和\n    sum=$(( ge**4 + shi**4 + bai**4 + qian**4 ))\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```\n功能：找出 **1000~9999 四位数范围**内的所有四叶玫瑰数（各位数字的 4 次方之和等于数字本身）"
+            "content": "批量创建用户",
+            "correct_answer": "```bash\n#!/bin/bash\nfor i in {1..10}\ndo\n    username=\"user$i\"\n    useradd -m $username\n    echo \"$username:123456\" | chpasswd\n    echo \"用户 $username 创建完成\"\ndone\necho \"批量用户创建完毕\"\n```功能：批量创建 `user1` ~ `user10` 共10个系统用户，统一设置初始密码为 `123456`。\n注意：该脚本需要使用 `sudo` 以root权限执行。"
         },
         {
             "id": 6,
-            "content": "编写Shell脚本，找出10000~99999范围内五角星数，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\necho \"10000~99999 范围内的五角星数：\"\nfor ((i=10000; i<=99999; i++))\ndo\n    # 分别取出个位、十位、百位、千位、万位\n    ge=$(( i % 10 ))\n    shi=$(( i / 10 % 10 ))\n    bai=$(( i / 100 % 10 ))\n    qian=$(( i / 1000 % 10 ))\n    wan=$(( i / 10000 ))\n    # 计算各位数字的五次方之和\n    sum=$(( ge**5 + shi**5 + bai**5 + qian**5 + wan**5 ))\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```\n功能：找出 **10000~99999 五位数范围**内的所有五角星数（各位数字的 5 次方之和等于数字本身，属于五位自幂数）"
-        },
-        {
-            "id": 7,
-            "content": "编写Shell脚本，找出100~999范围内所有三位回文数，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\necho \"100~999 范围内的三位回文数：\"\nfor ((i=100; i<=999; i++))\ndo\n    # 三位回文数：百位数字 = 个位数字\n    bai=$(( i / 100 ))\n    ge=$(( i % 10 ))\n    if [ $bai -eq $ge ]\n    then\n        echo -n \"$i \"\n    fi\ndone\necho \"\"\n```\n功能：找出 **100~999 三位数范围**内的所有回文数（正读和反读完全相同的数字，如 121、131）"
-        },
-        {
-            "id": 8,
-            "content": "编写Shell脚本，找出1000以内全部完美数，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\necho \"1000 以内的完美数：\"\nfor ((i=1; i<=1000; i++))\ndo\n    sum=0\n    # 遍历所有真因数（小于自身且能整除的数）\n    for ((j=1; j<i; j++))\n    do\n        if [ $(( i % j )) -eq 0 ]\n        then\n            sum=$(( sum + j ))\n        fi\n    done\n    if [ $sum -eq $i ]\n    then\n        echo \"$i\"\n    fi\ndone\n```\n功能：找出 **1000 以内**的所有完美数（所有真因数之和恰好等于数字本身，如 6、28）"
-        },
-        {
-            "id": 9,
-            "content": "编写Shell脚本，批量创建user1~user10用户，密码统一为123456，写出脚本、功能与注意事项",
-            "correct_answer": "```bash\n#!/bin/bash\nfor i in {1..10}\ndo\n    username=\"user$i\"\n    useradd -m $username\n    echo \"$username:123456\" | chpasswd\n    echo \"用户 $username 创建完成\"\ndone\necho \"批量用户创建完毕\"\n```\n功能：批量创建 `user1` ~ `user10` 共10个系统用户，统一设置初始密码为 `123456`。\n注意：该脚本需要使用 `sudo` 以root权限执行。"
-        },
-        {
-            "id": 10,
-            "content": "编写Shell脚本，计算并输出1~10每个数字的阶乘，写出脚本与功能说明",
-            "correct_answer": "```bash\n#!/bin/bash\nfor((n=1; n<=10; n++))\ndo\n    result=1\n    for((i=2; i<=n; i++))\n    do\n        result=$((result*i))\n    done\n    echo \"$n 的阶乘是 $result\"\ndone\n```\n功能：遍历计算并输出 1~10 每个数字的阶乘结果。"
+            "content": "求10以内数的阶乘。",
+            "correct_answer": "```bash\n#!/bin/bash\nfor((n=1; n<=10; n++))\ndo\n    result=1\n    for((i=2; i<=n; i++))\n    do\n        result=$((result*i))\n    done\n    echo \"$n 的阶乘是 $result\"\ndone\n```功能：遍历计算并输出 1~10 每个数字的阶乘结果。"
         }
     ]
 }
