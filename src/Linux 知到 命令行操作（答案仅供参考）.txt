@@ -54,7 +54,7 @@
         {
             "id": 11,
             "content": "user1登录后，查看当前所在工作目录的命令是什么，执行后会输出什么内容",
-            "correct_answer": "命令：\n```bash\npwd\n```\n执行后输出/home/user1"
+            "correct_answer": "命令：\n```bash\npwd\n```执行后输出/home/user1"
         },
         {
             "id": 12,
