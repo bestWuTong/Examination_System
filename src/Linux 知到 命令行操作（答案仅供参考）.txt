@@ -74,7 +74,7 @@
         {
             "id": 15,
             "content": "写出将/user1/file2.odt复制到/tmp文件夹的命令",
-            "correct_answer": "```bash\ncp /home/user1/file2.odt /tmp/\n```"
+            "correct_answer": "```bash\ncp /home/user1/file2.odt /tmp\n```"
         },
         {
             "id": 16,
