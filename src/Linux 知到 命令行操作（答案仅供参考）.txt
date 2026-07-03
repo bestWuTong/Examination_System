@@ -9,7 +9,7 @@
         {
             "id": 2,
             "content": "写出两条查看系统运行进程及资源占用情况的Linux命令，并分别说明用途",
-            "correct_answer": "```bash\n# 动态实时查看资源占用\ntop\n# 静态查看所有进程详情\nps aux\n```\n1. top：动态实时查看进程资源占用；\n2. ps aux：静态查看所有进程详情"
+            "correct_answer": "```bash\n# 动态实时查看资源占用\ntop\n# 静态查看所有进程详情\nps aux\n```"
         },
         {
             "id": 3,
@@ -29,7 +29,7 @@
         {
             "id": 6,
             "content": "写出为用户liu设置密码liu8888的交互式命令与非交互一行命令",
-            "correct_answer": "```bash\n# 交互式设置\nsudo passwd liu\n# 执行后输入两次密码 liu8888 即可\n# 非交互一行命令\necho \"liu:liu8888\" | sudo chpasswd\n```"
+            "correct_answer": "```bash\n# 交互式命令，执行后输入两次密码 liu8888 即可\nsudo passwd liu\n# 非交互一行命令\necho \"liu:liu8888\" | sudo chpasswd\n```"
         },
         {
             "id": 7,
@@ -54,17 +54,17 @@
         {
             "id": 11,
             "content": "user1登录后，查看当前所在工作目录的命令是什么，执行后会输出什么内容",
-            "correct_answer": "命令：\n```bash\npwd\n```\n执行后输出当前用户所在的工作目录路径"
+            "correct_answer": "命令：\n```bash\npwd\n```\n执行后输出/home/user1"
         },
         {
             "id": 12,
             "content": "写出将/home目录下所有文件打包压缩为home.tar.gz的命令",
-            "correct_answer": "```bash\ntar -zcvf home.tar.gz /home/*\n```"
+            "correct_answer": "```bash\nsudo tar -zcvf home.tar.gz /home\n```"
         },
         {
             "id": 13,
             "content": "写出两条查看压缩包home.tar.gz大小、磁盘占用的命令，并区分作用",
-            "correct_answer": "```bash\n# 查看文件占用磁盘大小\ndu -h home.tar.gz\n# 查看文件本身大小\nls -lh home.tar.gz\n```\ndu -h home.tar.gz：查看文件磁盘占用空间；\nls -lh home.tar.gz：查看文件本身大小"
+            "correct_answer": "```bash\n# 查看文件本身大小\nls -lh home.tar.gz\n# 查看文件占用磁盘大小，受文件系统块对齐影响，数值可能略大于 ls 显示的文件大小\ndu -h home.tar.gz\n```"
         },
         {
             "id": 14,
@@ -74,7 +74,7 @@
         {
             "id": 15,
             "content": "写出将/user1/file2.odt复制到/tmp文件夹的命令",
-            "correct_answer": "```bash\ncp /user1/file2.odt /tmp/\n```"
+            "correct_answer": "```bash\ncp /home/user1/file2.odt /tmp/\n```"
         },
         {
             "id": 16,
@@ -104,7 +104,7 @@
         {
             "id": 21,
             "content": "以用户wang登录，在家目录创建test目录，写出命令",
-            "correct_answer": "```bash\nsu - wang -c \"mkdir ~/test\"\n```"
+            "correct_answer": "```bash\nsu - wang\nmkdir ~/test\n```"
         },
         {
             "id": 22,
@@ -114,7 +114,7 @@
         {
             "id": 23,
             "content": "将/test目录全部内容打包压缩至/tmp/test.tar.gz，写出命令",
-            "correct_answer": "```bash\ntar -zcvf /tmp/test.tar.gz /test/*\n```"
+            "correct_answer": "```bash\ntar -zcvf /tmp/test.tar.gz /test\n```"
         },
         {
             "id": 24,
@@ -129,7 +129,7 @@
         {
             "id": 26,
             "content": "列出系统当前路由信息的命令",
-            "correct_answer": "```bash\nip route show\n```"
+            "correct_answer": "```bash\nip route\n```"
         },
         {
             "id": 27,
@@ -149,7 +149,7 @@
         {
             "id": 30,
             "content": "全盘查找文件t1，并将找到的文件复制到用户主目录，写出命令",
-            "correct_answer": "```bash\nsudo find / -name \"t1\" -exec cp {} ~/ \\;\n```"
+            "correct_answer": "```bash\nsudo find / -name \"t1\" -exec cp {} ~ \\;\n```"
         },
         {
             "id": 31,
@@ -159,7 +159,7 @@
         {
             "id": 32,
             "content": "查看本机端口占用状态的命令",
-            "correct_answer": "```bash\nss -tulnp\n```"
+            "correct_answer": "```bash\nsudo ss -tulnp\n```"
         },
         {
             "id": 33,
@@ -174,17 +174,17 @@
         {
             "id": 35,
             "content": "查看本机网卡IP地址的两条命令，分别说明使用条件",
-            "correct_answer": "```bash\nip addr show\n# 传统命令：ifconfig（需安装net-tools）\n```\n1. ip addr show：系统原生无需额外安装；\n2. ifconfig：需要安装net-tools工具包"
+            "correct_answer": "```bash\n# 系统原生无需额外安装\nip addr show\n# 需要安装net-tools工具包\nifconfig\n```"
         },
         {
             "id": 36,
             "content": "仅查看系统TCP端口服务状态的命令",
-            "correct_answer": "```bash\nss -tnlp\n```"
+            "correct_answer": "```bash\nsudo ss -tlnp\n```"
         },
         {
             "id": 37,
             "content": "查看Linux系统磁盘分区的两条命令，区分权限要求",
-            "correct_answer": "```bash\nlsblk\n# 查看详细分区表（需root）\nsudo fdisk -l\n```\nlsblk：普通用户可执行；\nsudo fdisk -l：需要root权限，查看详细分区表"
+            "correct_answer": "```bash\n# 普通用户可执行\nlsblk\n# 需要root权限，查看详细分区表\nsudo fdisk -l\n```"
         },
         {
             "id": 38,
@@ -204,7 +204,7 @@
         {
             "id": 41,
             "content": "解释命令 `systemctl start sshd` 的作用与执行结果",
-            "correct_answer": "- 作用：通过systemd服务管理器启动SSH服务（sshd守护进程）。\n- 执行结果：SSH服务被启动，本机开放22端口，允许其他主机通过SSH协议远程登录连接到当前系统；无报错则执行成功，可通过 ```systemctl status sshd``` 确认运行状态。"
+            "correct_answer": "- 作用：通过systemd服务管理器启动SSH服务（sshd守护进程）。\n- 执行结果：SSH服务被启动，本机开放22端口，允许其他主机通过SSH协议远程登录连接到当前系统。"
         },
         {
             "id": 42,
@@ -214,12 +214,12 @@
         {
             "id": 43,
             "content": "解释命令 `ifconfig eth1 down` 的作用与执行结果",
-            "correct_answer": "- 作用：禁用（关闭）名为 `eth1` 的物理网卡接口。\n- 执行结果：eth1网卡停止网络工作，不再收发数据包，该网卡上配置的IP地址、子网掩码等网络参数暂时失效；需 ```ifconfig eth1 up``` 可重新启用。"
+            "correct_answer": "- 作用：禁用（关闭）名为 `eth1` 的物理网卡接口。\n- 执行结果：eth1网卡停止网络工作，不再收发数据包，该网卡上配置的IP地址、子网掩码等网络参数暂时失效。"
         },
         {
             "id": 44,
             "content": "解释命令 `echo $SHELL` 的作用与执行结果",
-            "correct_answer": "- 作用：打印输出当前登录用户所使用的默认Shell程序的路径。\n- 执行结果：终端输出环境变量 `SHELL` 的值，Ubuntu系统默认通常为 ```/bin/bash```。"
+            "correct_answer": "- 作用：打印输出当前登录用户所使用的默认Shell程序的路径。\n- 执行结果：终端输出环境变量 `SHELL` 的值，Ubuntu系统默认通常为 /bin/bash 。"
         }
     ]
 }
