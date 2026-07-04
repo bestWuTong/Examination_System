@@ -9,7 +9,7 @@
         {
             "id": 2,
             "content": "如何找素数并输出",
-            "correct_answer": "```bash\n#!/bin/bash\necho \"2~1000范围内的素数如下：\"\nfor i in {2..1000}\ndo\n    is_sushu=1\n    for j in `seq 2 $((i/2))`\n    do\n        if (( $((i%j)) == 0 ))\n        then\n            is_sushu=0\n            break\n        fi\n    done\n    if (( is_sushu == 1 ))\n    then\n        echo -n \"$i \"\n    fi\ndone\necho \"\"\n```功能：输出 2~1000 范围内的所有素数。"
+            "correct_answer": "```bash\n#!/bin/bash\necho \"2~1000范围内的素数如下：\"\nfor i in {2..1000}\ndo\n    is_sushu=1\n    for j in `seq 2 $((i/2))`\n    do\n        if (( $((i%j)) == 0 ))\n        then\n            is_sushu=0\n            break\n        fi\n    done\n    if (( is_sushu == 1 ))\n    then\n        echo -n \"$i \"\n    fi\ndone\necho \"\"\n```功能：输出 2~1000 范围内的所有素数。\n```bash\n#!/bin/bash\nfor (( num=2; num<=1000; num++ ))\ndo\n    sushu=1\n    for (( i=2; i < num; i++ ))\n    do\n        if (( num % i == 0 ))\n        then\n            sushu=0\n            break\n        fi\n    done\n    if (( sushu == 1 ))\n    then\n        echo "$num"\n    fi\ndone\n```"
         },
         {
             "id": 3,
