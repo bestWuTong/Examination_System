@@ -1,0 +1,212 @@
+{
+  "type": "单选",
+  "questions": [
+    {
+      "id": 1,
+      "content": "不可对视图执行的操作有",
+      "options": [
+        "Select",
+        "update",
+        "insert",
+        "create index"
+      ],
+      "correct_answer": "create index"
+    },
+    {
+      "id": 2,
+      "content": "在关系模式R(X,Y,Z)中，已知函数依赖集为{XY→Z,Z→Y}，则该模式的候选键是：",
+      "options": [
+        "XY",
+        "XZ",
+        "YZ",
+        "XYZ"
+      ],
+      "correct_answer": "XY"
+    },
+    {
+      "id": 3,
+      "content": "以下哪种情况属于关系模式的插入异常？",
+      "options": [
+        "删除数据时丢失信息",
+        "插入新数据时无法插入部分信息",
+        "数据冗余导致存储空间浪费",
+        "更新数据时不一致"
+      ],
+      "correct_answer": "插入新数据时无法插入部分信息"
+    },
+    {
+      "id": 4,
+      "content": "在数据库db_school的表tb_student中创建一个触发器tb_student_update_trigger，用于每次更新表tb_student时将该表中nation列的值设置为native列的值。",
+      "options": [
+        "更新之前触发（before update）",
+        "更新之后触发（after update）"
+      ],
+      "correct_answer": "更新之前触发（before update）"
+    },
+    {
+      "id": 5,
+      "content": "以下哪种事件不能触发数据库触发器？",
+      "options": [
+        "INSERT",
+        "UPDATE",
+        "SELECT",
+        "DELETE"
+      ],
+      "correct_answer": "SELECT"
+    },
+    {
+      "id": 6,
+      "content": "关于BEFORE和AFTER触发器的区别，下列说法正确的是？",
+      "options": [
+        "BEFORE触发器在事件执行后触发，AFTER在执行前触发",
+        "BEFORE触发器可以修改触发事件中的数据，AFTER不能",
+        "AFTER触发器不能访问触发事件产生的新数据",
+        "两者触发时机相同，只是作用域不同"
+      ],
+      "correct_answer": "BEFORE触发器可以修改触发事件中的数据，AFTER不能"
+    },
+    {
+      "id": 7,
+      "content": "在MySQL中，创建触发器时使用的关键字是？",
+      "options": [
+        "CREATE PROCEDURE",
+        "CREATE TRIGGER",
+        "CREATE FUNCTION",
+        "CREATE VIEW"
+      ],
+      "correct_answer": "CREATE TRIGGER"
+    },
+    {
+      "id": 8,
+      "content": "在DELETE触发事件中，触发器可以使用哪个关键字引用被删除的记录？",
+      "options": [
+        "NEW",
+        "OLD",
+        "BOTH",
+        "NONE"
+      ],
+      "correct_answer": "OLD"
+    },
+    {
+      "id": 9,
+      "content": "触发器不能用于以下哪个场景？",
+      "options": [
+        "自动记录数据修改日志",
+        "强制复杂的数据完整性约束",
+        "直接响应用户的查询请求",
+        "实现数据的级联更新"
+      ],
+      "correct_answer": "直接响应用户的查询请求"
+    },
+    {
+      "id": 10,
+      "content": "以下关于触发器的说法错误的是？",
+      "options": [
+        "触发器是一种特殊的存储过程",
+        "某些数据库支持触发器的嵌套调用",
+        "触发器中可以使用SELECT语句查询数据",
+        "触发器可以被手动执行调用"
+      ],
+      "correct_answer": "触发器可以被手动执行调用"
+    },
+    {
+      "id": 11,
+      "content": "数据库需求分析阶段的主要输出文档是？",
+      "options": [
+        "概念模型图",
+        "需求规格说明书",
+        "关系模式表",
+        "索引设计方案"
+      ],
+      "correct_answer": "需求规格说明书"
+    },
+    {
+      "id": 12,
+      "content": "E-R模型是一种典型的？",
+      "options": [
+        "物理数据模型",
+        "概念数据模型",
+        "逻辑数据模型",
+        "存储数据模型"
+      ],
+      "correct_answer": "概念数据模型"
+    },
+    {
+      "id": 13,
+      "content": "数据库设计的正确流程顺序是？",
+      "options": [
+        "需求分析→概念设计→逻辑设计→物理设计",
+        "概念设计→需求分析→逻辑设计→物理设计",
+        "物理设计→逻辑设计→概念设计→需求分析",
+        "需求分析→物理设计→逻辑设计→概念设计"
+      ],
+      "correct_answer": "需求分析→概念设计→逻辑设计→物理设计"
+    },
+    {
+      "id": 14,
+      "content": "在关系代数中，对一个关系做投影操作后，新关系的元组个数____原来关系的元组个数。",
+      "options": [
+        "等于",
+        "小于或等于",
+        "小于",
+        "大于"
+      ],
+      "correct_answer": "小于或等于"
+    },
+    {
+      "id": 15,
+      "content": "数据库中的安全性是指保护数据库以防止不合法使用所造成的数据泄露、更改和 ( )。",
+      "options": [
+        "破坏",
+        "加密",
+        "丢失",
+        "修改"
+      ],
+      "correct_answer": "破坏"
+    },
+    {
+      "id": 16,
+      "content": "安全性控制的防范对象是 ( ), 防止他们对数据库对象的存取。",
+      "options": [
+        "不正确的数据",
+        "不符合语义的数据",
+        "非法或越权用户",
+        "不符合语义的数据"
+      ],
+      "correct_answer": "非法或越权用户"
+    },
+    {
+      "id": 17,
+      "content": "有关系 R 和 S，关系代数运算 R∩S 等价于（ ）",
+      "options": [
+        "S-R",
+        "S-(R-S)",
+        "R-(R-S)",
+        "R・S"
+      ],
+      "correct_answer": "R-(R-S)"
+    },
+    {
+      "id": 18,
+      "content": "关系代数中的投影操作是对关系进行（ ）",
+      "options": [
+        "列方向的选择",
+        "列方向的扩展",
+        "行方向的扩展",
+        "行方向的选择"
+      ],
+      "correct_answer": "列方向的选择"
+    },
+    {
+      "id": 19,
+      "content": "关于关系模型的性质，哪项错误的叙述。",
+      "options": [
+        "列可重名",
+        "行的顺序可以任意",
+        "任意两行不能完全相同",
+        "每一列的元素类型相同"
+      ],
+      "correct_answer": "列可重名"
+    }
+  ]
+}

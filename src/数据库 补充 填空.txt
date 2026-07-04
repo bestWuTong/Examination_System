@@ -1,0 +1,45 @@
+{
+  "type": "填空",
+  "questions": [
+    {
+      "id": 1,
+      "content": "并发控制导致的不一致性有哪几种？（使用、分割答案）",
+      "correct_answer": "丢失修改、不可重复读、读脏数据"
+    },
+    {
+      "id": 2,
+      "content": "数据库触发器的触发时机主要有______和______两种。（使用、分割答案）",
+      "correct_answer": "BEFORE、AFTER"
+    },
+    {
+      "id": 3,
+      "content": "在UPDATE触发事件中，______关键字用于引用更新前的记录，______关键字用于引用更新后的记录。（使用、分割答案）",
+      "correct_answer": "OLD、NEW"
+    },
+    {
+      "id": 4,
+      "content": "MySQL中，创建触发器的基本语法结构是______ trigger_name ______ trigger_time trigger_event ON table_name FOR EACH ______ trigger_body。（使用、分割答案）",
+      "correct_answer": "CREATE、BEFORE/AFTER、ROW"
+    },
+    {
+      "id": 5,
+      "content": "实现数据库安全性控制的常用方法和技术包括用户标识和鉴别、____、审计技术以及数据加密等其它保护措施。",
+      "correct_answer": "存取控制"
+    },
+    {
+      "id": 6,
+      "content": "在 SQL 中，表示并集的关键字是（ ）",
+      "correct_answer": "UNION"
+    },
+    {
+      "id": 7,
+      "content": "在数据库中，通常使用____值来表示一个字段有空值或缺值",
+      "correct_answer": "NULL"
+    },
+    {
+      "id": 8,
+      "content": "若关系 R 有 6 目、10 个元组，关系 S 有 3 目、5 个元组，执行 R × S（笛卡尔积）操作后，结果关系的元组个数是（ ）",
+      "correct_answer": "50"
+    }
+  ]
+}

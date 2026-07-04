@@ -1,0 +1,110 @@
+{
+  "type": "判断",
+  "questions": [
+    {
+      "id": 1,
+      "content": "MySQL 中，视图（VIEW）是物理存在的数据表，修改视图数据会直接修改源表数据。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 2,
+      "content": "索引的本质是优化查询的“数据结构”，可加快 WHERE 子句、JOIN 操作的数据查找速度。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 3,
+      "content": "关系模式的候选键是唯一标识元组的最小属性集。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 4,
+      "content": "函数依赖A→B表示B函数决定A。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 5,
+      "content": "2NF要求消除非主属性对候选键的部分函数依赖。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 6,
+      "content": "触发器只能在数据表上创建，无法在视图或存储过程上定义。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 7,
+      "content": "触发器中可以通过 NEW 关键字引用操作后的数据，OLD 关键字引用操作前的数据。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 8,
+      "content": "触发器可以被用户直接调用执行。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 9,
+      "content": "一个数据库表只能创建一个触发器。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 10,
+      "content": "BEFORE触发器可以修改触发事件中的NEW值，而AFTER触发器不能。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 11,
+      "content": "触发器中可以包含COMMIT或ROLLBACK语句。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 12,
+      "content": "E-R图是在数据库需求分析阶段完成的文档。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 13,
+      "content": "数据库物理结构设计主要确定数据表的字段类型和约束条件。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 14,
+      "content": "关系型数据库中，二维表的列（字段）顺序决定数据的逻辑关系，不能随意调整。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 15,
+      "content": "数据库的逻辑结构设计阶段，需将 E-R 图转换为具体的表结构。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 16,
+      "content": "MySQL 中，VARCHAR 类型字段会根据实际存储数据长度动态分配存储空间。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 17,
+      "content": "数据库的安全性是指保护数据库以防止不合法使用所造成的数据泄露、更改或破坏。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 18,
+      "content": "InnoDB 是 MySQL 的默认存储引擎，支持事务和外键约束。",
+      "correct_answer": "正确"
+    },
+    {
+      "id": 19,
+      "content": "两段锁协议是使并发操作可串行化调度的必要条件。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 20,
+      "content": "事务的隔离性是指事务一旦提交，其对数据库的修改就永久保存，无法回滚。",
+      "correct_answer": "错误"
+    },
+    {
+      "id": 21,
+      "content": "MySQL 中，LEFT JOIN 会返回左表所有记录，即使右表没有匹配的记录。",
+      "correct_answer": "正确"
+    }
+  ]
+}
