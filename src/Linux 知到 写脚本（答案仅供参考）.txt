@@ -39,7 +39,7 @@
         {
             "id": 8,
             "content": "求10以内数的阶乘。",
-            "correct_answer": "```bash\n#!/bin/bash\nfor((n=1; n<=10; n++))\ndo\n    result=1\n    for((i=2; i<=n; i++))\n    do\n        result=$((result*i))\n    done\n    echo \"$n 的阶乘是 $result\"\ndone\n```功能：遍历计算并输出 1~10 每个数字的阶乘结果。"
+            "correct_answer": "```bash\n#!/bin/bash\nfor((n=1; n<=10; n++))\ndo\n    result=1\n    for((i=2; i<=n; i++))\n    do\n        result=$((result*i))\n    done\n    echo \"$n 的阶乘是 $result\"\ndone\n```功能：遍历计算并输出 1~10 每个数字的阶乘结果。\n```bash\n#!/bin/bash\nread -p \"输入一个数：\" n\nresult=1\nfor((i=2; i<=$n; ++i))\ndo\n    result=$((result*i))\ndone\necho \"$n 阶乘是$result\"\n```功能：接收用户输入一个数字n，循环计算出n的阶乘并打印结果"
         }
     ]
 }
