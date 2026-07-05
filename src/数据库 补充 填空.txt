@@ -19,7 +19,7 @@
     {
       "id": 4,
       "content": "MySQL中，创建触发器的基本语法结构是______ trigger_name ______ trigger_time trigger_event ON table_name FOR EACH ______ trigger_body。（使用、分割答案）",
-      "correct_answer": "CREATE、BEFORE/AFTER、ROW"
+      "correct_answer": "CREATE TRIGGER、BEFORE/AFTER、ROW"
     },
     {
       "id": 5,
